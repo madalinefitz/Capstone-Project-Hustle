@@ -1,5 +1,5 @@
-from config import app, db
-from Models import User
+from config import app, db, api
+from models import User, Job_Category, Shift
 
 
 @app.route('/')

@@ -4,16 +4,22 @@ from sqlalchemy.orm import validates
 from sqlalchemy.ext.associationproxy import association_proxy
 from config import db, bcrypt
 
-# class User(db.Model, SerializerMixin):
-#     __tablename__='users'
+class User(db.Model, SerializerMixin):
+    __tablename__='users'
 
+    serialize_rules = ['-created_at', '-updated_at']
 
-#     id=db.Column(db.Integer, primary_key=True)
-#     username=db.Column(db.String, unique=True)
-#     _password_hash=db.Column(db.String, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String)
+    last_name = db.Column(db.String)
+    email = db.Column(db.String, unique=True)
+    _password_hash = db.Column(db.String, nullable=False)
 
-#     created_at=db.Column(db.DateTime, server_default = db.func.now())
-#     updated_at=db.Column(db.DateTime, onupdate = db.func.now())
+    created_at = db.Column(db.DateTime, server_default = db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate = db.func.now())
+
+    shifts = db.relationship('Shift', back_populates = 'user', cascade="all, delete-orphan")
+    job_categories = association_proxy('shifts', 'job_category')
 
 #     # @hybrid_property
 #     # def password_hash(self):
@@ -31,16 +37,37 @@ from config import db, bcrypt
 #     #         self._password_hash, password.encode('utf.8')
 #     #     )
 
-# class Shift(db.Model, SerializerMixin):
-#     __tablename__='shifts'
+class Shift(db.Model, SerializerMixin):
+    __tablename__='shifts'
 
-#     id=db.Column(db.Integer, primary_key=True)
-#     date=(db.String, unique=True)
-#     _password_hash=(db.String, nullable=False)
+    serialize_rules = ['-created_at', '-updated_at']
 
-# class Job(db.Model, SerializerMixin):
-#     __tablename__='jobs'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    job_id = db.Column(db.Integer, db.ForeignKey('job_categories.id'))
+    date = db.Column(db.DateTime)
+    time = db.Column(db.DateTime)
+    hourly_pay = db.Column(db.Float)
+    location = db.Column(db.String)
+    
+    created_at = db.Column(db.DateTime, server_default = db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate = db.func.now())
 
-#     id=db.Column(db.Integer, primary_key=True)
-#     username=(db.String, unique=True)
-#     _password_hash=(db.String, nullable=False)
+    user = db.relationship('Users', back_populates = 'shifts')
+    job_category = db.relationship('Job_Categories', back_populates = 'shifts')
+
+
+
+class Job_Category(db.Model, SerializerMixin):
+    __tablename__='job_categories'
+
+    serialize_rules = ['-created_at', '-updated_at']
+
+    id = db.Column(db.Integer, primary_key=True)
+    category_name = (db.String)
+
+    created_at = db.Column(db.DateTime, server_default = db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate = db.func.now())
+
+    shifts = db.relationship('Shift', back_populates = 'job_category', cascade='all, delete-orphan')
+    users = association_proxy('shifts', 'user')
