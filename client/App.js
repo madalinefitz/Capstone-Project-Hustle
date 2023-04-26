@@ -41,6 +41,14 @@ function CreateAccount(){
   const [password, setPassword] = useState('');
 
   const { createAccount } = useContext(AuthContext);
+
+  const user = struct({
+    first_name: firstName,
+    last_name: lastName,
+    email: email,
+    password: password
+  });
+  const STORAGE_KEY = 'id_token'
   return(
     <View>
         <TextInput
