@@ -7,7 +7,7 @@ from config import db, bcrypt
 class User(db.Model, SerializerMixin):
     __tablename__='users'
 
-    serialize_rules = ['-created_at', '-updated_at']
+    serialize_rules = ['-created_at', '-updated_at', '-shifts']
 
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String)
@@ -46,7 +46,7 @@ class User(db.Model, SerializerMixin):
 class Shift(db.Model, SerializerMixin):
     __tablename__='shifts'
 
-    serialize_rules = ['-created_at', '-updated_at']
+    serialize_rules = ['-created_at', '-updated_at', '-user', '-job']
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -67,7 +67,7 @@ class Shift(db.Model, SerializerMixin):
 class Job_Category(db.Model, SerializerMixin):
     __tablename__='job_categories'
 
-    serialize_rules = ['-created_at', '-updated_at']
+    serialize_rules = ['-created_at', '-updated_at', '-shifts']
 
     id = db.Column(db.Integer, primary_key=True)
     category_name = db.Column(db.String)

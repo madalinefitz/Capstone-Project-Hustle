@@ -5,10 +5,10 @@
  * @format
  */
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 // import type {PropsWithChildren} from 'react';
 import {
-  Alert, Modal, StyleSheet, Text, Pressable, View, SafeAreaView
+  FlatList, StyleSheet, Text, Pressable, View, SafeAreaView
 } from 'react-native';
 
 import {
@@ -50,34 +50,31 @@ import {
 // }
 
 function App(){
-  const [modalVisible, setModalVisible] = useState(false);
+
+  const [jobCategories, setJobCategories] = useState([])
+
+  useEffect(()=>{
+    fetch('http://127.0.0.1:5555/jobcategories')
+      .then(r=>r.json())
+      .then(data => setJobCategories(data))
+    }, [])
+  
+
+  
 
   return (
     <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>
+      <SafeAreaView style={styles.container}>
+      <FlatList
+          data={jobCategories}
+          keyExtractor={({id}) => id}
+          renderItem={({item}) => (
+            <Text>
+              {item.category_name}
+            </Text>
+          )}
+        />
+    </SafeAreaView>
     </View>
   );
 };

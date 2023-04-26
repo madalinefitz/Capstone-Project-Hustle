@@ -1,10 +1,15 @@
+from flask import make_response, request, session, jsonify
+from flask_restful import Resource
+
 from config import app, db, api
 from models import User, Job_Category, Shift
 
 
-@app.route('/')
-def root_route():
-    return 'how you doin\n'
+class Job_Categories(Resource):
+    def get(self):
+        job_categories = [j.to_dict() for j in Job_Category.query.all()]
+        return make_response(job_categories, 201)
+api.add_resource(Job_Categories, '/jobcategories')
 
 
 
