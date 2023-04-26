@@ -45,16 +45,16 @@ class Shift(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     job_id = db.Column(db.Integer, db.ForeignKey('job_categories.id'))
-    date = db.Column(db.DateTime)
-    time = db.Column(db.DateTime)
+    start_date_time = db.Column(db.DateTime)
+    end_date_time = db.Column(db.DateTime)
     hourly_pay = db.Column(db.Float)
     location = db.Column(db.String)
     
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
 
-    user = db.relationship('Users', back_populates = 'shifts')
-    job_category = db.relationship('Job_Categories', back_populates = 'shifts')
+    user = db.relationship('User', back_populates = 'shifts')
+    job_category = db.relationship('Job_Category', back_populates = 'shifts')
 
 
 
@@ -64,7 +64,7 @@ class Job_Category(db.Model, SerializerMixin):
     serialize_rules = ['-created_at', '-updated_at']
 
     id = db.Column(db.Integer, primary_key=True)
-    category_name = (db.String)
+    category_name = db.Column(db.String)
 
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
