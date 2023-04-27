@@ -5,8 +5,6 @@ from config import app, db, api
 from models import User, Job_Category, Shift
 
 
-
-
 class Job_Categories(Resource):
     def get(self):
         job_categories = [j.to_dict() for j in Job_Category.query.all()]
