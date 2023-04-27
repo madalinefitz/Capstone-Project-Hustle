@@ -1,12 +1,22 @@
-import React, {createContext} from 'react'
+import React, {createContext, useState} from 'react'
 
-export const AuthContext = createContext()
+export const AuthContext = React.createContext()
 
 export const AuthProvider = ({children}) => {
-    const [test, setTest] = useState('Test Value')
+    const [isLoading, setIsLoading] = useState(true)
+    const [userToken, setUserToken] = useState(null)
+    const login = () => {
+        setUserToken('hello')
+        setIsLoading(false)
+    }
+
+    const logout = () => {
+        setUserToken(null)
+        setIsLoading(false)
+    }
     
     return (
-        <AuthContext.Provider value = {{test}}>
+        <AuthContext.Provider value={{login, logout, isLoading, userToken}}>
             {children}
         </AuthContext.Provider>
     )
