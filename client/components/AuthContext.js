@@ -1,4 +1,4 @@
-import React, {createContext, useState} from 'react'
+import React, {createContext, useEffect, useState} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const AuthContext = React.createContext()
@@ -14,8 +14,21 @@ export const AuthProvider = ({children}) => {
     }
 
     const logout = () => {
+        setIsLoading(true)
         setUserToken(null)
+        AsyncStorage.removeItem('userToken')
         setIsLoading(false)
+    }
+
+    const isLoggedIn = async() =>{
+        try{
+            setIsLoading(true)
+            let funcUserToken = await AsyncStorage.getItem('userToken')
+            setUserToken(userToken)
+            setIsLoading(false)
+        } catch(e) {
+            console.log(`isLogged in error ${e}`)
+        }
     }
     
     return (
