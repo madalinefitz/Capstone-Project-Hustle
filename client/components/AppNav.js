@@ -6,8 +6,13 @@ import {View, Text, ActivityIndicator} from 'react-native'
 
 import AuthStack from './AuthStack'
 import AppStack from './AppStack'
-import {AuthProvider, AuthContext} from './AuthContext'
+import {AuthContext} from './AuthContext'
 
+import JobCategories from './JobCategories';
+import Home from './Home'
+import Login from './Login'
+
+const Stack = createNativeStackNavigator();
 
 function AppNav({navigation}){
     const {isLoading, userToken} = useContext(AuthContext)
@@ -21,9 +26,16 @@ function AppNav({navigation}){
   }
 
   return(
-      <NavigationContainer>
-        {userToken !== null ? <AppStack/> : <AuthStack />}
-      </NavigationContainer>
+    <NavigationContainer>
+        <Stack.Navigator>
+            {userToken !== null ? 
+            (<>
+            <Stack.Screen name='Home' component={Home}/> 
+            <Stack.Screen name='Job Categories' component={JobCategories}/>
+            </>): 
+            <Stack.Screen name='Login' component={Login}/>}
+        </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 

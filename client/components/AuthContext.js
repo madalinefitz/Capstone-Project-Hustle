@@ -9,7 +9,7 @@ export const AuthProvider = ({children}) => {
     const login = () => {
         setIsLoading(true)
         setUserToken('hello')
-        AsyncStorage.setItem('userToken', userToken)
+        AsyncStorage.setItem('userToken', 'hello')
         setIsLoading(false)
     }
 
@@ -30,6 +30,10 @@ export const AuthProvider = ({children}) => {
             console.log(`isLogged in error ${e}`)
         }
     }
+
+    useEffect(()=>{
+        isLoggedIn()
+    }, [])
     
     return (
         <AuthContext.Provider value={{login, logout, isLoading, userToken}}>
