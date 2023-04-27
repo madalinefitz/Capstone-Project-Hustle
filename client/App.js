@@ -185,20 +185,7 @@ function App(){
             fontWeight: 'bold',
           },
         }}>
-          <Stack.Screen
-                  name="Home"
-                  component={Home}
-                  options={{ headerRight: () => (
-                      <Button
-                        onPress={() => alert('This is a button!')}
-                        title="Info"
-                        color="#fff"
-                      />
-                      ),
-                    }}
-                />
-
-        {/* {isLoggedIn == false ? (
+        {isLoggedIn == false ? (
                 <>
                   <Stack.Screen name="Login" component={Login} />
                   <Stack.Screen name="CreateAccount" component={CreateAccount} />
@@ -220,7 +207,7 @@ function App(){
                 <Stack.Screen name="Job Categories" component={JobCategories} options={{ title: 'Job Categories' }}/>
               </>
             )
-          } */}
+          }
         </Stack.Navigator>
         <View >
           <SafeAreaView >
