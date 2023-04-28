@@ -10,6 +10,7 @@ function CreateAccount({navigation}){
 
     const {createAccount} = useContext(AuthContext)
 
+
     return(
         <View>
             <TextInput placeholder='First Name' style={styles.input} 
@@ -17,7 +18,7 @@ function CreateAccount({navigation}){
             <TextInput placeholder='Last Name' style={styles.input} 
                 value={lastName} onChangeText={text => setLastName(text)}/>
             <TextInput placeholder='Email' style={styles.input} 
-                value={newEmail} onChangeText={text => setNewEmail(text)}/>
+                value={newEmail} onChangeText={text => setNewEmail(text)} />
             <TextInput placeholder='Password' style={styles.input} 
                 value={newPassword} onChangeText={text => setNewPassword(text)}/>
             <Button title="Create Account" 
