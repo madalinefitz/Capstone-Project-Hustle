@@ -11,11 +11,13 @@ function Login ({navigation}){
     return (
         <SafeAreaView>
             <View>
-                <TextInput placeholder="Email" 
+                <TextInput placeholder='Email'
                     style={styles.input} value={email} onChangeText={text =>setEmail(text)}/>
                 <TextInput style={styles.input}
-                    placeholder="Password" value={password} onChangeText={text => setPassword(text)}/>
+                    placeholder='Password' value={password} onChangeText={text => setPassword(text)}/>
                 <Button title='Login' onPress={()=>{login(email, password)}}/>
+                <Text>New to Hustle?</Text>
+                <Button title='Create Account' onPress={() => navigation.navigate('Create Account')}/>
             </View>
         </SafeAreaView>
     )

@@ -15,7 +15,6 @@ export const AuthProvider = ({children}) => {
             email: email, 
             _password_hash: password
         }
-        console.log(currentUser)
         fetch('http://127.0.0.1:5555/login', { 
                 method:'POST',
                 headers: {"Content-Type": "application/json"},
@@ -24,19 +23,50 @@ export const AuthProvider = ({children}) => {
             )
                 .then(r => {
                     if (r.status === 200){
-                    console.log(r)
-                    let token = r
-                    // setUserInfo(user)
-                    setUserToken(token)
-                    
+                    r.json().then( (data) => {
 
-                    AsyncStorage.setItem('userToken', JSON.stringify(token))
-                    // AsyncStorage.setItem('userInfo', JSON.stringify(user))
-                
-                    } else {
+                    setUserInfo(data.user)
+                    setUserToken(data.token)
+                    
+                    AsyncStorage.setItem('userToken', JSON.stringify(data.token))
+                    AsyncStorage.setItem('userInfo', JSON.stringify(data.user))
+                    })
+                } else {
                     console.log('login failure')
                     }
+                })
+        
+        setIsLoading(false)
+    }
+
+    const createAccount = (firstName, lastName, newEmail, newPassword) => {
+        setIsLoading(true)
+        const newUser = {
+            first_name: firstName,
+            last_name: lastName,
+            email: newEmail, 
+            _password_hash: newPassword
+        }
+        fetch('http://127.0.0.1:5555/users', { 
+                method:'POST',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(newUser)
+                }
+            )
+                .then(r => {
+                    if (r.status === 200){
+                    r.json().then( (data) => {
+
+                    setUserInfo(data.user)
+                    setUserToken(data.token)
+                    
+                    AsyncStorage.setItem('userToken', JSON.stringify(data.token))
+                    AsyncStorage.setItem('userInfo', JSON.stringify(data.user))
                     })
+                } else {
+                    console.log('unable to create account')
+                    }
+                })
         
         setIsLoading(false)
     }
@@ -44,21 +74,23 @@ export const AuthProvider = ({children}) => {
     const logout = () => {
         setIsLoading(true)
         setUserToken(null)
+        setUserInfo(null)
         AsyncStorage.removeItem('userToken')
-        // AsyncStorage.removeItem('userInfo')
+        AsyncStorage.removeItem('userInfo')
         setIsLoading(false)
     }
 
     const isLoggedIn = async() =>{
         try{
             setIsLoading(true)
-            let funcUserToken = await AsyncStorage.getItem('userToken')
-            // let funcUserInfo = await AsyncStorage.getItem('userInfo')
-            // const theUserInfo = JSON.parse(funcUserInfo)
+            const funcUserToken = await AsyncStorage.getItem('userToken')
+            const funcUserInfo = await AsyncStorage.getItem('userInfo')
+            const theUserInfo = JSON.parse(funcUserInfo)
+            const theUserToken = JSON.parse(funcUserToken)
 
-            if(funcUserToken) {
-                setUserToken(funcUserToken)
-                // setUserInfo(theUserInfo)
+            if(theUserToken) {
+                setUserToken(theUserToken)
+                setUserInfo(theUserInfo)
             }
             setIsLoading(false)
         } catch(e) {
@@ -71,7 +103,7 @@ export const AuthProvider = ({children}) => {
     }, [])
     
     return (
-        <AuthContext.Provider value={{login, logout, isLoading, userToken}}>
+        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount}}>
             {children}
         </AuthContext.Provider>
     )

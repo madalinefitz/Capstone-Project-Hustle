@@ -23,14 +23,19 @@ class Users(Resource):
     def post(self):
         data = request.get_json()
         try:
-            new_user=User(first_name = data['first_name'], last_name = data['last_name'], email = data['email'], _password_hash = data['password'])
-        except:
-            return make_response({'error': 'unable to create new user'})
+            new_user=User(first_name = data['first_name'], last_name = data['last_name'], email = data['email'], _password_hash = data['_password_hash'])
+            db.session.add(new_user)
+            db.session.commit()
+            
+            token = jwt.encode({
+                'id': new_user.id,
+                'exp' : datetime.utcnow() + timedelta(minutes = 30)
+            }, app.config['SECRET_KEY'])
         
-        db.session.add(new_user)
-        db.session.commit()
+        except:
+            return make_response({'error': 'unable to create new user'}, 400)
     
-        return make_response({'message': 'new user created'}, 204)
+        return make_response({'token' : token.decode('UTF-8'), 'user': new_user.to_dict()}, 200)
 api.add_resource(Users, '/users')
 
 class Login(Resource):
@@ -51,7 +56,7 @@ class Login(Resource):
                 'exp' : datetime.utcnow() + timedelta(minutes = 30)
             }, app.config['SECRET_KEY'])
 
-            return make_response({'token' : token.decode('UTF-8')}, 200)
+            return make_response({'token' : token.decode('UTF-8'), 'user': user.to_dict()}, 200)
    
         return make_response('Could not verify', 403)
 

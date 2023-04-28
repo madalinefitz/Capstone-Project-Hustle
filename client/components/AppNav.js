@@ -11,6 +11,8 @@ import {AuthContext} from './AuthContext'
 import JobCategories from './JobCategories';
 import Home from './Home'
 import Login from './Login'
+import CreateAccount from './CreateAccount';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -32,8 +34,10 @@ function AppNav(){
                 (<>
                 <Stack.Screen name='Home' component={Home}/> 
                 <Stack.Screen name='Job Categories' component={JobCategories}/>
-                </>): 
-                <Stack.Screen name='Login' component={Login}/>}
+                </>): (<>
+                <Stack.Screen name='Login' component={Login}/>
+                <Stack.Screen name='Create Account' component={CreateAccount}/> 
+                </>)}
             </Stack.Navigator>
         </NavigationContainer>
     )
