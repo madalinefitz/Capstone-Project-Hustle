@@ -6,6 +6,7 @@ from flask_cors import CORS
 from flask_restful import Api
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'QGT12HGF320LT4098INCM320W10VHTZXP12'
 
 app.config[ 'SQLALCHEMY_DATABASE_URI' ] = 'sqlite:///app.db'
 app.config[ 'SQLALCHEMY_TRACK_MODIFICATIONS' ] = False

@@ -13,6 +13,7 @@ flask-restful = "*"
 sqlalchemy-serializer = "*"
 flask-sqlalchemy-session = "*"
 faker = "*"
+pyjwt = "==1.4.2"
 
 [dev-packages]
 

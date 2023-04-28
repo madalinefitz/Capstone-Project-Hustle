@@ -3,6 +3,8 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.associationproxy import association_proxy
 from config import db, bcrypt
+import jwt
+from datetime import datetime, timedelta
 
 class User(db.Model, SerializerMixin):
     __tablename__='users'
@@ -20,6 +22,31 @@ class User(db.Model, SerializerMixin):
 
     shifts = db.relationship('Shift', back_populates = 'user', cascade="all, delete-orphan")
     job_categories = association_proxy('shifts', 'job_category')
+
+    # def encode_auth_token(self, user_id):
+    #     try:
+    #         payload = {
+    #             'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=5),
+    #             'iat': datetime.datetime.utcnow(),
+    #             'sub': user_id
+    #         }
+    #         return jwt.encode(
+    #             payload,
+    #             app.config.get('SECRET_KEY'),
+    #             algorithm='HS256'
+    #         )
+    #     except Exception as e:
+    #         return e
+
+    # @staticmethod
+    # def decode_auth_token(auth_token):
+    #     try:
+    #         payload = jwt.decode(auth_token, app.config.get('SECRET_KEY'))
+    #         return payload['sub']
+    #     except jwt.ExpiredSignatureError:
+    #         return 'Signature expired. Please log in again.'
+    #     except jwt.InvalidTokenError:
+    #         return 'Invalid token. Please log in again.'
 
     @hybrid_property
     def password_hash(self):
