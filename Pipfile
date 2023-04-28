@@ -12,8 +12,8 @@ flask-cors = "*"
 flask-restful = "*"
 sqlalchemy-serializer = "*"
 flask-sqlalchemy-session = "*"
-faker = "*"
 pyjwt = "==1.4.2"
+faker = "*"
 
 [dev-packages]
 

@@ -14,29 +14,29 @@ import Login from './Login'
 
 const Stack = createNativeStackNavigator();
 
-function AppNav({navigation}){
+function AppNav(){
     const {isLoading, userToken} = useContext(AuthContext)
 
-  if (isLoading) {
-    return(
-    <View style = {{flex:1,justifyContent:'center', alignItems:'center'}}>
-      <ActivityIndicator size={'large'}/>
-    </View>
-    )
-  }
+    if (isLoading) {
+        return(
+            <View style = {{flex:1,justifyContent:'center', alignItems:'center'}}>
+                <ActivityIndicator size={'large'}/>
+            </View>
+        )
+    }
 
-  return(
-    <NavigationContainer>
-        <Stack.Navigator>
-            {userToken !== null ? 
-            (<>
-            <Stack.Screen name='Home' component={Home}/> 
-            <Stack.Screen name='Job Categories' component={JobCategories}/>
-            </>): 
-            <Stack.Screen name='Login' component={Login}/>}
-        </Stack.Navigator>
-    </NavigationContainer>
-  )
+    return(
+        <NavigationContainer>
+            <Stack.Navigator>
+                {userToken !== null ? 
+                (<>
+                <Stack.Screen name='Home' component={Home}/> 
+                <Stack.Screen name='Job Categories' component={JobCategories}/>
+                </>): 
+                <Stack.Screen name='Login' component={Login}/>}
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }
 
 export default AppNav

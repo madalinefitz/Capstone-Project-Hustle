@@ -40,7 +40,7 @@ class Login(Resource):
         if not auth or not auth.get('email') or not auth.get('_password_hash'):
             return make_response('Could not verify email or password', 401)
   
-        user = User.query.filter(User.email == auth['email']).first()
+        user = User.query.filter_by(email = auth['email']).first()
         
         if not user:
             return make_response('Could not verify email', 401)
@@ -51,7 +51,7 @@ class Login(Resource):
                 'exp' : datetime.utcnow() + timedelta(minutes = 30)
             }, app.config['SECRET_KEY'])
 
-            return make_response(jsonify({'token' : token.decode('UTF-8')}), 201)
+            return make_response({'token' : token.decode('UTF-8')}, 200)
    
         return make_response('Could not verify', 403)
 

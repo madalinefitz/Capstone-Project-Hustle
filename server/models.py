@@ -64,10 +64,10 @@ class User(db.Model, SerializerMixin):
             self._password_hash, password.encode('utf.8')
         )
 
-    @validates('_password_hash')
-    def pass_hashing(self, key, attr):
-        password_hash = bcrypt.generate_password_hash(attr.encode('utf-8'))
-        return password_hash.decode('utf-8')
+    # @validates('_password_hash')
+    # def pass_hashing(self, key, attr):
+    #     password_hash = bcrypt.generate_password_hash(attr.encode('utf-8'))
+    #     return password_hash.decode('utf-8')
        
 
 class Shift(db.Model, SerializerMixin):
