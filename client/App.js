@@ -1,8 +1,7 @@
 /**
  * @format
  */
-import React, {useContext} from 'react'
-import {View, Text, ActivityIndicator} from 'react-native'
+import React from 'react'
 
 import {AuthProvider} from './components/AuthContext'
 import AppNav from './components/AppNav';
