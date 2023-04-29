@@ -34,7 +34,7 @@ class Users(Resource):
                 'exp' : datetime.utcnow() + timedelta(minutes = 30)
             }, app.config['SECRET_KEY'])
 
-            return make_response({'token' : token.decode('UTF-8'), 'user': user.to_dict()}, 200)
+            return make_response({'token' : token.decode('UTF-8'), 'user': user.to_dict(rules = ('shifts',))}, 200)
         
         elif user == None:
             try:
@@ -50,19 +50,28 @@ class Users(Resource):
                     'exp' : datetime.utcnow() + timedelta(minutes = 30)
                 }, app.config['SECRET_KEY'])
                 
-                return make_response({'token' : token.decode('UTF-8'), 'user': new_user.to_dict()}, 200)
+                return make_response({'token' : token.decode('UTF-8'), 'user': new_user.to_dict(rules = ('shifts',))}, 200)
             
             except:
                 return make_response({'error': 'unable to locate user'}, 400)
     
 api.add_resource(Users, '/users')
 
-class Shifts(Resource):
-    def get(self):
-        shifts = [s.to_dict() for s in Shift.query.all()]
-        return make_response(shifts, 201)
+# class UserById(Resource):
+#     def get(self, id):
+#         user = User.query.filter_by(id=id).first()
+#         if user == None:
+#             return make_response({'error': 'user not found'}, 400)
+#         return make_response(user.to_dict(rules = ('shifts',)))
 
-api.add_resource(Shifts, '/shifts')
+# api.add_resource(UserById, '/users/<int:id>')
+
+# class Shifts(Resource):
+#     def get(self):
+#         shifts = [s.to_dict() for s in Shift.query.all()]
+#         return make_response(shifts, 201)
+
+# api.add_resource(Shifts, '/shifts')
 
 # class Login(Resource):
 #     def post(self):

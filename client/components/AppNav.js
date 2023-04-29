@@ -20,7 +20,9 @@ import EstimatedPay from './EstimatedPay';
 const Stack = createNativeStackNavigator();
 
 function AppNav(){
-    const {isLoading, userToken} = useContext(AuthContext)
+    const {isLoading, userToken, userInfo} = useContext(AuthContext)
+
+
 
     if (isLoading) {
         return(
