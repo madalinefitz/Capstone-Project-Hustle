@@ -25,7 +25,6 @@ const Stack = createNativeStackNavigator();
 function AppNav(){
     const {isLoading, userToken, userInfo} = useContext(AuthContext)
     const [accountModal, setAccountModal] = useState(false);
-    console.log(accountModal)
     
 
     if (isLoading) {

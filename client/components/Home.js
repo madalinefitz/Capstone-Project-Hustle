@@ -12,7 +12,6 @@ function Home({navigation}){
     return (
       <SafeAreaView>
             <Text style={styles.welcomeUser}>Welcome {userInfo.first_name}</Text>
-            
             <Button
               title="View Calendar"
               onPress={() => navigation.navigate('Calendar Container')}/>
