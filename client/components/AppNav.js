@@ -13,7 +13,7 @@ import Home from './Home'
 import Login from './Login'
 import CreateAccount from './CreateAccount';
 import MyShifts from './MyShifts';
-import Calendar from './Calendar';
+import CalendarContainer from './CalendarContainer';
 import EstimatedPay from './EstimatedPay';
 
 
@@ -40,7 +40,7 @@ function AppNav(){
                 <Stack.Screen name='Home' component={Home}/> 
                 <Stack.Screen name='Job Categories' component={JobCategories}/>
                 <Stack.Screen name='My Shifts' component={MyShifts}/>
-                <Stack.Screen name='Calendar' component={Calendar}/>
+                <Stack.Screen name='CalendarContainer' component={CalendarContainer}/>
                 <Stack.Screen name='Estimated Pay' component={EstimatedPay}/>
                 </>): (<>
                 <Stack.Screen name='Login' component={Login}/>
