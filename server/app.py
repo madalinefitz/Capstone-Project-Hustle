@@ -87,6 +87,31 @@ class Shifts(Resource):
     
 api.add_resource(Shifts, '/shifts')
 
+class ShiftById(Resource):
+    def patch(self, id):
+        data = request.get_json()
+        shift = Shift.query.filter_by(id=id).first()
+
+        for key in data.keys():
+            setattr(shift, key, data[key])
+
+        db.session.add(shift)
+        db.session.commit()
+        return make_response(shift.to_dict(), 200)
+    
+    def delete(self, id):
+        shift = Shift.query.filter_by(id=id).first()
+        
+        if shift == None:
+            return make_response({'error': 'shift not found'})
+
+        db.session.delete(shift)
+        db.session.commit()
+
+        return make_response({}, 200)
+
+api.add_resource(ShiftById, '/shifts/<int:id>')
+
 # class Login(Resource):
 #     def post(self):
 #         auth = request.get_json()

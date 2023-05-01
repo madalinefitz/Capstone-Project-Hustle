@@ -17,16 +17,17 @@ function EstimatedPay({navigation}){
     })
 
     const initialValue = 0
-    const weeklyPaySum = weeklyPayList.reduce( 
+    const weeklyPaySum = weeklyPayList.reduce(
         (accumulator, currentValue) => accumulator + currentValue, initialValue)
+    
 
-    console.log(weeklyPaySum)
-   
+    console.log(weeklyPaySum);
+
 
     return (
       <SafeAreaView>
             <Text>Estimated Pay</Text>
-            <Text>{weeklyPaySum}</Text>
+            <Text>${weeklyPaySum}</Text>
             <Button title='logout' onPress={()=> {logout()}}/>
       </SafeAreaView>
     );
