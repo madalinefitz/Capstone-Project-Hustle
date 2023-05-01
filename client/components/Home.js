@@ -15,7 +15,7 @@ function Home({navigation}){
             
             <Button
               title="View Calendar"
-              onPress={() => navigation.navigate('CalendarContainer')}/>
+              onPress={() => navigation.navigate('Calendar Container')}/>
             <Button
               title="My Shifts"
               onPress={() => navigation.navigate('My Shifts')}/>
