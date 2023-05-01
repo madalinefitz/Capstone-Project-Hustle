@@ -26,7 +26,7 @@ function EstimatedPay({navigation}){
 
     return (
       <SafeAreaView>
-            <Text>Estimated Pay</Text>
+            <Text>Estimated Weekly Pay</Text>
             <Text>${weeklyPaySum}</Text>
             <Button title='logout' onPress={()=> {logout()}}/>
       </SafeAreaView>

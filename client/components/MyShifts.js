@@ -8,10 +8,7 @@ function MyShifts({navigation}){
 
     const {logout, userInfo} = useContext(AuthContext)
     const [myShifts, setMyShifts] = useState(userInfo.shifts)
-    console.log(userInfo.shifts)
 
-    
-    
     const Item = ({job_category, start_date_time, hourly_pay, location, end_date_time}) => (
         <View >
           <Text>{start_date_time}</Text>
@@ -27,7 +24,7 @@ function MyShifts({navigation}){
       <SafeAreaView>
             <Text>MyShifts</Text>
             <FlatList data={myShifts}
-                renderItem={({item}) => <Item job_category={item.job_category.name} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time}/>}
+                renderItem={({item}) => <Item job_category={item.job_category.category_name} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time}/>}
                 keyExtractor={item => item.id}/>
             <Button title='logout' onPress={()=> {logout()}}/>
       </SafeAreaView>
