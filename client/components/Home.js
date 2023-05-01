@@ -11,7 +11,7 @@ function Home({navigation}){
 
     return (
       <SafeAreaView>
-            <Text>Welcome {userInfo.first_name}</Text>
+            <Text style={styles.welcomeUser}>Welcome {userInfo.first_name}</Text>
             
             <Button
               title="View Calendar"
@@ -29,5 +29,14 @@ function Home({navigation}){
       </SafeAreaView>
     );
   }
+
+styles = StyleSheet.create({
+  welcomeUser: {
+    fontSize: 30,
+    alignSelf: 'center',
+    padding: 20,
+    fontWeight: 'bold'
+  },
+})
 
 export default Home
