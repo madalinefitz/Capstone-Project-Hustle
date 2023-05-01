@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, StyleSheet, Text, Pressable, View, SafeAreaView, Button} from 'react-native';
+import {FlatList, StyleSheet, Text, Pressable, View, SafeAreaView, } from 'react-native';
+
 
 
 function JobCategories({navigation}){
@@ -18,11 +19,11 @@ function JobCategories({navigation}){
   );
     return (
       
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <SafeAreaView >
           <FlatList data={jobCategories}
               renderItem={({item}) => <Item name={item.category_name} />}
               keyExtractor={item => item.id}/>
-        </View>
+        </SafeAreaView>
     );
   }
 

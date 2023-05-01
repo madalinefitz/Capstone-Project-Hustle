@@ -9,6 +9,9 @@ import AppStack from './AppStack'
 import {AuthContext} from './AuthContext'
 import { Avatar } from '@rneui/themed'
 
+
+
+
 import JobCategories from './JobCategories';
 import Home from './Home'
 import Login from './Login'
@@ -38,12 +41,15 @@ function AppNav(){
     const handleModalState =()=>{
         setAccountModal(!accountModal)
     }
-
-    if (accountModal){ 
-        return(
-            <MyAccount handleModalState={handleModalState}/>
-        )
+    
+    if (userToken !== null){
+        if (accountModal){ 
+            return(
+                <MyAccount handleModalState={handleModalState}/>
+            )
+        }
     }
+
 
     return(
         <NavigationContainer>
@@ -59,14 +65,16 @@ function AppNav(){
                     headerRight: () => (
                         <Avatar
                         onPress={() => setAccountModal(true)}
-                        title={userInfo.first_name}
+                        title={userInfo.first_name.charAt(0)}
                         color="white"
                         size={32}
                         rounded
                         containerStyle={{ backgroundColor: "grey" }}
-                        />)
-                }}>
-                    <Stack.Screen name='Home' component={Home}/> 
+                        />
+                        ),
+                    }}
+                >
+                    <Stack.Screen name='Home' component={Home} options={{title: '',}}/> 
                     <Stack.Screen name='Job Categories' component={JobCategories}/>
                     <Stack.Screen name='My Shifts' component={MyShifts}/>
                     <Stack.Screen name='Calendar Container' component={CalendarContainer}        
@@ -84,9 +92,10 @@ function AppNav(){
                         headerTitleStyle: {
                             fontWeight: 'bold',
                         },
+                        autoCapitalize: 'none'
                     }}
                 >
-                    <Stack.Screen name='Login' component={Login}/>
+                    <Stack.Screen name='Login' component={Login} />
                     <Stack.Screen name='Create Account' component={CreateAccount}/> 
                 </Stack.Navigator>
             )}

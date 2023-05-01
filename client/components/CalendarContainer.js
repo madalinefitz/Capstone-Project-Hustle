@@ -34,7 +34,7 @@ function CalendarContainer({navigation}){
     );
   }
 
-  styles=StyleSheet.create({
+  const styles=StyleSheet.create({
     calendar: {
       borderWidth: 0,
       borderColor: 'blue',
