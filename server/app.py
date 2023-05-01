@@ -66,12 +66,26 @@ api.add_resource(Users, '/users')
 
 # api.add_resource(UserById, '/users/<int:id>')
 
-# class Shifts(Resource):
-#     def get(self):
-#         shifts = [s.to_dict() for s in Shift.query.all()]
-#         return make_response(shifts, 201)
+class Shifts(Resource):
+    def get(self):
+        shifts = [s.to_dict() for s in Shift.query.all()]
+        return make_response(shifts, 201)
 
-# api.add_resource(Shifts, '/shifts')
+    def post(self):
+        data = request.get_json()
+        try:
+            new_shift = Shift(user_id=data['user_id'], job_id=data['job_id'], hourly_pay=data['hourly_pay'], location=data['location'], start_date_time=data['start_date_time'], end_date_time=data['end_date_time'])
+        
+        except: 
+            return make_response({ 'error': 'unable to add new shift'})
+
+        db.session.add(new_shift)
+        db.session.commit()
+
+        return make_response({}, 204)
+
+    
+api.add_resource(Shifts, '/shifts')
 
 # class Login(Resource):
 #     def post(self):
