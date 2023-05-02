@@ -45,7 +45,7 @@ function AppNav(){
     if (userToken !== null){
         if (accountModal){ 
             return(
-                <MyAccount handleModalState={handleModalState}/>
+                <MyAccount handleModalState={handleModalState} />
             )
         }
     }

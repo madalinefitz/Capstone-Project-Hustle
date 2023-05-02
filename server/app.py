@@ -24,10 +24,9 @@ class Users(Resource):
         data = request.get_json()
         user = User.query.filter_by(email = data['email']).first()
 
-        # if not data or not data.get('email') or not data.get('_password_hash'):
-        #     return make_response('Could not verify email or password', 401)
         password = data['_password_hash']
 
+        # login
         if user and user.authenticate(password):
             token = jwt.encode({
                 'id': user.id,
@@ -36,9 +35,10 @@ class Users(Resource):
 
             return make_response({'token' : token.decode('UTF-8'), 'user': user.to_dict(rules = ('shifts',))}, 200)
         
+        # create new account
         elif user == None:
             try:
-                almost_user=User(first_name = data['first_name'], last_name = data['last_name'], email = data['email'], _password_hash = data['_password_hash'])
+                almost_user=User(first_name = data['first_name'], last_name = data['last_name'], email = data['email'], _password_hash = password)
                 almost_user.password_hash=almost_user._password_hash
                 hashed_pass=almost_user._password_hash
                 new_user=User(first_name = data['first_name'], last_name = data['last_name'], email = data['email'], _password_hash = hashed_pass)
@@ -57,14 +57,37 @@ class Users(Resource):
     
 api.add_resource(Users, '/users')
 
-# class UserById(Resource):
-#     def get(self, id):
-#         user = User.query.filter_by(id=id).first()
-#         if user == None:
-#             return make_response({'error': 'user not found'}, 400)
-#         return make_response(user.to_dict(rules = ('shifts',)))
+class UserById(Resource):
+    def get(self, id):
+        user = User.query.filter_by(id=id).first()
+        if user == None:
+            return make_response({'error': 'user not found'}, 400)
+        return make_response(user.to_dict(rules = ('shifts',)))
+    
+    def patch(self, id):
+        data = request.get_json()
+        user = User.query.filter_by(id=id).first()
 
-# api.add_resource(UserById, '/users/<int:id>')
+        if user == None:
+            make_response({'error': 'user not found'}, 400)
+
+        for key in data.keys():
+            setattr(user, key, data[key])
+        db.session.add(user)
+        db.session.commit()
+        return make_response(user.to_dict(rules = ('shifts',)), 200)
+
+    def delete(self, id):
+        user = User.query.filter_by(id=id).first()
+
+        if user == None:
+            make_response({'error': 'user not found'}, 400)
+        
+        db.session.delete(user)
+        db.session.commit()
+        return make_response({'succes': 'user deleted'}, 200)
+
+api.add_resource(UserById, '/users/<int:id>')
 
 class Shifts(Resource):
     def get(self):
