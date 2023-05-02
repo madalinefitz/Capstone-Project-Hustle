@@ -19,7 +19,7 @@ function JobCategories(){
 
   const Item = ({name}) => (
     <View style={styles.categoryItem}>
-      <Text style={styles.categoryTitle} >{name}</Text>
+      <Text style={styles.categoryTitle}>{name}</Text>
     </View>
   )
 
@@ -28,7 +28,6 @@ function JobCategories(){
   })
 
     return(
-      
         <SafeAreaView style={styles.categoryContainer}>
           {myCategories ? (
             <>

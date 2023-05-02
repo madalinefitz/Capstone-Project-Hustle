@@ -62,7 +62,8 @@ class Shift(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     job_id = db.Column(db.Integer, db.ForeignKey('job_categories.id'))
     start_date_time = db.Column(db.DateTime)
-    end_date_time = db.Column(db.DateTime)
+    start_time = db.Column(db.String)
+    # end_date_time = db.Column(db.DateTime)
     hourly_pay = db.Column(db.Float)
     location = db.Column(db.String)
     

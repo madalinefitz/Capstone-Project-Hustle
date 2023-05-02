@@ -134,9 +134,10 @@ styles = StyleSheet.create({
     calendar: {
         borderWidth: 0,
         borderColor: 'blue',
-        height: '100%',
+        height: '50%',
         width: '100%',
         content: 'fill',
+        marginBottom: 50,
     },
     addShiftButtonContainer: {
         marginTop: 0,
@@ -153,6 +154,14 @@ styles = StyleSheet.create({
         fontWeight: "bold",
         alignSelf: "center",
         textTransform: "uppercase"
+    },
+    shiftInput:{
+        height: 30,
+        margin: 2,
+        alignSelf: 'center',
+        width: '60%',
+        borderWidth: 1,
+        padding: 2,
     },
 
     // My Shifts

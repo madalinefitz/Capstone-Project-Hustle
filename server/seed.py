@@ -13,8 +13,8 @@ with app.app_context():
 
     print("Deleting data...")
     # User.query.delete()
-    Job_Category.query.delete()
-    # Shift.query.delete()
+    # Job_Category.query.delete()
+    Shift.query.delete()
 
 
     print("Creating users...")
@@ -49,13 +49,13 @@ with app.app_context():
     print("Creating shifts...")
 
 
-    shifts_list = [Shift(user_id = randint(1,5), job_id=randint(1,5), start_date_time = faker.date_time(),  end_date_time= faker.date_time(), hourly_pay = randint(20,70), location=faker.address()) for _ in range(1,10)]
+    shifts_list = [Shift(user_id = randint(1,5), job_id=randint(1,5), start_date_time = faker.date_time(), start_time = faker.time(), hourly_pay = randint(20,70), location=faker.address()) for _ in range(1,10)]
 
-    # db.session.add_all(shifts_list)
+    db.session.add_all(shifts_list)
     # db.session.add_all(jobs_list)
     # db.session.add_all(users_list)
 
-    db.session.add_all([j1,j2,j3,j4,j5,j6,j7,j8,j9,j10,j11,j12,j13,j14, j15, j16])
+    # db.session.add_all([j1,j2,j3,j4,j5,j6,j7,j8,j9,j10,j11,j12,j13,j14, j15, j16])
     
     
     db.session.commit()

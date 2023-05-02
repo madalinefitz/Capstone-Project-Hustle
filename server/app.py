@@ -88,7 +88,7 @@ class Shifts(Resource):
     def post(self):
         data = request.get_json()
         try:
-            new_shift = Shift(user_id=data['user_id'], job_id=data['job_id'], hourly_pay=data['hourly_pay'], location=data['location'], start_date_time=data['start_date_time'], end_date_time=data['end_date_time'])
+            new_shift = Shift(user_id=data['user_id'], job_id=data['job_id'], hourly_pay=data['hourly_pay'], location=data['location'], start_date_time=data['start_date_time'], start_time=data['start_time'])
         
         except: 
             return make_response({ 'error': 'unable to add new shift'})
