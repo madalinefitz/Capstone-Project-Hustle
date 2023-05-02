@@ -27,7 +27,7 @@ function Home({navigation}){
             </Pressable>
             <Pressable
             onPress={() => navigation.navigate('Job Categories')} style={styles.buttons}>
-              <Text style={styles.buttonText}>All Job Categories</Text>
+              <Text style={styles.buttonText}>Job Categories</Text>
             </Pressable>
       </SafeAreaView>
     );
