@@ -1,14 +1,11 @@
 import React, {useEffect, useContext, useState} from 'react';
-import {Text, Pressable, View, StyleSheet, Button} from 'react-native';
+import {Text, Pressable, View} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from './AuthContext';
 
 
-function EstimatedPay({navigation}){
-
+function EstimatedPay(){
     const {logout, userInfo} = useContext(AuthContext)
-
-    const [estPay, setEstPay] = useState('')
 
     const weeklyPayList = userInfo.shifts.map(shift=>{
         return(
@@ -19,16 +16,13 @@ function EstimatedPay({navigation}){
     const initialValue = 0
     const weeklyPaySum = weeklyPayList.reduce(
         (accumulator, currentValue) => accumulator + currentValue, initialValue)
-    
-
-    console.log(weeklyPaySum);
-
+  
 
     return (
       <SafeAreaView>
-            <Text>Estimated Weekly Pay</Text>
-            <Text>${weeklyPaySum}</Text>
-            <Button title='logout' onPress={()=> {logout()}}/>
+          <View style={styles.payContainer}>
+            <Text style={styles.pay}>${weeklyPaySum}</Text>
+          </View>
       </SafeAreaView>
     );
   }

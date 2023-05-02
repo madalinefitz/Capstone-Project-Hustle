@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react'
-import {FlatList, StyleSheet, Text, Pressable, View, SafeAreaView, TextInput} from 'react-native'
+import {FlatList, Text, Pressable, View, SafeAreaView, TextInput} from 'react-native'
 import { AuthContext } from './AuthContext'
 
 
@@ -18,8 +18,8 @@ function JobCategories(){
   },[])
 
   const Item = ({name}) => (
-    <View style={styles.item}>
-      <Text style={styles.title} >{name}</Text>
+    <View style={styles.categoryItem}>
+      <Text style={styles.categoryTitle} >{name}</Text>
     </View>
   )
 
@@ -29,11 +29,11 @@ function JobCategories(){
 
     return(
       
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.categoryContainer}>
           {myCategories ? (
             <>
-              <Pressable style={styles.button} onPress={()=>setMyCategories(!myCategories)}>
-                <Text style={styles.buttonText}>View All Job Categories</Text>
+              <Pressable style={styles.myCategoriesButton} onPress={()=>setMyCategories(!myCategories)}>
+                <Text style={styles.myCategoriesButtonText}>View All Job Categories</Text>
               </Pressable>
               <FlatList data={userInfo.job_categories}
               renderItem={({item}) => <Item  name={item.category_name} />}
@@ -41,10 +41,10 @@ function JobCategories(){
             </>
             ):(
             <>
-              <Pressable style={styles.button} onPress={()=>setMyCategories(!myCategories)}>
-                <Text style={styles.buttonText}>View My Job Categories</Text>
+              <Pressable style={styles.myCategoriesButton} onPress={()=>setMyCategories(!myCategories)}>
+                <Text style={styles.myCategoriesButtonText}>View My Job Categories</Text>
               </Pressable>
-              <TextInput onChangeText={(text)=>setSearchedCategory(text.toLowerCase())} style={styles.search} placeholder='search...'/>
+              <TextInput onChangeText={(text)=>setSearchedCategory(text.toLowerCase())} style={styles.categorySearch} placeholder='search...'/>
               <FlatList data={filterCategories} 
                 renderItem={({item}) => <Item name={item.category_name} />}
                 keyExtractor={item => item.id}/>
@@ -54,44 +54,5 @@ function JobCategories(){
         </SafeAreaView>
     );
   }
-
-styles = StyleSheet.create({
-  button:{
-    alignSelf: 'flex-end',
-    backgroundColor: "blue",
-    borderRadius: 10,
-    paddingVertical: 2,
-    paddingHorizontal: 2,
-    marginVertical: 30,
-    marginHorizontal: 10,
-    width: '60%'
-  },
-  buttonText:{
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-    alignSelf: 'center'
-  },
-  container: {
-    flex: 1,
-    marginTop: 0,
-  },
-  item: {
-    backgroundColor: 'grey',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 25,
-    color: 'white'
-  },
-  search:{
-    height: 40,
-    margin: 20,
-    borderWidth: 1,
-    padding: 10,
-  }
-})
 
 export default JobCategories

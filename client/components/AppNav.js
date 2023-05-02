@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react'
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {View, Text, ActivityIndicator, Button, Pressable, SafeAreaView, StyleSheet} from 'react-native'
+import {View, ActivityIndicator, StyleSheet} from 'react-native'
 
 import {AuthContext} from './AuthContext'
 import { Avatar } from '@rneui/themed'
@@ -101,5 +101,127 @@ function AppNav(){
         </NavigationContainer>
     )
 }
+
+styles = StyleSheet.create({
+    // Home
+    welcomeUser: {
+        fontSize: 30,
+        alignSelf: 'center',
+        padding: 20,
+        fontWeight: 'bold'
+    },
+
+    homeButtons: {
+        marginTop: 0,
+        backgroundColor: "blue",
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 2,
+        alignSelf: 'stretch',
+        marginVertical: 30,
+        marginHorizontal: 10
+    },
+    homeButtonsText: {
+        fontSize: 25,
+        color: "#fff",
+        fontWeight: "bold",
+        alignSelf: "center",
+        textTransform: "uppercase",
+        paddingVertical: 20,
+    },
+
+    // Calendar
+    calendar: {
+        borderWidth: 0,
+        borderColor: 'blue',
+        height: '100%',
+        width: '100%',
+        content: 'fill',
+    },
+    addShiftButtonContainer: {
+        marginTop: 0,
+        backgroundColor: "grey",
+        borderRadius: 10,
+        paddingVertical: 2,
+        paddingHorizontal: 2,
+        alignSelf: 'flex-end',
+        margin: 10,
+    },
+    addShiftButtonText: {
+        fontSize: 30,
+        color: "#fff",
+        fontWeight: "bold",
+        alignSelf: "center",
+        textTransform: "uppercase"
+    },
+
+    // My Shifts
+    shiftsContainer: {
+        flex: 1,
+        marginTop: 0,
+    },
+    shiftItem: {
+        backgroundColor: 'grey',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+    },
+    shiftText: {
+        fontSize: 20,
+        color: 'white'
+    },
+    
+    // Estimated Pay
+    payContainer: {
+      backgroundColor: 'grey',
+      padding: 20,
+      marginVertical: 100,
+      marginHorizontal: 16,
+      alignSelf: 'center',
+    },
+    pay: {
+      fontSize: 100,
+      color: 'white',
+      alignSelf: 'center',
+    },
+
+    // Job Categories
+    myCategoriesButton:{
+        alignSelf: 'flex-end',
+        backgroundColor: "blue",
+        borderRadius: 10,
+        paddingVertical: 2,
+        paddingHorizontal: 2,
+        marginVertical: 30,
+        marginHorizontal: 10,
+        width: '60%'
+      },
+      myCategoriesButtonText:{
+        color: 'white',
+        fontSize: 18,
+        fontWeight: 'bold',
+        alignSelf: 'center'
+      },
+      categoryContainer: {
+        flex: 1,
+        marginTop: 0,
+      },
+      categoryItem: {
+        backgroundColor: 'grey',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+      },
+      categoryTitle: {
+        fontSize: 25,
+        color: 'white'
+      },
+      categorySearch:{
+        height: 40,
+        margin: 20,
+        borderWidth: 1,
+        padding: 10,
+      },
+})
 
 export default AppNav
