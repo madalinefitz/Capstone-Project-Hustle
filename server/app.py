@@ -33,7 +33,7 @@ class Users(Resource):
                 'exp' : datetime.utcnow() + timedelta(minutes = 30)
             }, app.config['SECRET_KEY'])
 
-            return make_response({'token' : token.decode('UTF-8'), 'user': user.to_dict(rules = ('shifts',))}, 200)
+            return make_response({'token' : token.decode('UTF-8'), 'user': user.to_dict(rules = ('shifts', 'job_categories'))}, 200)
         
         # create new account
         elif user == None:
@@ -50,7 +50,7 @@ class Users(Resource):
                     'exp' : datetime.utcnow() + timedelta(minutes = 30)
                 }, app.config['SECRET_KEY'])
                 
-                return make_response({'token' : token.decode('UTF-8'), 'user': new_user.to_dict(rules = ('shifts',))}, 200)
+                return make_response({'token' : token.decode('UTF-8'), 'user': new_user.to_dict(rules = ('shifts', 'job_categories'))}, 200)
             
             except:
                 return make_response({'error': 'unable to locate user'}, 400)
