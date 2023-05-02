@@ -79,6 +79,12 @@ export const AuthProvider = ({children}) => {
         AsyncStorage.removeItem('userInfo')
         setIsLoading(false)
     }
+    
+    const updateUser = (editedUser) =>{
+        setUserInfo(editedUser)
+        AsyncStorage.removeItem('userInfo')
+        AsyncStorage.setItem('userInfo', JSON.stringify(editedUser))
+    }
 
     const isLoggedIn = async() =>{
         try{
@@ -101,9 +107,10 @@ export const AuthProvider = ({children}) => {
     useEffect(()=>{
         isLoggedIn()
     }, [])
+
     
     return (
-        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount}}>
+        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser}}>
             {children}
         </AuthContext.Provider>
     )

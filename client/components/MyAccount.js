@@ -1,91 +1,97 @@
 import React, {useEffect, useContext, useState} from 'react';
-import {Text, TextInput, Pressable, View, StyleSheet, Button, Modal, Dropdown} from 'react-native';
+import {Text, TextInput, Pressable, View, StyleSheet, Button, Modal} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from './AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
-function MyAccount({navigation, handleModalState}){
 
-    const {logout, userInfo, setUserInfo} = useContext(AuthContext)
+
+function MyAccount({navigation, handleModalState}){
+    const {logout, userInfo, updateUser} = useContext(AuthContext)
+
+    const firstName = userInfo.first_name
+    const lastName = userInfo.last_name
+    const email = userInfo.email
+
+    
     const [showEdit, setShowEdit] = useState(false)
-    const [editedAttribute, setEditedAttribute] = useState('')
-    const [editedInfo, setEditedInfo] = useState('')
+    const [editedFirst, setEditedFirst] = useState(firstName)
+    const [editedLast, setEditedLast] = useState(lastName)
+    const [editedEmail, setEditedEmail] = useState(email)
 
     const editUser = ()=>{
         fetch(`http://127.0.0.1:5555/users/${userInfo.id}`, {
             method: 'PATCH',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                [editedAttribute]: editedInfo,
+                first_name: editedFirst,
+                last_name: editedLast,
+                email: editedEmail
             })
         })
             .then(r=>r.json())
             .then(editedUser => {
-                setUserInfo(editedUser)
-                AsyncStorage.setItem('userInfo', JSON.stringify(editedUser))
+                updateUser(editedUser)
             })
-            
         }
+    
     const deleteUser = ()=>{
         fetch(`http://127.0.0.1:5555/users/${userInfo.id}`, {method: 'DELETE',})
             .then(r=>r.json())
         }
 
-    
-
     return (
         <SafeAreaView style={styles.centeredView}>
-            <View>
+            <Modal>
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <Pressable
+                            style={styles.buttonClose}
+                            onPress={() => handleModalState()}>
+                            <Text style={styles.buttonText}>X</Text>
+                        </Pressable>
                         {showEdit ? (
-                            <Modal>
-                            <View style={styles.centeredView}>
-                            <View style={styles.modalView}>
-                                <TextInput style={styles.input}/>
-                                <Pressable onPress={()=>setShowEdit(false)}>
-                                    <Text>Save</Text>
+                                <>
+                                <Pressable style={styles.editButton} onPress={() => {editUser(), setShowEdit(!showEdit)}}>
+                                    <Text style={styles.editText}>Save</Text>
                                 </Pressable>
-                            </View>
-                            </View>
-                            </Modal>
+                                </>
                             ):(
-                            <Modal>
-                            <View style={styles.centeredView}>
-                            <View style={styles.modalView}>
-                                {/* <Pressable
-                                        style={styles.editButton}
-                                        onPress={() => setShowEdit(true)}>
-                                    <Text style={styles.buttonText}>Edit</Text>
-                                </Pressable> */}
-                                <Button title='Edit' onPress={() => setShowEdit(true)}/>
-
-                                <Pressable
-                                    style={styles.buttonClose}
-                                    onPress={() => handleModalState()}>
-                                    <Text style={styles.buttonText}>X</Text>
+                                <>
+                                <Pressable style={styles.editButton} onPress={() => setShowEdit(!showEdit)}>
+                                    <Text style={styles.editText}>Edit</Text>
                                 </Pressable>
-
+                                </>
+                            )
+                        }
+                        
+                        {showEdit == false ? (
+                                <>
                                 <Text style={styles.modalText}>
                                     {userInfo.first_name}
                                     <Text style={styles.modalText}> {userInfo.last_name}</Text>
                                 </Text>
-                                
                                 <Text style={styles.modalText}>{userInfo.email}</Text>
-                                
-                                <Pressable style={styles.logoutButton} onPress={()=>{handleModalState(), logout()}}>
-                                    <Text style={styles.logoutButtonText}>Logout</Text>
-                                </Pressable>
-                                
-                                <Pressable style={styles.deleteUserButton} onPress={()=>{deleteUser(), handleModalState(), logout()}}>
-                                    <Text style={styles.deleteUserText}>Delete Account</Text>
-                                </Pressable>
-                            </View>
-                            </View>
-                            </Modal>
-                        )
-                    }
+                                </>
+                            ) : (
+                                <>
+                                <TextInput onChangeText={text=>setEditedFirst(text)} style={styles.input} placeholder={userInfo.first_name}/>
+                                <TextInput onChangeText={text=>setEditedLast(text)} style={styles.input} placeholder={userInfo.last_name}/>
+                                <TextInput onChangeText={text=>setEditedEmail(text)} style={styles.input} placeholder={userInfo.email}/>
+                                </>
+                            )
+                        }
+                        <Pressable style={styles.logoutButton} onPress={()=>{handleModalState(), logout()}}>
+                            <Text style={styles.logoutButtonText}>Logout</Text>
+                        </Pressable>
                         
+                        <Pressable style={styles.deleteUserButton} onPress={()=>{deleteUser(), handleModalState(), logout()}}>
+                            <Text style={styles.deleteUserText}>Delete Account</Text>
+                        </Pressable>
                     </View>
+                </View>
+            </Modal>
         </SafeAreaView>
     );
   }
@@ -94,21 +100,20 @@ function MyAccount({navigation, handleModalState}){
     input: {
         height: 40,
         width: 200,
-        margin: 20,
+        margin: 10,
         borderWidth: 1,
         padding: 10,
     },
-    saveButton:{
-        marginTop: 0,
-        backgroundColor: "blue",
-        borderRadius: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 2,
-        alignSelf: 'center',
-        marginVertical: 30,
-        marginHorizontal: 10,
-        width: '50%'
+    editButton:{
+        alignSelf: 'flex-start',
+        marginTop:0,
+        marginBottom:30,
     },
+    editText:{
+        color: '#2196F3',
+        fontSize: 18,
+    },
+
     centeredView: {
       width: '90%',
       height: '90%',
@@ -137,10 +142,10 @@ function MyAccount({navigation, handleModalState}){
     buttonClose: {
         borderRadius: 20,
         padding: 5,
-        elevation: 1,
         backgroundColor: '#2196F3',
         alignSelf: 'flex-end',
-        marginBottom:20
+        marginBottom:0,
+        marginTop:0
     },
 
     buttonText: {

@@ -2,10 +2,8 @@ import React, {useContext, useState} from 'react'
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {View, Text, ActivityIndicator, Button, Modal, Pressable, SafeAreaView, StyleSheet} from 'react-native'
+import {View, Text, ActivityIndicator, Button, Pressable, SafeAreaView, StyleSheet} from 'react-native'
 
-import AuthStack from './AuthStack'
-import AppStack from './AppStack'
 import {AuthContext} from './AuthContext'
 import { Avatar } from '@rneui/themed'
 
