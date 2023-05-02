@@ -25,8 +25,8 @@ class Users(Resource):
         user = User.query.filter_by(email = data['email']).first()
 
         if user:
-            return make_response({'error':'email already associated with account'})
-        # create new account
+            return make_response({'error':'email already associated with account'}, 400)
+        
         if user == None:
             try:
                 almost_user=User(first_name = data['first_name'], last_name = data['last_name'], email = data['email'], _password_hash = data['_password_hash'])
@@ -133,7 +133,6 @@ class Login(Resource):
         if not user:
             return make_response({'error':'Could not verify email'}, 401)
   
-         # login
         if user and user.authenticate(data['_password_hash']):
             token = jwt.encode({
                 'id': user.id,

@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react'
 import {FlatList, StyleSheet, Text, Pressable, View, SafeAreaView, TextInput} from 'react-native'
 import { AuthContext } from './AuthContext'
-import { SearchBar } from 'react-native-elements'
 
 
 
@@ -28,15 +27,11 @@ function JobCategories(){
     return (job.category_name.toLowerCase().includes(searchedCategory))
   })
 
-  console.log(searchedCategory)
-    return (
+    return(
       
         <SafeAreaView style={styles.container}>
           {myCategories ? (
             <>
-              {/* <SearchBar
-                placeholder="Type Here..."
-              /> */}
               <Pressable style={styles.button} onPress={()=>setMyCategories(!myCategories)}>
                 <Text style={styles.buttonText}>View All Job Categories</Text>
               </Pressable>

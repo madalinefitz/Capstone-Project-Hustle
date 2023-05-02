@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-export const AuthContext = React.createContext()
+export const AuthContext = createContext()
 
 export const AuthProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(false)
@@ -39,7 +39,7 @@ export const AuthProvider = ({children}) => {
         setIsLoading(false)
     }
 
-    const createAccount = (firstName, lastName, newEmail, newPassword) => {
+    const createAccount = (firstName, lastName, newEmail, newPassword, newAccountValidator) => {
         setIsLoading(true)
         const newUser = {
             first_name: firstName,
@@ -64,7 +64,7 @@ export const AuthProvider = ({children}) => {
                     AsyncStorage.setItem('userInfo', JSON.stringify(data.user))
                     })
                 } else {
-                    console.log('unable to create account')
+                    newAccountValidator('email invalid')
                     }
                 })
         
