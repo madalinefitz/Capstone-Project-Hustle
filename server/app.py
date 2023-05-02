@@ -26,6 +26,7 @@ class Users(Resource):
 
         password = data['_password_hash']
 
+
         # login
         if user and user.authenticate(password):
             token = jwt.encode({
@@ -53,7 +54,7 @@ class Users(Resource):
                 return make_response({'token' : token.decode('UTF-8'), 'user': new_user.to_dict(rules = ('shifts', 'job_categories'))}, 200)
             
             except:
-                return make_response({'error': 'unable to locate user'}, 400)
+                return make_response({'error': 'user input invalid'}, 400)
     
 api.add_resource(Users, '/users')
 

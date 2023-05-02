@@ -10,6 +10,15 @@ function CreateAccount({navigation}){
 
     const {createAccount} = useContext(AuthContext)
 
+    const firstNameValidator = inputFirst => {
+        if (!inputFirst) {
+            return "Email is required";
+          } else if (!new RegExp(/\S+@\S+\.\S+/).test(email)) {
+            return "Incorrect email format";
+          }
+          return "";
+    }
+
 
     return(
         <View style={styles.conatainer}>
@@ -19,7 +28,7 @@ function CreateAccount({navigation}){
                 value={lastName} onChangeText={text => setLastName(text)}/>
             <TextInput placeholder='Email' style={styles.input} 
                 value={newEmail} onChangeText={text => setNewEmail(text)} autoCapitalize='none'/>
-            <TextInput placeholder='Password' style={styles.input} 
+            <TextInput placeholder='Password' style={styles.input} secureTextEntry={true}
                 value={newPassword} onChangeText={text => setNewPassword(text)} autoCapitalize='none'/>
             <Pressable style={styles.button} onPress={()=>{createAccount(firstName, lastName, newEmail, newPassword)}}>
                     <Text style={styles.buttonText}>Create Account</Text>

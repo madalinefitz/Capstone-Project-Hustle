@@ -8,12 +8,23 @@ function Login ({navigation}){
     const {login} = useContext(AuthContext)
     
 
+    const emailValidator = inputEmail => {
+        if (!inputEmail) {
+            return('Email is required')
+        } else if (inputEmail.includes('@')) {
+          return "";
+        } else return('Incorrect email format')
+    }
+
+    
+
     return (
         <SafeAreaView>
             <View style={styles.container}>
                 <TextInput placeholder='Email'
                     style={styles.input} value={email} onChangeText={text =>setEmail(text)} autoCapitalize='none'/>
-                <TextInput style={styles.input}
+                <Text style={styles.emailValidation}>{emailValidator(email)}</Text>
+                <TextInput style={styles.input} secureTextEntry={true}
                     placeholder='Password' value={password} onChangeText={text => setPassword(text)} autoCapitalize='none'/>
                 <Pressable style={styles.button} onPress={()=>{login(email, password)}}>
                     <Text style={styles.buttonText}>Login</Text>

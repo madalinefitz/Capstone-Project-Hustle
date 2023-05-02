@@ -78,7 +78,7 @@ function MyAccount({navigation, handleModalState}){
                                 <>
                                 <TextInput onChangeText={text=>setEditedFirst(text)} style={styles.input} placeholder={userInfo.first_name}/>
                                 <TextInput onChangeText={text=>setEditedLast(text)} style={styles.input} placeholder={userInfo.last_name}/>
-                                <TextInput onChangeText={text=>setEditedEmail(text)} style={styles.input} placeholder={userInfo.email}/>
+                                <TextInput onChangeText={text=>setEditedEmail(text)} style={styles.input} placeholder={userInfo.email} autoCapitalize='none'/>
                                 </>
                             )
                         }
