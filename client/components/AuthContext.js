@@ -9,13 +9,13 @@ export const AuthProvider = ({children}) => {
     const [userInfo, setUserInfo] = useState(null)
 
 
-    const login = (email, password) => {
+    const login = (email, password, accountValidator) => {
         setIsLoading(true)
         const currentUser = {
             email: email, 
             _password_hash: password
         }
-        fetch('http://127.0.0.1:5555/users', { 
+        fetch('http://127.0.0.1:5555/login', { 
                 method:'POST',
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(currentUser)
@@ -32,7 +32,7 @@ export const AuthProvider = ({children}) => {
                     AsyncStorage.setItem('userInfo', JSON.stringify(data.user))
                     })
                 } else {
-                    console.log('login failure')
+                    accountValidator('account not found')
                     }
                 })
         

@@ -6,31 +6,36 @@ function Login ({navigation}){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const {login} = useContext(AuthContext)
+    const [accountValidation, setAccountValidation] = useState('')
     
 
     const emailValidator = inputEmail => {
         if (!inputEmail) {
-            return('Email is required')
+            return('*Email is required')
         } else if (inputEmail.includes('@')) {
           return "";
-        } else return('Incorrect email format')
+        } else return('*Incorrect email format')
+    }
+    
+    const accountValidator = accountError => {
+        setAccountValidation(accountError)
     }
 
-    
 
     return (
         <SafeAreaView>
             <View style={styles.container}>
+                <Text style={styles.accountValidation}>{accountValidation}</Text>
                 <TextInput placeholder='Email'
                     style={styles.input} value={email} onChangeText={text =>setEmail(text)} autoCapitalize='none'/>
                 <Text style={styles.emailValidation}>{emailValidator(email)}</Text>
                 <TextInput style={styles.input} secureTextEntry={true}
                     placeholder='Password' value={password} onChangeText={text => setPassword(text)} autoCapitalize='none'/>
-                <Pressable style={styles.button} onPress={()=>{login(email, password)}}>
+                <Pressable style={styles.button} onPress={()=>{login(email, password, accountValidator)}}>
                     <Text style={styles.buttonText}>Login</Text>
                 </Pressable> 
                 <Text style={styles.text}>New to Hustle?</Text>
-                <Pressable style={styles.button} onPress={() => navigation.navigate('Create Account')}>
+                <Pressable style={styles.button2} onPress={() => navigation.navigate('Create Account')}>
                     <Text style={styles.button2Text}>Create Account</Text>
                 </Pressable>
             </View>
@@ -45,7 +50,8 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        margin: 20,
+        margin: 2,
+        marginHorizontal: 20,
         borderWidth: 1,
         padding: 10,
     },
@@ -56,7 +62,6 @@ const styles = StyleSheet.create({
         paddingBottom: 20
     },
     button:{
-        marginTop: 0,
         backgroundColor: "blue",
         borderRadius: 10,
         paddingVertical: 10,
@@ -74,6 +79,15 @@ const styles = StyleSheet.create({
         textTransform: "uppercase",
         paddingVertical: 3,
     },
+    button2:{
+        backgroundColor: "blue",
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 2,
+        alignSelf: 'center',
+        marginHorizontal: 10,
+        width: '50%',
+    },
     button2Text:{
         fontSize: 18,
         color: "#fff",
@@ -81,8 +95,18 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         textTransform: "uppercase",
         paddingVertical: 3,
-    }
-    
+    },
+    emailValidation:{
+        color: 'red',
+        marginHorizontal: 20,
+        marginBottom: 20,
+    },
+    accountValidation:{
+        color: 'red',
+        alignSelf: 'flex-end',
+        marginEnd: 18,
+        fontSize: 20
+    },
 
 });
 

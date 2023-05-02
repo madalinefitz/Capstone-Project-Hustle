@@ -24,22 +24,12 @@ class Users(Resource):
         data = request.get_json()
         user = User.query.filter_by(email = data['email']).first()
 
-        password = data['_password_hash']
-
-
-        # login
-        if user and user.authenticate(password):
-            token = jwt.encode({
-                'id': user.id,
-                'exp' : datetime.utcnow() + timedelta(minutes = 30)
-            }, app.config['SECRET_KEY'])
-
-            return make_response({'token' : token.decode('UTF-8'), 'user': user.to_dict(rules = ('shifts', 'job_categories'))}, 200)
-        
+        if user:
+            return make_response({'error':'email already associated with account'})
         # create new account
-        elif user == None:
+        if user == None:
             try:
-                almost_user=User(first_name = data['first_name'], last_name = data['last_name'], email = data['email'], _password_hash = password)
+                almost_user=User(first_name = data['first_name'], last_name = data['last_name'], email = data['email'], _password_hash = data['_password_hash'])
                 almost_user.password_hash=almost_user._password_hash
                 hashed_pass=almost_user._password_hash
                 new_user=User(first_name = data['first_name'], last_name = data['last_name'], email = data['email'], _password_hash = hashed_pass)
@@ -107,7 +97,6 @@ class Shifts(Resource):
         db.session.commit()
 
         return make_response({}, 204)
-
     
 api.add_resource(Shifts, '/shifts')
 
@@ -136,29 +125,24 @@ class ShiftById(Resource):
 
 api.add_resource(ShiftById, '/shifts/<int:id>')
 
-# class Login(Resource):
-#     def post(self):
-#         auth = request.get_json()
-  
-#         if not auth or not auth.get('email') or not auth.get('_password_hash'):
-#             return make_response('Could not verify email or password', 401)
-  
-#         user = User.query.filter_by(email = auth['email']).first()
+class Login(Resource):
+    def post(self):
+        data = request.get_json()
+        user = User.query.filter_by(email = data['email']).first()
         
-#         if not user:
-#             return make_response('Could not verify email', 401)
+        if not user:
+            return make_response({'error':'Could not verify email'}, 401)
   
-#         if user._password_hash == auth['_password_hash']:
-#             token = jwt.encode({
-#                 'id': user.id,
-#                 'exp' : datetime.utcnow() + timedelta(minutes = 30)
-#             }, app.config['SECRET_KEY'])
+         # login
+        if user and user.authenticate(data['_password_hash']):
+            token = jwt.encode({
+                'id': user.id,
+                'exp' : datetime.utcnow() + timedelta(minutes = 30)
+            }, app.config['SECRET_KEY'])
 
-#             return make_response({'token' : token.decode('UTF-8'), 'user': user.to_dict()}, 200)
-   
-#         return make_response('Could not verify', 403)
+        return make_response({'token' : token.decode('UTF-8'), 'user': user.to_dict(rules = ('shifts', 'job_categories'))}, 200)
 
-# api.add_resource(Login, '/login')
+api.add_resource(Login, '/login')
 
 
 
