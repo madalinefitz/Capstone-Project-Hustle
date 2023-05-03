@@ -4,10 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from './AuthContext';
 
 
-function MyShifts({navigation}){
+function MyShifts(){
 
-    const {logout, userInfo} = useContext(AuthContext)
-    const [myShifts, setMyShifts] = useState(userInfo.shifts)
+    const {logout, userInfo, myShifts} = useContext(AuthContext)
+
 
     const Item = ({job_category, start_date_time, hourly_pay, location, end_date_time}) => (
         <View style={styles.shiftItem}>

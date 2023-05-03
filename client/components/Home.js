@@ -7,6 +7,7 @@ import { AuthContext } from './AuthContext';
 function Home({navigation}){
 
     const {userInfo} = useContext(AuthContext)
+
     
 
     return (

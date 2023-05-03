@@ -7,6 +7,12 @@ export const AuthProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(false)
     const [userToken, setUserToken] = useState(null)
     const [userInfo, setUserInfo] = useState(null)
+    
+    const [myShifts, setMyShifts] = useState('')
+
+    const addNewShift = (createdShift) => {
+        setMyShifts([...userInfo.shifts, createdShift])
+    }
 
 
     const login = (email, password, accountValidator) => {
@@ -27,9 +33,11 @@ export const AuthProvider = ({children}) => {
 
                     setUserInfo(data.user)
                     setUserToken(data.token)
+                    setMyShifts(data.user.shifts)
                     
                     AsyncStorage.setItem('userToken', JSON.stringify(data.token))
                     AsyncStorage.setItem('userInfo', JSON.stringify(data.user))
+                    
                     })
                 } else {
                     accountValidator('account not found')
@@ -37,6 +45,7 @@ export const AuthProvider = ({children}) => {
                 })
         
         setIsLoading(false)
+        
     }
 
     const createAccount = (firstName, lastName, newEmail, newPassword, newAccountValidator) => {
@@ -59,6 +68,7 @@ export const AuthProvider = ({children}) => {
 
                     setUserInfo(data.user)
                     setUserToken(data.token)
+                    setMyShifts(data.user.shifts)
                     
                     AsyncStorage.setItem('userToken', JSON.stringify(data.token))
                     AsyncStorage.setItem('userInfo', JSON.stringify(data.user))
@@ -110,7 +120,7 @@ export const AuthProvider = ({children}) => {
 
     
     return (
-        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser}}>
+        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, myShifts, addNewShift}}>
             {children}
         </AuthContext.Provider>
     )

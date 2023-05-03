@@ -7,7 +7,7 @@ import {Calendar, CalendarUtils, CalendarList, Agenda, AgendaSchedule, AgendaEnt
 
 function CalendarContainer(){
 
-  const {userInfo} = useContext(AuthContext)
+  const {userInfo, addNewShift} = useContext(AuthContext)
      
   const [addShift, setAddShift] = useState(false)
   const [startDateTime, setStartDateTime] = useState('')
@@ -16,12 +16,10 @@ function CalendarContainer(){
   const [hourlyPay, setHourlyPay] = useState('')
   const [location, setLocation] = useState('')
 
-  const [createdShift, setCreatedShift] = useState('')
-
-  const [shiftDates, setShiftDates] = useState(myShiftDates)
+  // const [shiftDates, setShiftDates] = useState(myShiftDates)
   const myShifts = [...userInfo.shifts]
   const userId = userInfo.id
-  
+
   //trying to get my shift dates to populate to calendar
   // const myShiftDates = myShifts.map( shift => {
   //   return(
@@ -48,7 +46,7 @@ function CalendarContainer(){
       }
     )
         .then(r => r.json())
-        .then(newShift => setCreatedShift(newShift))
+        .then(newShift => addNewShift(newShift))
 
       setStartDateTime('')
       setEndDateTime('')
@@ -56,7 +54,7 @@ function CalendarContainer(){
       setJobCategory('')
       setLocation('')
   }
-  console.log(createdShift)
+  
 
   return (
     <SafeAreaView>

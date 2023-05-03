@@ -48,6 +48,8 @@ function AppNav(){
         }
     }
 
+    
+    
 
     return(
         <NavigationContainer>
@@ -74,7 +76,7 @@ function AppNav(){
                 >
                     <Stack.Screen name='Home' component={Home} options={{title: '',}}/> 
                     <Stack.Screen name='Job Categories' component={JobCategories}/>
-                    <Stack.Screen name='My Shifts' component={MyShifts}/>
+                    <Stack.Screen name='My Shifts' component={MyShifts} />
                     <Stack.Screen name='Calendar Container' component={CalendarContainer}        
                         options={{title: '',}}
                     />

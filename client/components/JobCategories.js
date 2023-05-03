@@ -34,7 +34,7 @@ function JobCategories(){
               <Pressable style={styles.myCategoriesButton} onPress={()=>setMyCategories(!myCategories)}>
                 <Text style={styles.myCategoriesButtonText}>View All Job Categories</Text>
               </Pressable>
-              <FlatList data={userInfo.job_categories}
+              <FlatList data={_.uniq(userInfo.job_categories, false)}
               renderItem={({item}) => <Item  name={item.category_name} />}
               keyExtractor={item => item.id}/>
             </>
