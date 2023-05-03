@@ -100,12 +100,12 @@ class Shifts(Resource):
             new_shift = Shift(user_id=data['user_id'], job_id=data['job_id'], hourly_pay=data['hourly_pay'], location=data['location'], start_date_time=start_date_time_obj, end_date_time=end_date_time_obj)
         
         except: 
-            return make_response({ 'error': 'unable to add new shift'})
+            return make_response({ 'error': 'unable to add new shift'}, 400)
 
         db.session.add(new_shift)
         db.session.commit()
 
-        return make_response({}, 204)
+        return make_response(new_shift.to_dict(), 200)
     
 api.add_resource(Shifts, '/shifts')
 

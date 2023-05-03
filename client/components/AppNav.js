@@ -137,7 +137,7 @@ styles = StyleSheet.create({
         height: '50%',
         width: '100%',
         content: 'fill',
-        marginBottom: 50,
+        marginBottom: 20,
     },
     addShiftButtonContainer: {
         marginTop: 0,
