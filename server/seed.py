@@ -49,7 +49,7 @@ with app.app_context():
     print("Creating shifts...")
 
 
-    shifts_list = [Shift(user_id = randint(1,5), job_id=randint(1,5), start_date_time = faker.date_time(), start_time = faker.time(), hourly_pay = randint(20,70), location=faker.address()) for _ in range(1,10)]
+    shifts_list = [Shift(user_id = randint(1,5), job_id=randint(1,5), start_date_time = faker.date_time(), end_date_time = faker.date_time(), hourly_pay = randint(20,70), location=faker.address()) for _ in range(1,10)]
 
     db.session.add_all(shifts_list)
     # db.session.add_all(jobs_list)
