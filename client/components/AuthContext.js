@@ -9,6 +9,7 @@ export const AuthProvider = ({children}) => {
     const [userInfo, setUserInfo] = useState(null)
     
     const [myShifts, setMyShifts] = useState('')
+    const [myJobCategories, setMyJobCategories] = useState('')
 
     const login = (email, password, accountValidator) => {
         setIsLoading(true)
@@ -29,6 +30,7 @@ export const AuthProvider = ({children}) => {
                     setUserInfo(data.user)
                     setUserToken(data.token)
                     setMyShifts(data.user.shifts)
+                    setMyJobCategories(data.user.job_categories)
                     
                     AsyncStorage.setItem('userToken', JSON.stringify(data.token))
                     AsyncStorage.setItem('userInfo', JSON.stringify(data.user))
@@ -43,6 +45,7 @@ export const AuthProvider = ({children}) => {
         
     }
 
+    
     const createAccount = (firstName, lastName, newEmail, newPassword, newAccountValidator) => {
         setIsLoading(true)
         const newUser = {
@@ -63,7 +66,6 @@ export const AuthProvider = ({children}) => {
 
                     setUserInfo(data.user)
                     setUserToken(data.token)
-                    // setMyShifts(data.user.shifts)
                     
                     AsyncStorage.setItem('userToken', JSON.stringify(data.token))
                     AsyncStorage.setItem('userInfo', JSON.stringify(data.user))
@@ -103,6 +105,7 @@ export const AuthProvider = ({children}) => {
                 setUserToken(theUserToken)
                 setUserInfo(theUserInfo)
                 setMyShifts(theUserInfo.shifts)
+                setMyJobCategories(theUserInfo.job_categories)
             }
             setIsLoading(false)
         } catch(e) {
@@ -117,14 +120,15 @@ export const AuthProvider = ({children}) => {
             data = JSON.parse( data );
     
             data.shifts.push(createdShift)
+            data.job_categories.push(createdShift.job_category)
 
     
             AsyncStorage.setItem( 'userInfo', JSON.stringify( data ) )
             setMyShifts([...data.shifts])
+            setMyJobCategories([...data.job_categories])
     
           })
       }
-    
     
     useEffect(()=>{
         isLoggedIn()
@@ -132,7 +136,7 @@ export const AuthProvider = ({children}) => {
 
     
     return (
-        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, addNewShift, myShifts}}>
+        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, addNewShift, myShifts, myJobCategories}}>
             {children}
         </AuthContext.Provider>
     )
