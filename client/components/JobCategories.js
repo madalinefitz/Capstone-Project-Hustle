@@ -5,28 +5,35 @@ import { AuthContext } from './AuthContext'
 
 
 function JobCategories(){
-  const {userInfo} = useContext(AuthContext)
+    const {userInfo} = useContext(AuthContext)
 
-  const [jobCategories, setJobCategories] = useState([])
-  const [myCategories, setMyCategories] = useState(false)
-  const [searchedCategory, setSearchedCategory] = useState('')
-  
-  useEffect(()=>{
-    fetch('http://127.0.0.1:5555/jobcategories')
-      .then(r=>r.json())
-      .then(data => setJobCategories(data))
-  },[])
+    const [jobCategories, setJobCategories] = useState([])
+    const [myCategories, setMyCategories] = useState(false)
+    const [searchedCategory, setSearchedCategory] = useState('')
+    
+    useEffect(()=>{
+      fetch('http://127.0.0.1:5555/jobcategories')
+        .then(r=>r.json())
+        .then(data => setJobCategories(data))
+    },[])
 
-  const Item = ({name}) => (
-    <View style={styles.categoryItem}>
-      <Text style={styles.categoryTitle}>{name}</Text>
-    </View>
-  )
+    const Item = ({name}) => (
+      <View style={styles.categoryItem}>
+        <Text style={styles.categoryTitle}>{name}</Text>
+      </View>
+    )
 
-  const filterCategories = jobCategories.filter(job => {
-    return (job.category_name.toLowerCase().includes(searchedCategory))
-  })
-
+    const filterCategories = jobCategories.filter(job => {
+        return (job.category_name.toLowerCase().includes(searchedCategory))
+    })
+    
+    const uniqueCategories = [...new Map(userInfo.job_categories.map((c) => [c.category_name, c])).values()]
+    // const uniqueCategories = userInfo.job_categories.filter((item, index) => {
+    //   return index===userInfo.job_categories.findIndex(obj=>{
+    //     return JSON.stringify(obj) ===JSON.stringify(item)
+    //   })
+    // })
+    
     return(
         <SafeAreaView style={styles.categoryContainer}>
           {myCategories ? (
@@ -34,7 +41,7 @@ function JobCategories(){
               <Pressable style={styles.myCategoriesButton} onPress={()=>setMyCategories(!myCategories)}>
                 <Text style={styles.myCategoriesButtonText}>View All Job Categories</Text>
               </Pressable>
-              <FlatList data={_.uniq(userInfo.job_categories, false)}
+              <FlatList data={uniqueCategories}
               renderItem={({item}) => <Item  name={item.category_name} />}
               keyExtractor={item => item.id}/>
             </>
