@@ -1,5 +1,5 @@
 import React, {useEffect, useContext, useState} from 'react';
-import {Text, FlatList, Pressable, View} from 'react-native';
+import {Text, TextInput, Pressable, View} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from './AuthContext';
 
@@ -38,8 +38,17 @@ function MyShiftItems({job_category, start_date_time, hourly_pay, location, end_
     return(
         <SafeAreaView>
             {showShiftEdit ? (
-                <Text>Editing Shift</Text>
-
+                <View style={styles.shiftItem}>
+                    <Text>Editing Shift</Text>
+                        <TextInput onChangeText={text=>setEditedStartDT(text)} style={styles.input} placeholder={start_date_time}/>
+                        <TextInput onChangeText={text=>setEditedEndDT(text)} style={styles.input} placeholder={end_date_time}/>
+                        <TextInput onChangeText={text=>setEditedJobId(text)} style={styles.input} placeholder={job_category} />
+                        <TextInput onChangeText={text=>setEditedLocation(text)} style={styles.input} placeholder={location} />
+                        <TextInput onChangeText={text=>setEditedPay(text)} style={styles.input} placeholder={hourly_pay.toString()} />
+                    <Pressable style={styles.shiftDeleteButton} onPress={()=>setShowShiftEdit(!showShiftEdit)}>
+                            <Text style={styles.shiftDeleteText}> Save Edits </Text>
+                    </Pressable>
+                </View>
             ) : (
                 <View style={styles.shiftItem}>
                     <Pressable style={styles.shiftDeleteButton} onPress={()=>deleteShift(id)}>
