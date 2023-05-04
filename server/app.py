@@ -114,6 +114,14 @@ class ShiftById(Resource):
         data = request.get_json()
         shift = Shift.query.filter_by(id=id).first()
 
+        # start_date_time_str = data['start_date_time']
+        # end_date_time_str = data['end_date_time']
+    
+        # date_time_format = '%Y-%m-%d %H:%M:%S'
+    
+        # start_date_time_obj = datetime.strptime(start_date_time_str, date_time_format)
+        # end_date_time_obj = datetime.strptime(end_date_time_str, date_time_format)
+
         for key in data.keys():
             setattr(shift, key, data[key])
 

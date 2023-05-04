@@ -16,22 +16,24 @@ function MyShiftItems({job_category, start_date_time, hourly_pay, location, end_
 
     const [showShiftEdit, setShowShiftEdit] = useState(false)
 
-    const editShift=()=>{
-      fetch (`http://127.0.0.1:5555/shifts/${userInfo.id}`, {
+    const editShift=(id)=>{
+      fetch (`http://127.0.0.1:5555/shifts/${id}`, {
         method: 'PATCH',
         headers: {'Content-type': 'application/json'},
         body: JSON.stringify({
+            user_id: userInfo.id,
             start_date_time: editedStartDT,
             end_date_time: editedEndDT,
-            job_category: editedJobId,
+            job_id: editedJobId,
             location: editedLocation,
             hourly_pay: editedPay,
           })
       })
           .then(r=>r.json())
           .then(editedShift => {
-              updateShift(editedShift)
+              console.log(editedShift)
             })
+            
     }
     
 
@@ -45,7 +47,7 @@ function MyShiftItems({job_category, start_date_time, hourly_pay, location, end_
                         <TextInput onChangeText={text=>setEditedJobId(text)} style={styles.input} placeholder={job_category} />
                         <TextInput onChangeText={text=>setEditedLocation(text)} style={styles.input} placeholder={location} />
                         <TextInput onChangeText={text=>setEditedPay(text)} style={styles.input} placeholder={hourly_pay.toString()} />
-                    <Pressable style={styles.shiftDeleteButton} onPress={()=>setShowShiftEdit(!showShiftEdit)}>
+                    <Pressable style={styles.shiftDeleteButton} onPress={()=>{editShift(id), setShowShiftEdit(!showShiftEdit)}}>
                             <Text style={styles.shiftDeleteText}> Save Edits </Text>
                     </Pressable>
                 </View>
