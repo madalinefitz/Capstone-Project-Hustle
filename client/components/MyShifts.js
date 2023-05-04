@@ -6,7 +6,7 @@ import { AuthContext } from './AuthContext';
 
 function MyShifts(){
 
-    const {logout, userInfo, myShifts} = useContext(AuthContext)
+    const {userInfo, myShifts} = useContext(AuthContext)
 
 
     const Item = ({job_category, start_date_time, hourly_pay, location, end_date_time}) => (
@@ -19,7 +19,6 @@ function MyShifts(){
         </View>
       );
     
-
     return (
       <SafeAreaView style={styles.shiftsContainer}>
             <FlatList data={myShifts}

@@ -10,11 +10,6 @@ export const AuthProvider = ({children}) => {
     
     const [myShifts, setMyShifts] = useState('')
 
-    const addNewShift = (createdShift) => {
-        setMyShifts([...userInfo.shifts, createdShift])
-    }
-
-
     const login = (email, password, accountValidator) => {
         setIsLoading(true)
         const currentUser = {
@@ -68,7 +63,7 @@ export const AuthProvider = ({children}) => {
 
                     setUserInfo(data.user)
                     setUserToken(data.token)
-                    setMyShifts(data.user.shifts)
+                    // setMyShifts(data.user.shifts)
                     
                     AsyncStorage.setItem('userToken', JSON.stringify(data.token))
                     AsyncStorage.setItem('userInfo', JSON.stringify(data.user))
@@ -107,6 +102,7 @@ export const AuthProvider = ({children}) => {
             if(theUserToken) {
                 setUserToken(theUserToken)
                 setUserInfo(theUserInfo)
+                setMyShifts(theUserInfo.shifts)
             }
             setIsLoading(false)
         } catch(e) {
@@ -114,13 +110,29 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+    const addNewShift = (createdShift) => {
+  
+        AsyncStorage.getItem( 'userInfo' )
+          .then( data => {
+            data = JSON.parse( data );
+    
+            data.shifts.push(createdShift)
+
+    
+            AsyncStorage.setItem( 'userInfo', JSON.stringify( data ) )
+            setMyShifts([...data.shifts])
+    
+          })
+      }
+    
+    
     useEffect(()=>{
         isLoggedIn()
     }, [])
 
     
     return (
-        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, myShifts, addNewShift}}>
+        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, addNewShift, myShifts}}>
             {children}
         </AuthContext.Provider>
     )

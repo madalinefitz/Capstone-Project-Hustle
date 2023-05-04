@@ -3,7 +3,7 @@ import {Text, Pressable, View, Switch, Alert, TouchableOpacity, TextInput, Style
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from './AuthContext';
 import {Calendar, CalendarUtils, CalendarList, Agenda, AgendaSchedule, AgendaEntry,} from 'react-native-calendars';
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 function CalendarContainer(){
 
@@ -29,6 +29,7 @@ function CalendarContainer(){
   // )
   
   // console.log(shiftDates)
+
 
   const createNewShift = () => {
     const newShift = {
