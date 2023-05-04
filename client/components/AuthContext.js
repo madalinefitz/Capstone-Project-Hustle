@@ -86,12 +86,6 @@ export const AuthProvider = ({children}) => {
         AsyncStorage.removeItem('userInfo')
         setIsLoading(false)
     }
-    
-    const updateUser = (editedUser) =>{
-        setUserInfo(editedUser)
-        AsyncStorage.removeItem('userInfo')
-        AsyncStorage.setItem('userInfo', JSON.stringify(editedUser))
-    }
 
     const isLoggedIn = async() =>{
         try{
@@ -113,6 +107,12 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+    const updateUser = (editedUser) =>{
+        setUserInfo(editedUser)
+        AsyncStorage.removeItem('userInfo')
+        AsyncStorage.setItem('userInfo', JSON.stringify(editedUser))
+    }
+
     const addNewShift = (createdShift) => {
   
         AsyncStorage.getItem( 'userInfo' )
@@ -129,6 +129,25 @@ export const AuthProvider = ({children}) => {
     
           })
       }
+
+    const deleteShift=(id)=>{
+        fetch (`http://127.0.0.1:5555/shifts/${id}`, {method:'DELETE',})
+          .then (r => r.json())
+
+          AsyncStorage.getItem( 'userInfo' )
+            .then( data => {
+            data = JSON.parse( data )
+    
+            const currentShifts = data.shifts.filter(shift => {
+                if (shift.id !== id){
+                    return shift
+                }})
+
+            AsyncStorage.setItem( 'userInfo', JSON.stringify( {...data, shifts:currentShifts} ) )
+            setMyShifts(currentShifts)
+          })
+    }
+    
     
     useEffect(()=>{
         isLoggedIn()
@@ -136,7 +155,7 @@ export const AuthProvider = ({children}) => {
 
     
     return (
-        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, addNewShift, myShifts, myJobCategories}}>
+        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, addNewShift, myShifts, myJobCategories, deleteShift}}>
             {children}
         </AuthContext.Provider>
     )

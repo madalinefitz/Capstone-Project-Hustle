@@ -105,6 +105,7 @@ function AppNav(){
 }
 
 styles = StyleSheet.create({
+
     // Home
     welcomeUser: {
         fontSize: 30,
@@ -130,6 +131,106 @@ styles = StyleSheet.create({
         alignSelf: "center",
         textTransform: "uppercase",
         paddingVertical: 20,
+    },
+
+    //MyAccount
+    input: {
+        height: 40,
+        width: 200,
+        margin: 10,
+        borderWidth: 1,
+        padding: 10,
+    },
+    editButton:{
+        alignSelf: 'flex-start',
+        marginTop:0,
+        marginBottom:30,
+    },
+    editText:{
+        color: '#2196F3',
+        fontSize: 18,
+    },
+
+    centeredView: {
+      width: '90%',
+      height: '90%',
+      alignSelf: 'center',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 22,
+    },
+
+    modalView: {
+      margin: 10,
+      backgroundColor: 'white',
+      borderRadius: 20,
+      padding: 30,
+      alignItems: 'center',
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
+    },
+
+    buttonClose: {
+        borderRadius: 20,
+        padding: 5,
+        backgroundColor: '#2196F3',
+        alignSelf: 'flex-end',
+        marginBottom:0,
+        marginTop:0
+    },
+
+    buttonText: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 12
+    }, 
+
+    modalText: {
+      marginBottom: 15,
+      textAlign: 'center',
+      color: 'black',
+      fontWeight: 'bold',
+      textAlign: 'center',
+      fontSize: 20
+    },
+
+    logoutButton: {
+        backgroundColor: '#2196F3',
+        alignSelf: 'center',
+        marginTop:10,
+        padding: 12,
+        marginBottom:3,
+        borderRadius: 20,
+        width: 200,
+    },
+
+    logoutButtonText:{
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 25,
+        alignSelf: 'center',
+    }, 
+    
+    deleteUserButton:{
+        backgroundColor: 'red',
+        alignSelf: 'center',
+        marginTop:40,
+        padding: 7,
+        marginBottom:3,
+        borderRadius: 20,
+    },
+
+    deleteUserText:{
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 18
+
     },
 
     // Calendar
@@ -181,6 +282,20 @@ styles = StyleSheet.create({
         fontSize: 20,
         color: 'white'
     },
+    shiftDeleteText:{  
+        fontSize: 20,
+        color: 'black',
+    },
+    shiftDeleteButton:{
+        alignSelf: 'flex-end',
+        marginTop: 0,
+        backgroundColor: 'white',
+        borderRadius: 10,
+        paddingVertical: 2,
+        paddingHorizontal: 5,
+        alignSelf: 'flex-end',
+        margin: 10,
+    }, 
     
     // Estimated Pay
     payContainer: {
