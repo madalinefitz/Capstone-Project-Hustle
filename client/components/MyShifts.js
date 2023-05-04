@@ -1,31 +1,19 @@
-import React, {useEffect, useContext, useState} from 'react';
-import {Text, FlatList, Pressable, View} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { AuthContext } from './AuthContext';
+import React, {useEffect, useContext, useState} from 'react'
+import {Text, FlatList, Pressable, View} from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { AuthContext } from './AuthContext'
+import MyShiftItems from './MyShiftItems'
 
 
 function MyShifts(){
 
     const {userInfo, myShifts, deleteShift} = useContext(AuthContext)
 
-    const Item = ({job_category, start_date_time, hourly_pay, location, end_date_time, id}) => (
-        <View style={styles.shiftItem}>
-          <Pressable style={styles.shiftDeleteButton} onPress={()=>deleteShift(id)}>
-              <Text style={styles.shiftDeleteText}>x</Text>
-          </Pressable>
-          <Text style={styles.shiftText}> {id} </Text>
-          <Text style={styles.shiftText}>Start: {start_date_time}</Text>
-          <Text style={styles.shiftText}>End: {end_date_time}</Text>
-          <Text style={styles.shiftText}>{job_category}</Text>
-          <Text style={styles.shiftText}>{location}</Text>
-          <Text style={styles.shiftText}>${hourly_pay}/hr</Text>
-        </View>
-      )
     
     return (
       <SafeAreaView style={styles.shiftsContainer}>
             <FlatList data={myShifts}
-                renderItem={({item}) => <Item job_category={item.job_category.category_name} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time} id={item.id}/>}
+                renderItem={({item}) => <MyShiftItems job_category={item.job_category.category_name} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time} id={item.id}/>}
                 keyExtractor={item => item.id}/>
       </SafeAreaView>
     )
