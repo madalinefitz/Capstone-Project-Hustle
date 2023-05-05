@@ -56,7 +56,7 @@ class User(db.Model, SerializerMixin):
 class Shift(db.Model, SerializerMixin):
     __tablename__='shifts'
 
-    serialize_rules = ['-created_at', '-updated_at', '-user', '-job_id', '-user_id']
+    serialize_rules = ['-created_at', '-updated_at', '-user', '-user_id']
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

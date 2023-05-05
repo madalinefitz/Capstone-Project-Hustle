@@ -9,11 +9,12 @@ function MyShifts(){
 
     const {userInfo, myShifts, deleteShift} = useContext(AuthContext)
 
+    console.log(myShifts)
     
     return (
       <SafeAreaView style={styles.shiftsContainer}>
             <FlatList data={myShifts}
-                renderItem={({item}) => <MyShiftItems job_category={item.job_category.category_name} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time} id={item.id}/>}
+                renderItem={({item}) => <MyShiftItems job_category_name={item.job_category.category_name} job_category_id={item.job_category.id} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time} id={item.id}/>}
                 keyExtractor={item => item.id}/>
       </SafeAreaView>
     )

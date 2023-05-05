@@ -4,13 +4,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from './AuthContext';
 
 
-function MyShiftItems({job_category, start_date_time, hourly_pay, location, end_date_time, id}){
-
+function MyShiftItems({job_category_name, job_category_id, start_date_time, hourly_pay, location, end_date_time, id}){
+    
     const {userInfo, deleteShift, updateShift} = useContext(AuthContext)
 
     const [editedStartDT, setEditedStartDT] = useState(start_date_time)
     const [editedEndDT, setEditedEndDT] = useState(end_date_time)
-    const [editedJobId, setEditedJobId] = useState(job_category)
+    const [editedJobId, setEditedJobId] = useState(job_category_id)
     const [editedLocation, setEditedLocation] = useState(location)
     const [editedPay, setEditedPay] = useState(hourly_pay)
 
@@ -44,7 +44,7 @@ function MyShiftItems({job_category, start_date_time, hourly_pay, location, end_
                     <Text>Editing Shift</Text>
                         <TextInput onChangeText={text=>setEditedStartDT(text)} style={styles.input} placeholder={start_date_time}/>
                         <TextInput onChangeText={text=>setEditedEndDT(text)} style={styles.input} placeholder={end_date_time}/>
-                        <TextInput onChangeText={text=>setEditedJobId(text)} style={styles.input} placeholder={job_category} />
+                        <TextInput onChangeText={text=>setEditedJobId(text)} style={styles.input} placeholder={job_category_name} />
                         <TextInput onChangeText={text=>setEditedLocation(text)} style={styles.input} placeholder={location} />
                         <TextInput onChangeText={text=>setEditedPay(text)} style={styles.input} placeholder={hourly_pay.toString()} />
                     <Pressable style={styles.shiftDeleteButton} onPress={()=>{editShift(id), setShowShiftEdit(!showShiftEdit)}}>
@@ -58,7 +58,7 @@ function MyShiftItems({job_category, start_date_time, hourly_pay, location, end_
                     </Pressable>
                     <Text style={styles.shiftText}>Start: {start_date_time}</Text>
                     <Text style={styles.shiftText}>End: {end_date_time}</Text>
-                    <Text style={styles.shiftText}>{job_category}</Text>
+                    <Text style={styles.shiftText}>{job_category_name}</Text>
                     <Text style={styles.shiftText}>{location}</Text>
                     <Text style={styles.shiftText}>${hourly_pay}/hr</Text>
                     <Pressable style={styles.shiftDeleteButton} onPress={()=>setShowShiftEdit(!showShiftEdit)}>
