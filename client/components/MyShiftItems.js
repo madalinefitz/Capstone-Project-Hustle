@@ -6,7 +6,7 @@ import { AuthContext } from './AuthContext';
 
 function MyShiftItems({job_category, start_date_time, hourly_pay, location, end_date_time, id}){
 
-    const {userInfo, myShifts, deleteShift} = useContext(AuthContext)
+    const {userInfo, deleteShift, updateShift} = useContext(AuthContext)
 
     const [editedStartDT, setEditedStartDT] = useState(start_date_time)
     const [editedEndDT, setEditedEndDT] = useState(end_date_time)
@@ -31,7 +31,7 @@ function MyShiftItems({job_category, start_date_time, hourly_pay, location, end_
       })
           .then(r=>r.json())
           .then(editedShift => {
-              console.log(editedShift)
+              updateShift(editedShift)
             })
             
     }

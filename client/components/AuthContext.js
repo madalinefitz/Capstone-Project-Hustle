@@ -147,6 +147,19 @@ export const AuthProvider = ({children}) => {
             setMyShifts(currentShifts)
           })
     }
+
+    const updateShift = (editedShift) => {
+        const newShiftArray= myShifts.map(shift => {
+            return(shift.id !== editedShift.id ? shift : editedShift)
+        })
+
+        setMyShifts(newShiftArray)
+        AsyncStorage.getItem( 'userInfo' )
+            .then( data => {
+                data = JSON.parse( data )
+                AsyncStorage.setItem( 'userInfo', JSON.stringify( {...data, shifts:newShiftArray} ) )
+            })
+    }
     
     
     useEffect(()=>{
@@ -155,7 +168,7 @@ export const AuthProvider = ({children}) => {
 
     
     return (
-        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, addNewShift, myShifts, myJobCategories, deleteShift}}>
+        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, addNewShift, myShifts, myJobCategories, deleteShift, updateShift}}>
             {children}
         </AuthContext.Provider>
     )
