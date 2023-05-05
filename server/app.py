@@ -113,17 +113,20 @@ class ShiftById(Resource):
     def patch(self, id):
         data = request.get_json()
         shift = Shift.query.filter_by(id=id).first()
-
-        # start_date_time_str = data['start_date_time']
-        # end_date_time_str = data['end_date_time']
-    
-        # date_time_format = '%Y-%m-%d %H:%M:%S'
-    
-        # start_date_time_obj = datetime.strptime(start_date_time_str, date_time_format)
-        # end_date_time_obj = datetime.strptime(end_date_time_str, date_time_format)
+        
+        date_time_format = '%Y-%m-%d %H:%M:%S'
+        start_date_time_str = data['start_date_time']
+        end_date_time_str = data['end_date_time']
 
         for key in data.keys():
-            setattr(shift, key, data[key])
+            if key == 'start_date_time':  
+                start_date_time_obj=datetime.strptime(start_date_time_str, date_time_format)
+                setattr(shift, key, start_date_time_obj)
+            elif key == 'end_date_time':
+                end_date_time_obj = datetime.strptime(end_date_time_str, date_time_format)
+                setattr(shift, key, end_date_time_obj)
+            else:
+                setattr(shift, key, data[key])
 
         db.session.add(shift)
         db.session.commit()
