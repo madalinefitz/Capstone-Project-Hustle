@@ -7,9 +7,7 @@ import MyShiftItems from './MyShiftItems'
 
 function MyShifts(){
 
-    const {userInfo, myShifts, deleteShift} = useContext(AuthContext)
-
-    console.log(myShifts)
+    const {userInfo, myShifts} = useContext(AuthContext)
     
     return (
       <SafeAreaView style={styles.shiftsContainer}>

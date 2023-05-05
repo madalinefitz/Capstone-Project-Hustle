@@ -1,13 +1,11 @@
-import React, {useEffect, useContext, useState, useCallback, useMemo, Fragment, useRef} from 'react';
-import {Text, Pressable, View, Switch, Alert, TouchableOpacity, TextInput, StyleSheet, ScrollView} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { AuthContext } from './AuthContext';
-import {Calendar, CalendarUtils, CalendarList, Agenda, AgendaSchedule, AgendaEntry,} from 'react-native-calendars';
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import React, {useEffect, useContext, useState, useCallback, useMemo, Fragment, useRef} from 'react'
+import {Text, View, Switch, Alert, TouchableOpacity, TextInput, Pressable} from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { AuthContext } from './AuthContext'
+import {Calendar, CalendarUtils, CalendarList, Agenda, AgendaSchedule, AgendaEntry,} from 'react-native-calendars'
 
 function CalendarContainer(){
-
-  const {userInfo, addNewShift} = useContext(AuthContext)
+  const {userInfo, myJobCategories, addNewShift} = useContext(AuthContext)
      
   const [addShift, setAddShift] = useState(false)
   const [startDateTime, setStartDateTime] = useState('')
@@ -16,11 +14,16 @@ function CalendarContainer(){
   const [hourlyPay, setHourlyPay] = useState('')
   const [location, setLocation] = useState('')
 
-  // const [shiftDates, setShiftDates] = useState(myShiftDates)
-  const myShifts = [...userInfo.shifts]
+  const [showDropdown, setShowDropdown] = useState(false)
+  const [selected, setSelected] = useState('Select Job Category')
+
   const userId = userInfo.id
 
   //trying to get my shift dates to populate to calendar
+
+  // const [shiftDates, setShiftDates] = useState(myShiftDates)
+  // const myShifts = [...userInfo.shifts]
+
   // const myShiftDates = myShifts.map( shift => {
   //   return(
   //     Date(shift.start_date_time.split(' ')[0])
@@ -30,6 +33,19 @@ function CalendarContainer(){
   
   // console.log(shiftDates)
 
+  
+
+  const renderDropdown = myJobCategories.map(jc => {
+    if (showDropdown) {
+        return (
+          <View style={styles.dropdownContainer} keyExtractor={jc.id}>
+            <Pressable onPress={()=> {setSelected(jc.category_name), setShowDropdown(!setShowDropdown), setJobCategory(jc.id)}} style={styles.dropdownOptions}>
+                <Text>{jc.category_name}</Text>
+            </Pressable>
+          </View>
+          )
+      }
+  })
 
   const createNewShift = () => {
     const newShift = {
@@ -54,6 +70,7 @@ function CalendarContainer(){
       setHourlyPay('')
       setJobCategory('')
       setLocation('')
+      setSelected('Select Job Category')
   }
   
 
@@ -88,7 +105,10 @@ function CalendarContainer(){
             <View>
               <TextInput style={styles.shiftInput} placeholder='tap start date on calendar'  value={startDateTime} onChangeText={(text)=>{setStartDateTime(text)}}/>
               <TextInput style={styles.shiftInput} placeholder='tap end date on calendar' value={endDateTime} onChangeText={(text)=>{setEndDateTime(text)}}/>
-              <TextInput style={styles.shiftInput} placeholder='job category' value={jobCategory} onChangeText={(text)=>{setJobCategory(text)}}/>
+              <Pressable style={styles.dropdown} onPress={()=>setShowDropdown(!showDropdown)}>
+                  <Text>{selected}</Text>
+                  {renderDropdown}
+              </Pressable>
               <TextInput style={styles.shiftInput} placeholder='hourly pay' value={hourlyPay} onChangeText={(text)=>{setHourlyPay(text)}}/>
               <TextInput style={styles.shiftInput} placeholder='location' value={location} onChangeText={(text)=>{setLocation(text)}}/>
               <TouchableOpacity 
@@ -103,5 +123,6 @@ function CalendarContainer(){
     </SafeAreaView>
   );
 }
+
 
 export default CalendarContainer

@@ -265,7 +265,36 @@ styles = StyleSheet.create({
         width: '60%',
         borderWidth: 1,
         padding: 2,
+        backgroundColor: 'white',
+        zIndex: -1,
     },
+    dropdown: {
+        position: 'relative',
+        backgroundColor: 'white',
+        height: 30,
+        margin: 2,
+        alignSelf: 'center',
+        width: '60%',
+        borderWidth: 1,
+        padding: 2,
+        backgroundColor: 'white',
+    },
+    dropdownOptions: {
+        position: 'relative',
+        zIndex: 50,
+        marginHorizontal: 5,
+        height: 30,
+        margin: 1,
+        alignSelf: 'center',
+        width: '60%',
+        padding: 1,
+        
+        
+    },
+    dropdownContainer:{
+        borderWidth: 1,
+        backgroundColor: 'white',
+    },  
 
     // My Shifts
     shiftsContainer: {
