@@ -91,7 +91,7 @@ class Shifts(Resource):
         start_date_time_str = data['start_date_time']
         end_date_time_str = data['end_date_time']
     
-        date_time_format = '%Y-%m-%d %H:%M:%S'
+        date_time_format = '%Y-%m-%dT%H:%M:%S.%fZ'
     
         start_date_time_obj = datetime.strptime(start_date_time_str, date_time_format)
         end_date_time_obj = datetime.strptime(end_date_time_str, date_time_format)

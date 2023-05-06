@@ -1,18 +1,22 @@
 import React, {useEffect, useContext, useState, useCallback, useMemo, Fragment, useRef} from 'react'
-import {Text, View, Switch, Alert, TouchableOpacity, TextInput, Pressable} from 'react-native'
+import {Text, View, Switch, Alert, Modal, TouchableOpacity, TextInput, Pressable, Button } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { AuthContext } from './AuthContext'
 import {Calendar, CalendarUtils, CalendarList, Agenda, AgendaSchedule, AgendaEntry,} from 'react-native-calendars'
+import DatePicker from 'react-native-date-picker'
+
 
 function CalendarContainer(){
   const {userInfo, myJobCategories, addNewShift} = useContext(AuthContext)
      
   const [addShift, setAddShift] = useState(false)
-  const [startDateTime, setStartDateTime] = useState('')
-  const [endDateTime, setEndDateTime] = useState('')
+  const [startDateTime, setStartDateTime] = useState(new Date())
+  const [endDateTime, setEndDateTime] = useState(new Date())
   const [jobCategory, setJobCategory] = useState('')
   const [hourlyPay, setHourlyPay] = useState('')
   const [location, setLocation] = useState('')
+  const [startOpen, setStartOpen] = useState(false)
+  const [endOpen, setEndOpen] = useState(false)
 
   const [showDropdown, setShowDropdown] = useState(false)
   const [selected, setSelected] = useState('Select Job Category')
@@ -63,7 +67,7 @@ function CalendarContainer(){
       }
     )
         .then(r => r.json())
-        .then(newShift => addNewShift(newShift))
+        .then(newShift => addNewShift({...newShift, end_date_time : Date(), start_date_time : Date()} ))
 
       setStartDateTime('')
       setEndDateTime('')
@@ -73,9 +77,13 @@ function CalendarContainer(){
       setSelected('Select Job Category')
   }
   
+  console.log(startDateTime)
+  console.log(endDateTime)
+
 
   return (
     <SafeAreaView>
+        
         {addShift ? (
             <TouchableOpacity 
             style={styles.addShiftButtonContainer} onPress={()=>setAddShift(!addShift)}>
@@ -88,7 +96,7 @@ function CalendarContainer(){
             </TouchableOpacity>
           )
         }
-        <Calendar onDayPress={day => {setStartDateTime(day.dateString)}} markingType="multi-period" 
+        <Calendar onDayPress={day => {console.log(day.dateString)}} isMultiSelection={true} markingType="multi-period" 
         style={styles.calendar}
         theme={{
           backgroundColor: '#ffffff',
@@ -102,9 +110,40 @@ function CalendarContainer(){
         }}
         />
         {addShift ? (
-            <View>
-              <TextInput style={styles.shiftInput} placeholder='tap start date on calendar'  value={startDateTime} onChangeText={(text)=>{setStartDateTime(text)}}/>
-              <TextInput style={styles.shiftInput} placeholder='tap end date on calendar' value={endDateTime} onChangeText={(text)=>{setEndDateTime(text)}}/>
+          <Modal>
+            <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Pressable onPress={()=>setAddShift(!addShift)}>
+                <Text>x</Text>
+              </Pressable>
+              <Text style={styles.shiftInput}>start date & time</Text>
+                  <Button title='+' onPress={() => setStartOpen(true)} />
+                  <DatePicker
+                    modal
+                    open={startOpen}
+                    date={startDateTime}
+                    onConfirm={(date) => {
+                      setStartOpen(false)
+                      setStartDateTime(new Date(date))
+                    }}
+                    onCancel={() => {
+                      setStartOpen(false)
+                    }}
+                  />
+              <Text style={styles.shiftInput}>end date & time</Text>
+                  <Button title='+' onPress={() => setEndOpen(true)} />
+                  <DatePicker
+                    modal
+                    open={endOpen}
+                    date={endDateTime}
+                    onConfirm={(date) => {
+                      setEndOpen(false)
+                      setEndDateTime(date)
+                    }}
+                    onCancel={() => {
+                      setEndOpen(false)
+                    }}
+                  />
               <Pressable style={styles.dropdown} onPress={()=>setShowDropdown(!showDropdown)}>
                   <Text>{selected}</Text>
                   {renderDropdown}
@@ -116,6 +155,8 @@ function CalendarContainer(){
                 <Text style={styles.addShiftButtonText}> Save Shift </Text>
               </TouchableOpacity>
             </View>
+            </View>
+          </Modal>
           ):(
             null
           )
