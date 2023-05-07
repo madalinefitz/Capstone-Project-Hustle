@@ -38,14 +38,12 @@ function CalendarContainer(){
   // console.log(shiftDates)
   const myUniqueCategories = [...new Map(myJobCategories.map((c) => [c.category_name, c])).values()]
 
-  
-
   const renderDropdown = myUniqueCategories.map(jc => {
     if (showDropdown) {
         return (
-          <View style={styles.dropdownContainer} keyExtractor={jc.id}>
+          <View style={styles.dropdownContainer}>
             <Pressable onPress={()=> {setSelected(jc.category_name), setShowDropdown(!setShowDropdown), setJobCategory(jc.id)}} style={styles.dropdownOptions}>
-                <Text>{jc.category_name}</Text>
+                <Text keyExtractor={jc.id}>{jc.category_name}</Text>
             </Pressable>
           </View>
           )
@@ -77,9 +75,6 @@ function CalendarContainer(){
       setLocation('')
       setSelected('Select Job Category')
   }
-
-  console.log(endDateTime)
-  // console.log(startDateTime)
 
   
 
@@ -147,7 +142,7 @@ function CalendarContainer(){
                     }}
                   />
               <Pressable style={styles.dropdown} onPress={()=>setShowDropdown(!showDropdown)}>
-                  <Text>{selected}</Text>
+                  <Text >{selected}</Text>
                   {renderDropdown}
               </Pressable>
               <TextInput style={styles.shiftInput} placeholder='hourly pay' value={hourlyPay} onChangeText={(text)=>setHourlyPay(text)}/>

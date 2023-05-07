@@ -160,6 +160,16 @@ export const AuthProvider = ({children}) => {
                 AsyncStorage.setItem( 'userInfo', JSON.stringify( {...data, shifts:newShiftArray} ) )
             })
     }
+
+    const favoriteCategory = (favoritedCategory) => {
+            setMyJobCategories([...myJobCategories, favoritedCategory])
+            AsyncStorage.getItem( 'userInfo' )
+                .then( data => {
+            
+                data = JSON.parse( data );
+                AsyncStorage.setItem( 'userInfo', JSON.stringify( {...data, job_categories:[...myJobCategories, favoritedCategory]} ))
+                })
+    }
     
     
     useEffect(()=>{
@@ -168,7 +178,7 @@ export const AuthProvider = ({children}) => {
 
     
     return (
-        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, addNewShift, myShifts, myJobCategories, deleteShift, updateShift}}>
+        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, addNewShift, myShifts, myJobCategories, deleteShift, updateShift, favoriteCategory}}>
             {children}
         </AuthContext.Provider>
     )

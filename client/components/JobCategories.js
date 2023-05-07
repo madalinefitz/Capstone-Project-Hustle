@@ -5,7 +5,7 @@ import { AuthContext } from './AuthContext'
 
 
 function JobCategories(){
-    const {userInfo, myJobCategories} = useContext(AuthContext)
+    const {userInfo, myJobCategories, favoriteCategory} = useContext(AuthContext)
 
     const [jobCategories, setJobCategories] = useState([])
     const [myCategories, setMyCategories] = useState(false)
@@ -17,8 +17,11 @@ function JobCategories(){
         .then(data => setJobCategories(data))
     },[])
 
-    const Item = ({name}) => (
+    const Item = ({name, id}) => (
       <View style={styles.categoryItem}>
+        <Pressable style={styles.favoriteButton} onPress={()=>handleFavorites(id)}>
+          <Text>Favorite?</Text>
+        </Pressable>
         <Text style={styles.categoryTitle}>{name}</Text>
       </View>
     )
@@ -33,6 +36,14 @@ function JobCategories(){
     //     return JSON.stringify(obj) ===JSON.stringify(item)
     //   })
     // })
+
+    const handleFavorites = (id) => {
+      jobCategories.filter((category) => {
+        if (category.id === id){
+          favoriteCategory(category)
+        }
+      })
+    }
     
     return(
         <SafeAreaView style={styles.categoryContainer}>
@@ -52,7 +63,7 @@ function JobCategories(){
               </Pressable>
               <TextInput onChangeText={(text)=>setSearchedCategory(text.toLowerCase())} style={styles.categorySearch} placeholder='search...'/>
               <FlatList data={filterCategories} 
-                renderItem={({item}) => <Item name={item.category_name} />}
+                renderItem={({item}) => <Item name={item.category_name} id={item.id}/>}
                 keyExtractor={item => item.id}/>
             </>
             )

@@ -250,6 +250,7 @@ styles = StyleSheet.create({
         paddingHorizontal: 2,
         alignSelf: 'flex-end',
         margin: 10,
+        zIndex: -2,
     },
     addShiftButtonText: {
         fontSize: 30,
@@ -369,13 +370,23 @@ styles = StyleSheet.create({
       },
       categoryTitle: {
         fontSize: 25,
-        color: 'white'
+        color: 'white',
+        alignSelf: 'center',
       },
       categorySearch:{
         height: 40,
         margin: 20,
         borderWidth: 1,
         padding: 10,
+      },
+      favoriteButton:{
+        marginTop: 0,
+        backgroundColor: "white",
+        borderRadius: 10,
+        paddingVertical: 2,
+        paddingHorizontal: 2,
+        alignSelf: 'flex-end',
+        margin: 10,
       },
 })
 
