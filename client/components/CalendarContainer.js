@@ -36,10 +36,11 @@ function CalendarContainer(){
   // )
   
   // console.log(shiftDates)
+  const myUniqueCategories = [...new Map(myJobCategories.map((c) => [c.category_name, c])).values()]
 
   
 
-  const renderDropdown = myJobCategories.map(jc => {
+  const renderDropdown = myUniqueCategories.map(jc => {
     if (showDropdown) {
         return (
           <View style={styles.dropdownContainer} keyExtractor={jc.id}>
@@ -68,7 +69,7 @@ function CalendarContainer(){
     )
         .then(r => r.json())
         .then(newShift => addNewShift({...newShift, end_date_time : Date(), start_date_time : Date()} ))
-
+        
       setStartDateTime('')
       setEndDateTime('')
       setHourlyPay('')
@@ -76,10 +77,11 @@ function CalendarContainer(){
       setLocation('')
       setSelected('Select Job Category')
   }
-  
-  console.log(startDateTime)
-  console.log(endDateTime)
 
+  console.log(endDateTime)
+  // console.log(startDateTime)
+
+  
 
   return (
     <SafeAreaView>
@@ -116,26 +118,26 @@ function CalendarContainer(){
               <Pressable onPress={()=>setAddShift(!addShift)}>
                 <Text>x</Text>
               </Pressable>
-              <Text style={styles.shiftInput}>start date & time</Text>
+              <Text style={styles.shiftInput}>{Date(startDateTime)}</Text>
                   <Button title='+' onPress={() => setStartOpen(true)} />
                   <DatePicker
                     modal
                     open={startOpen}
-                    date={startDateTime}
+                    date={new Date(startDateTime)}
                     onConfirm={(date) => {
                       setStartOpen(false)
-                      setStartDateTime(new Date(date))
+                      setStartDateTime(date)
                     }}
                     onCancel={() => {
                       setStartOpen(false)
                     }}
                   />
-              <Text style={styles.shiftInput}>end date & time</Text>
+              <Text style={styles.shiftInput}>{Date(endDateTime)}</Text>
                   <Button title='+' onPress={() => setEndOpen(true)} />
                   <DatePicker
                     modal
                     open={endOpen}
-                    date={endDateTime}
+                    date={new Date(endDateTime)}
                     onConfirm={(date) => {
                       setEndOpen(false)
                       setEndDateTime(date)
@@ -148,10 +150,10 @@ function CalendarContainer(){
                   <Text>{selected}</Text>
                   {renderDropdown}
               </Pressable>
-              <TextInput style={styles.shiftInput} placeholder='hourly pay' value={hourlyPay} onChangeText={(text)=>{setHourlyPay(text)}}/>
-              <TextInput style={styles.shiftInput} placeholder='location' value={location} onChangeText={(text)=>{setLocation(text)}}/>
+              <TextInput style={styles.shiftInput} placeholder='hourly pay' value={hourlyPay} onChangeText={(text)=>setHourlyPay(text)}/>
+              <TextInput style={styles.shiftInput} placeholder='location' value={location} onChangeText={(text)=>setLocation(text)}/>
               <TouchableOpacity 
-                  style={styles.addShiftButtonContainer} onPress={()=>createNewShift()}>
+                  style={styles.addShiftButtonContainer} onPress={()=>{createNewShift(), setAddShift(!addShift)}} >
                 <Text style={styles.addShiftButtonText}> Save Shift </Text>
               </TouchableOpacity>
             </View>
