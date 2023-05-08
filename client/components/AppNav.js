@@ -65,7 +65,7 @@ function AppNav(){
                         onPress={() => setAccountModal(true)}
                         title={userInfo.first_name.charAt(0)}
                         color="white"
-                        size={32}
+                        size={35}
                         rounded
                         containerStyle={{ backgroundColor: "#1C2541" }}
                         />
@@ -90,12 +90,14 @@ function AppNav(){
                         headerTintColor: '#1C2541',
                         headerTitleStyle: {
                             fontWeight: 'bold',
+                            fontSize: 25,
+                            
                         },
                         autoCapitalize: 'none'
                     }}
                 >
-                    <Stack.Screen name='Login' component={Login} />
-                    <Stack.Screen name='Create Account' component={CreateAccount}/> 
+                    <Stack.Screen name='Login' component={Login} options={{title: ''}}/>
+                    <Stack.Screen name='Create Account' component={CreateAccount} options={{title: 'Hustle.',}}/> 
                 </Stack.Navigator>
             )}
             
@@ -146,17 +148,26 @@ styles = StyleSheet.create({
 
     //MyAccount
     input: {
-        height: 40,
-        width: 200,
-        margin: 10,
+        height: 35,
+        marginTop: 15,
+        alignSelf: 'stretch',
         borderWidth: 1,
-        padding: 10,
-        alignSelf: 'center', 
+        borderColor: '#C3C9E9',
+        paddingHorizontal: 10,
+        backgroundColor: 'white',
+        zIndex: -1,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 1,
+        elevation: 2, 
     },
     editButton:{
         alignSelf: 'flex-start',
-        margin:20,
-
+        marginVertical: 20,
+        marginHorizontal: 20,
         position: 'absolute',
     },
     editText:{
@@ -202,19 +213,28 @@ styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 
-    modalText: {
+    modalName: {
       textAlign: 'center',
       color: '#1C2541',
       fontWeight: 'bold',
       textAlign: 'center',
-      fontSize: 20,
-      marginTop: 15,
+      fontSize: 25,
+      marginTop: 25,
+    },
+
+    modalEmail: {
+        textAlign: 'center',
+        color: '#1C2541',
+        marginTop: 10,
+        marginBottom: 10,
+        textAlign: 'center',
+        fontSize: 20,
     },
     
     logoutButton: {
         backgroundColor: '#1C2541',
         alignSelf: 'center',
-        marginTop:40,
+        marginTop:30,
         padding: 12,
         marginBottom:3,
         borderRadius: 20,
@@ -241,7 +261,6 @@ styles = StyleSheet.create({
         color: '#EEF0F2',
         fontWeight: 'bold',
         fontSize: 18
-
     },
 
     // Calendar
@@ -283,7 +302,8 @@ styles = StyleSheet.create({
         alignSelf: 'stretch',
         borderWidth: 1,
         borderColor: '#C3C9E9',
-        padding: 2,
+        paddingHorizontal: 10,
+        paddingVertical: 2,
         backgroundColor: 'white',
         zIndex: -1,
         shadowOffset: {
@@ -293,6 +313,10 @@ styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 1,
         elevation: 2,
+        color: '#1C2541', 
+    },
+    modalText:{
+        color: '#1C2541', 
     },
     addDateButton:{
         alignSelf:'flex-start',
@@ -312,7 +336,8 @@ styles = StyleSheet.create({
         alignSelf: 'stretch',
         borderWidth: 1,
         borderColor: '#C3C9E9',
-        padding: 2,
+        paddingVertical: 2,
+        paddingHorizontal: 10,
         backgroundColor: 'white',
         shadowOffset: {
             width: 0,
@@ -325,10 +350,9 @@ styles = StyleSheet.create({
     dropdownOptions: {
         position: 'relative',
         zIndex: 50,
-        marginHorizontal: 5,
-        height: 30,
-        margin: 1, 
-        padding: 1,
+        padding: 5,
+        height: 20,
+        alignSelf: 'stretch',
     },
     dropdownContainer:{
         borderWidth: 1,
@@ -441,7 +465,7 @@ styles = StyleSheet.create({
         margin: 7,
         borderWidth: 2,
         borderColor: '#EEF0F2',
-        padding: 2,
+        paddingHorizontal: 10,
         alignSelf: 'stretch', 
         shadowOffset: {
             width: 0,
@@ -482,7 +506,7 @@ styles = StyleSheet.create({
         backgroundColor: "#1C2541",
         borderRadius: 10,
         padding: 10,
-        marginVertical: 30,
+        marginVertical: 20,
         marginHorizontal: 10,
         width: '70%'
       },
@@ -503,9 +527,9 @@ styles = StyleSheet.create({
         marginHorizontal: 16,
       },
       categoryTitle: {
-        fontSize: 25,
+        fontSize: 20,
         color: '#1C2541',
-        alignSelf: 'center',
+        alignSelf: 'flex-start',
         fontWeight: 'bold',
       },
       categorySearch:{
@@ -528,7 +552,7 @@ styles = StyleSheet.create({
         alignSelf: 'flex-end',
         fontSize: 25,
         position: 'absolute',
-        padding: 20,
+        padding: 15,
       },
 })
 

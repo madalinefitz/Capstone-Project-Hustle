@@ -36,8 +36,8 @@ function CalendarContainer(){
   // )
   
   // console.log(shiftDates)
-  const myUniqueCategories = [...new Map(myJobCategories.map((c) => [c.category_name, c])).values()]
 
+  const myUniqueCategories = [...new Map(myJobCategories.map((c) => [c.category_name, c])).values()]
   const renderDropdown = myUniqueCategories.map(jc => {
     if (showDropdown) {
         return (
@@ -135,7 +135,7 @@ function CalendarContainer(){
                     }}
                   />
               <Pressable style={styles.dropdown} onPress={()=>setShowDropdown(!showDropdown)}>
-                  <Text>{selected}</Text>
+                  <Text style={styles.modalText}>{selected}</Text>
                   {renderDropdown}
               </Pressable>
               <TextInput style={styles.shiftInput} placeholder='hourly pay' value={hourlyPay} onChangeText={(text)=>setHourlyPay(text)}/>

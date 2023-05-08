@@ -67,11 +67,11 @@ function MyAccount({handleModalState}){
                         
                         {showEdit == false ? (
                                 <>
-                                <Text style={styles.modalText}>
+                                <Text style={styles.modalName}>
                                     {userInfo.first_name}
-                                    <Text style={styles.modalText}> {userInfo.last_name}</Text>
+                                    <Text style={styles.modalName}> {userInfo.last_name}</Text>
                                 </Text>
-                                <Text style={styles.modalText}>{userInfo.email}</Text>
+                                <Text numberOfLines={1} style={styles.modalEmail}>{userInfo.email}</Text>
                                 </>
                             ) : (
                                 <>

@@ -25,6 +25,7 @@ function Login ({navigation}){
     return (
         <SafeAreaView>
             <View style={styles.container}>
+                <Text style={styles.hustle}>Hustle.</Text>
                 <Text style={styles.accountValidation}>{accountValidation}</Text>
                 <TextInput placeholder='Email'
                     style={styles.input} value={email} onChangeText={text =>setEmail(text)} autoCapitalize='none'/>
@@ -48,23 +49,38 @@ const styles = StyleSheet.create({
     container: {
         marginVertical: 70,
     },
+    hustle: {
+        fontSize: 50,
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        color: '#1C2541', 
+        marginBottom: 20,
+    },
     input: {
         height: 40,
-        margin: 2,
+        marginBottom: 5,
         marginHorizontal: 20,
-        color: '#1C2541',
+        alignSelf: 'stretch',
         borderWidth: 1,
-        padding: 10,
+        borderColor: '#C3C9E9',
+        paddingHorizontal: 10,
+        backgroundColor: 'white',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 1,
+        elevation: 2, 
     },
     text: {
         fontSize:20,
         alignSelf: 'center',
         paddingTop: 80,
         paddingBottom: 20,
-        
     },
     button:{
-        backgroundColor: "#1C2541",
+        backgroundColor: "#858AE3",
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 2,
