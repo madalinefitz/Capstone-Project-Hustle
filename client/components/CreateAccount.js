@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     },
     button:{
         marginTop: 20,
-        backgroundColor: "blue",
+        backgroundColor: "#1C2541",
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 2,
@@ -85,13 +85,13 @@ const styles = StyleSheet.create({
         paddingVertical: 3,
     },
     accountValidation:{
-        color: 'red',
+        color: '#1C2541',
         alignSelf: 'flex-end',
         marginEnd: 18,
         fontSize: 20
     },
     validation:{
-        color: 'red',
+        color: '#1C2541',
         marginHorizontal: 20,
         marginTop:0,
     },

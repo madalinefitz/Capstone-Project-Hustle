@@ -47,18 +47,16 @@ function AppNav(){
             )
         }
     }
-
-    
     
 
     return(
-        <NavigationContainer>
+        <NavigationContainer >
             {userToken !== null ? (
                 <Stack.Navigator screenOptions={{
                     headerStyle: {
-                        backgroundColor: 'blue',
+                        backgroundColor: '#EEF0F2',
                     },
-                    headerTintColor: '#fff',
+                    headerTintColor: '#394053',
                     headerTitleStyle: {
                         fontWeight: 'bold',
                     },
@@ -69,7 +67,7 @@ function AppNav(){
                         color="white"
                         size={32}
                         rounded
-                        containerStyle={{ backgroundColor: "grey" }}
+                        containerStyle={{ backgroundColor: "#1C2541" }}
                         />
                         ),
                     }}
@@ -82,13 +80,14 @@ function AppNav(){
                     />
                     <Stack.Screen name='Estimated Pay' component={EstimatedPay}/>
                 </Stack.Navigator>
+                
             ):(
                 <Stack.Navigator 
                     screenOptions={{
                         headerStyle: {
-                            backgroundColor: 'blue',
+                            backgroundColor: '#EEF0F2',
                         },
-                        headerTintColor: '#fff',
+                        headerTintColor: '#1C2541',
                         headerTitleStyle: {
                             fontWeight: 'bold',
                         },
@@ -108,25 +107,31 @@ styles = StyleSheet.create({
 
     // Home
     welcomeUser: {
-        fontSize: 30,
-        alignSelf: 'center',
-        padding: 20,
-        fontWeight: 'bold'
+        fontSize: 20,
+        alignSelf: 'flex-start',
+        padding: 0,
+        fontWeight: 'bold',
+        color: '#1C2541', 
+        marginTop:0,
+        marginBottom: 40,
+        marginHorizontal: 20,
+        
     },
+    // CDD1DE, 545677, 012A36, -C9B6BE, CEFF1A, C2E812
 
     homeButtons: {
         marginTop: 0,
-        backgroundColor: "blue",
+        backgroundColor: "#C2E812",
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 2,
         alignSelf: 'stretch',
         marginVertical: 30,
-        marginHorizontal: 10
+        marginHorizontal: 10,
     },
     homeButtonsText: {
         fontSize: 25,
-        color: "#fff",
+        color: 'white',
         fontWeight: "bold",
         alignSelf: "center",
         textTransform: "uppercase",
@@ -140,6 +145,7 @@ styles = StyleSheet.create({
         margin: 10,
         borderWidth: 1,
         padding: 10,
+        alignSelf: 'center', 
     },
     editButton:{
         alignSelf: 'flex-start',
@@ -147,8 +153,8 @@ styles = StyleSheet.create({
         marginBottom:30,
     },
     editText:{
-        color: '#2196F3',
-        fontSize: 18,
+        color: '#C3C9E9',
+        fontSize: 15,
     },
 
     centeredView: {
@@ -177,31 +183,28 @@ styles = StyleSheet.create({
     },
 
     buttonClose: {
-        borderRadius: 20,
-        padding: 5,
-        backgroundColor: '#2196F3',
         alignSelf: 'flex-end',
+        padding: 5,
         marginBottom:0,
         marginTop:0
-    },
-
-    buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 12
     }, 
+    buttonText: {
+        color: '#C3C9E9',
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
 
     modalText: {
       marginBottom: 15,
       textAlign: 'center',
-      color: 'black',
+      color: '#1C2541',
       fontWeight: 'bold',
       textAlign: 'center',
       fontSize: 20
     },
-
+    
     logoutButton: {
-        backgroundColor: '#2196F3',
+        backgroundColor: '#1C2541',
         alignSelf: 'center',
         marginTop:10,
         padding: 12,
@@ -213,15 +216,15 @@ styles = StyleSheet.create({
     logoutButtonText:{
         color: 'white',
         fontWeight: 'bold',
-        fontSize: 25,
+        fontSize: 30,
         alignSelf: 'center',
     }, 
     
     deleteUserButton:{
-        backgroundColor: 'red',
+        backgroundColor: '#C3C9E9',
         alignSelf: 'center',
         marginTop:40,
-        padding: 7,
+        padding: 10,
         marginBottom:3,
         borderRadius: 20,
     },
@@ -236,24 +239,24 @@ styles = StyleSheet.create({
     // Calendar
     calendar: {
         borderWidth: 0,
-        borderColor: 'blue',
+        borderColor: '#CDD1DE',
         height: '50%',
         width: '100%',
         content: 'fill',
         marginBottom: 20,
+        marginTop: 50,
     },
     addShiftButtonContainer: {
-        marginTop: 0,
-        backgroundColor: "grey",
+        backgroundColor: "#C3C9E9",
         borderRadius: 10,
-        paddingVertical: 2,
-        paddingHorizontal: 2,
-        alignSelf: 'flex-end',
-        margin: 10,
+        padding: 10,
+        alignSelf: 'center',
+        marginHorizontal: 20,
+        marginTop: 80,
         zIndex: -2,
     },
     addShiftButtonText: {
-        fontSize: 30,
+        fontSize: 20,
         color: "#fff",
         fontWeight: "bold",
         alignSelf: "center",
@@ -263,7 +266,7 @@ styles = StyleSheet.create({
         height: 30,
         margin: 2,
         alignSelf: 'center',
-        width: '60%',
+        width: '70%',
         borderWidth: 1,
         padding: 2,
         backgroundColor: 'white',
@@ -289,13 +292,41 @@ styles = StyleSheet.create({
         alignSelf: 'center',
         width: '60%',
         padding: 1,
-        
-        
+
     },
     dropdownContainer:{
         borderWidth: 1,
         backgroundColor: 'white',
     },  
+    saveShiftButtonContainer: {
+        marginTop: 20,
+        backgroundColor: "#C3C9E9",
+        borderRadius: 10,
+        padding: 15,
+        alignSelf: 'center',
+        margin: 10,
+        zIndex: -2,
+    },
+    saveShiftButtonText: {
+        fontSize: 20,
+        color: "#fff",
+        fontWeight: "bold",
+        alignSelf: "center",
+        textTransform: "uppercase"
+    },
+    addShiftExitButton:{
+        marginTop: 0,
+        padding: 2,
+        alignSelf: 'flex-end',
+        marginBottom: 10,
+
+    },
+    addShiftExitButtonText:{
+        color: '#C3C9E9',
+        fontSize: 20,
+
+    },
+
 
     // My Shifts
     shiftsContainer: {
@@ -303,33 +334,56 @@ styles = StyleSheet.create({
         marginTop: 0,
     },
     shiftItem: {
-        backgroundColor: 'grey',
+        backgroundColor: '#C3C9E9',
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
     },
     shiftText: {
         fontSize: 20,
-        color: 'white'
+        color: 'white',
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        margin: 10,
     },
     shiftDeleteText:{  
-        fontSize: 20,
-        color: 'black',
+        fontSize: 15,
+        color: 'white',
+        fontWeight: 'bold',
     },
     shiftDeleteButton:{
         alignSelf: 'flex-end',
-        marginTop: 0,
-        backgroundColor: 'white',
+        backgroundColor: "#1C2541",
         borderRadius: 10,
-        paddingVertical: 2,
-        paddingHorizontal: 5,
+        padding: 10,
+        marginBottom: 0
+    }, 
+    shiftEditText:{  
+        fontSize: 15,
+        color: '#1C2541',
+    },
+    shiftEditButton:{
         alignSelf: 'flex-end',
-        margin: 10,
+        marginTop: 10,
+        padding: 5,
+    }, 
+    shiftSaveText:{  
+        fontSize: 25,
+        color: 'white',
+        fontWeight: 'bold',
+    },
+    shiftSaveButton:{
+        backgroundColor: '#C2E812',
+        alignSelf: 'center',
+        borderRadius: 10,
+        padding: 10,
+        marginBottom: 10,
+
     }, 
     
     // Estimated Pay
     payContainer: {
-      backgroundColor: 'grey',
+      backgroundColor: '#C2E812',
       padding: 20,
       marginVertical: 100,
       marginHorizontal: 16,
@@ -344,7 +398,7 @@ styles = StyleSheet.create({
     // Job Categories
     myCategoriesButton:{
         alignSelf: 'flex-end',
-        backgroundColor: "blue",
+        backgroundColor: "#C2E812",
         borderRadius: 10,
         paddingVertical: 2,
         paddingHorizontal: 2,
@@ -363,7 +417,7 @@ styles = StyleSheet.create({
         marginTop: 0,
       },
       categoryItem: {
-        backgroundColor: 'grey',
+        backgroundColor: '#C3C9E9',
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
@@ -372,6 +426,7 @@ styles = StyleSheet.create({
         fontSize: 25,
         color: 'white',
         alignSelf: 'center',
+        fontWeight: 'bold',
       },
       categorySearch:{
         height: 40,
@@ -380,13 +435,10 @@ styles = StyleSheet.create({
         padding: 10,
       },
       favoriteButton:{
-        marginTop: 0,
-        backgroundColor: "white",
-        borderRadius: 10,
-        paddingVertical: 2,
-        paddingHorizontal: 2,
         alignSelf: 'flex-end',
-        margin: 10,
+        fontSize: 20,
+        margin: 0,
+        position: 'relative',
       },
 })
 

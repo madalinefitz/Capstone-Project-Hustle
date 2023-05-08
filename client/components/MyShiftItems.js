@@ -41,28 +41,29 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
         <SafeAreaView>
             {showShiftEdit ? (
                 <View style={styles.shiftItem}>
-                    <Text>Editing Shift</Text>
                         <TextInput onChangeText={text=>setEditedStartDT(text)} style={styles.input} placeholder={start_date_time}/>
                         <TextInput onChangeText={text=>setEditedEndDT(text)} style={styles.input} placeholder={end_date_time}/>
                         <TextInput onChangeText={text=>setEditedJobId(text)} style={styles.input} placeholder={job_category_name} />
                         <TextInput onChangeText={text=>setEditedLocation(text)} style={styles.input} placeholder={location} />
                         <TextInput onChangeText={text=>setEditedPay(text)} style={styles.input} placeholder={hourly_pay.toString()} />
-                    <Pressable style={styles.shiftDeleteButton} onPress={()=>{editShift(id), setShowShiftEdit(!showShiftEdit)}}>
-                            <Text style={styles.shiftDeleteText}> Save Edits </Text>
+                    
+                    <Pressable style={styles.shiftSaveButton} onPress={()=>{editShift(id), setShowShiftEdit(!showShiftEdit)}}>
+                            <Text style={styles.shiftSaveText}> Save Edits </Text>
+                    </Pressable>
+                    <Pressable style={styles.shiftDeleteButton} onPress={()=>deleteShift(id)}>
+                        <Text style={styles.shiftDeleteText}>Delete Shift</Text>
                     </Pressable>
                 </View>
             ) : (
                 <View style={styles.shiftItem}>
-                    <Pressable style={styles.shiftDeleteButton} onPress={()=>deleteShift(id)}>
-                        <Text style={styles.shiftDeleteText}>x</Text>
-                    </Pressable>
-                    <Text style={styles.shiftText}>Start: {start_date_time}</Text>
-                    <Text style={styles.shiftText}>End: {end_date_time}</Text>
+                    
+                    <Text style={styles.shiftText}>Start: {Date(start_date_time)}</Text>
+                    <Text style={styles.shiftText}>End: {Date(end_date_time)}</Text>
                     <Text style={styles.shiftText}>{job_category_name}</Text>
                     <Text style={styles.shiftText}>{location}</Text>
                     <Text style={styles.shiftText}>${hourly_pay}/hr</Text>
-                    <Pressable style={styles.shiftDeleteButton} onPress={()=>setShowShiftEdit(!showShiftEdit)}>
-                        <Text style={styles.shiftDeleteText}> edit shift </Text>
+                    <Pressable style={styles.shiftEditButton} onPress={()=>setShowShiftEdit(!showShiftEdit)}>
+                        <Text style={styles.shiftEditText}>EDIT</Text>
                     </Pressable>
                 </View>
             )}

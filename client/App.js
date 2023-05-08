@@ -2,6 +2,7 @@
  * @format
  */
 import React from 'react'
+import {Text, Pressable, View, StyleSheet} from 'react-native';
 
 import {AuthProvider} from './components/AuthContext'
 import AppNav from './components/AppNav';
@@ -9,7 +10,7 @@ import AppNav from './components/AppNav';
 function App() {
 
   return(
-    <AuthProvider>
+    <AuthProvider >
       <AppNav/>
     </AuthProvider>
   )

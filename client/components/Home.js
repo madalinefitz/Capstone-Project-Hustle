@@ -11,8 +11,8 @@ function Home({navigation}){
     
 
     return (
-      <SafeAreaView>
-            <Text style={styles.welcomeUser}>Welcome {userInfo.first_name}</Text>
+      <SafeAreaView >
+            <Text style={styles.welcomeUser}>Ready to Hustle, {userInfo.first_name}?</Text>
             <Pressable
               onPress={() => navigation.navigate('Calendar Container')} style={styles.homeButtons}>
                 <Text style={styles.homeButtonsText}>View Calendar</Text>

@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
         height: 40,
         margin: 2,
         marginHorizontal: 20,
+        color: '#1C2541',
         borderWidth: 1,
         padding: 10,
     },
@@ -59,10 +60,11 @@ const styles = StyleSheet.create({
         fontSize:20,
         alignSelf: 'center',
         paddingTop: 80,
-        paddingBottom: 20
+        paddingBottom: 20,
+        
     },
     button:{
-        backgroundColor: "blue",
+        backgroundColor: "#1C2541",
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 2,
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
         paddingVertical: 3,
     },
     button2:{
-        backgroundColor: "blue",
+        backgroundColor: "#1C2541",
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 2,
@@ -97,12 +99,12 @@ const styles = StyleSheet.create({
         paddingVertical: 3,
     },
     emailValidation:{
-        color: 'red',
+        color: '#1C2541',
         marginHorizontal: 20,
         marginBottom: 20,
     },
     accountValidation:{
-        color: 'red',
+        color: '#1C2541',
         alignSelf: 'flex-end',
         marginEnd: 18,
         fontSize: 20

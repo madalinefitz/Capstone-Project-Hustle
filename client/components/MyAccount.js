@@ -53,13 +53,13 @@ function MyAccount({handleModalState}){
                         {showEdit ? (
                                 <>
                                 <Pressable style={styles.editButton} onPress={() => {editUser(), setShowEdit(!showEdit)}}>
-                                    <Text style={styles.editText}>Save</Text>
+                                    <Text style={styles.editText}>SAVE</Text>
                                 </Pressable>
                                 </>
                             ):(
                                 <>
                                 <Pressable style={styles.editButton} onPress={() => setShowEdit(!showEdit)}>
-                                    <Text style={styles.editText}>Edit</Text>
+                                    <Text style={styles.editText}>EDIT</Text>
                                 </Pressable>
                                 </>
                             )

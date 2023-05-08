@@ -79,20 +79,8 @@ function CalendarContainer(){
   
 
   return (
-    <SafeAreaView>
+    <SafeAreaView >
         
-        {addShift ? (
-            <TouchableOpacity 
-            style={styles.addShiftButtonContainer} onPress={()=>setAddShift(!addShift)}>
-              <Text style={styles.addShiftButtonText}> - </Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity 
-              style={styles.addShiftButtonContainer} onPress={()=>setAddShift(!addShift)}>
-                <Text style={styles.addShiftButtonText}> + </Text>
-            </TouchableOpacity>
-          )
-        }
         <Calendar onDayPress={day => {console.log(day.dateString)}} isMultiSelection={true} markingType="multi-period" 
         style={styles.calendar}
         theme={{
@@ -106,12 +94,13 @@ function CalendarContainer(){
           textDisabledColor: '#d9e'
         }}
         />
+        <View>
         {addShift ? (
           <Modal>
             <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Pressable onPress={()=>setAddShift(!addShift)}>
-                <Text>x</Text>
+              <Pressable onPress={()=>setAddShift(!addShift)} style={styles.addShiftExitButton}>
+                <Text style={styles.addShiftExitButtonText}>x</Text>
               </Pressable>
               <Text style={styles.shiftInput}>{Date(startDateTime)}</Text>
                   <Button title='+' onPress={() => setStartOpen(true)} />
@@ -148,16 +137,22 @@ function CalendarContainer(){
               <TextInput style={styles.shiftInput} placeholder='hourly pay' value={hourlyPay} onChangeText={(text)=>setHourlyPay(text)}/>
               <TextInput style={styles.shiftInput} placeholder='location' value={location} onChangeText={(text)=>setLocation(text)}/>
               <TouchableOpacity 
-                  style={styles.addShiftButtonContainer} onPress={()=>{createNewShift(), setAddShift(!addShift)}} >
-                <Text style={styles.addShiftButtonText}> Save Shift </Text>
+                  style={styles.saveShiftButtonContainer} onPress={()=>{createNewShift(), setAddShift(!addShift)}} >
+                <Text style={styles.saveShiftButtonText}> Save Shift </Text>
               </TouchableOpacity>
             </View>
             </View>
           </Modal>
           ):(
-            null
+            (
+              <TouchableOpacity 
+                style={styles.addShiftButtonContainer} onPress={()=>setAddShift(!addShift)}>
+                  <Text style={styles.addShiftButtonText}> Add Shift </Text>
+              </TouchableOpacity>
+            )
           )
-        }      
+        } 
+        </View>     
     </SafeAreaView>
   );
 }
