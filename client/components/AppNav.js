@@ -73,7 +73,7 @@ function AppNav(){
                     }}
                 >
                     <Stack.Screen name='Home' component={Home} options={{title: '',}}/> 
-                    <Stack.Screen name='Job Categories' component={JobCategories}/>
+                    <Stack.Screen name='Job Categories' component={JobCategories} options={{title: ''}}/>
                     <Stack.Screen name='My Shifts' component={MyShifts} />
                     <Stack.Screen name='Calendar Container' component={CalendarContainer}        
                         options={{title: '',}}
@@ -534,6 +534,7 @@ styles = StyleSheet.create({
       },
       categorySearch:{
         height: 40,
+        width: '60%',
         margin: 20,
         borderWidth: 1,
         padding: 10,
@@ -546,7 +547,8 @@ styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 1,
         elevation: 2,
-        borderRadius: 15,
+        borderRadius: 10,
+        alignSelf: 'center',
       },
       favoriteButton:{
         alignSelf: 'flex-end',
