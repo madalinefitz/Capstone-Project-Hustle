@@ -103,7 +103,9 @@ function CalendarContainer(){
                 <Text style={styles.addShiftExitButtonText}>x</Text>
               </Pressable>
               <Text style={styles.shiftInput}>{Date(startDateTime)}</Text>
-                  <Button title='+' onPress={() => setStartOpen(true)} />
+                  <Pressable title='+' onPress={() => setStartOpen(true)} style={styles.addDateButton}>
+                    <Text style={styles.addDateText}>+</Text>
+                  </Pressable>
                   <DatePicker
                     modal
                     open={startOpen}
@@ -117,7 +119,9 @@ function CalendarContainer(){
                     }}
                   />
               <Text style={styles.shiftInput}>{Date(endDateTime)}</Text>
-                  <Button title='+' onPress={() => setEndOpen(true)} />
+                  <Pressable title='+' onPress={() => setEndOpen(true)} style={styles.addDateButton}>
+                    <Text style={styles.addDateText}>+</Text>
+                  </Pressable>
                   <DatePicker
                     modal
                     open={endOpen}
@@ -131,7 +135,7 @@ function CalendarContainer(){
                     }}
                   />
               <Pressable style={styles.dropdown} onPress={()=>setShowDropdown(!showDropdown)}>
-                  <Text >{selected}</Text>
+                  <Text>{selected}</Text>
                   {renderDropdown}
               </Pressable>
               <TextInput style={styles.shiftInput} placeholder='hourly pay' value={hourlyPay} onChangeText={(text)=>setHourlyPay(text)}/>

@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     },
     buttonText:{
         fontSize: 25,
-        color: "#fff",
+        color: "#EEF0F2",
         fontWeight: "bold",
         alignSelf: "center",
         textTransform: "uppercase",
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     },
     button2Text:{
         fontSize: 18,
-        color: "#fff",
+        color: "#EEF0F2",
         fontWeight: "bold",
         alignSelf: "center",
         textTransform: "uppercase",

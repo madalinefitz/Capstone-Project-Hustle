@@ -117,21 +117,27 @@ styles = StyleSheet.create({
         marginHorizontal: 20,
         
     },
-    // CDD1DE, 545677, 012A36, -C9B6BE, CEFF1A, C2E812
 
     homeButtons: {
         marginTop: 0,
-        backgroundColor: "#B5CA8D",
+        backgroundColor: "#858AE3",
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 2,
         alignSelf: 'stretch',
         marginVertical: 30,
         marginHorizontal: 10,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
     },
     homeButtonsText: {
         fontSize: 25,
-        color: 'white',
+        color: '#EEF0F2',
         fontWeight: "bold",
         alignSelf: "center",
         textTransform: "uppercase",
@@ -149,8 +155,9 @@ styles = StyleSheet.create({
     },
     editButton:{
         alignSelf: 'flex-start',
-        marginTop:0,
-        marginBottom:30,
+        margin:20,
+
+        position: 'absolute',
     },
     editText:{
         color: '#C3C9E9',
@@ -184,9 +191,10 @@ styles = StyleSheet.create({
 
     buttonClose: {
         alignSelf: 'flex-end',
-        padding: 5,
-        marginBottom:0,
-        marginTop:0
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        marginVertical: 10,
+        position: 'absolute',
     }, 
     buttonText: {
         color: '#C3C9E9',
@@ -195,18 +203,18 @@ styles = StyleSheet.create({
     },
 
     modalText: {
-      marginBottom: 15,
       textAlign: 'center',
       color: '#1C2541',
       fontWeight: 'bold',
       textAlign: 'center',
-      fontSize: 20
+      fontSize: 20,
+      marginTop: 15,
     },
     
     logoutButton: {
         backgroundColor: '#1C2541',
         alignSelf: 'center',
-        marginTop:10,
+        marginTop:40,
         padding: 12,
         marginBottom:3,
         borderRadius: 20,
@@ -214,7 +222,7 @@ styles = StyleSheet.create({
     },
 
     logoutButtonText:{
-        color: 'white',
+        color: '#EEF0F2',
         fontWeight: 'bold',
         fontSize: 30,
         alignSelf: 'center',
@@ -230,7 +238,7 @@ styles = StyleSheet.create({
     },
 
     deleteUserText:{
-        color: 'white',
+        color: '#EEF0F2',
         fontWeight: 'bold',
         fontSize: 18
 
@@ -254,49 +262,79 @@ styles = StyleSheet.create({
         marginHorizontal: 20,
         marginTop: 80,
         zIndex: -2,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
     },
     addShiftButtonText: {
         fontSize: 20,
-        color: "#fff",
+        color: "#EEF0F2",
         fontWeight: "bold",
         alignSelf: "center",
         textTransform: "uppercase"
     },
     shiftInput:{
         height: 30,
-        margin: 2,
-        alignSelf: 'center',
-        width: '70%',
+        margin: 5,
+        alignSelf: 'stretch',
         borderWidth: 1,
+        borderColor: '#C3C9E9',
         padding: 2,
         backgroundColor: 'white',
         zIndex: -1,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 1,
+        elevation: 2,
+    },
+    addDateButton:{
+        alignSelf:'flex-start',
+        position: 'relative',
+        padding: 2,
+    },
+    addDateText:{
+        color: '#C3C9E9',
+        fontSize: 20,
+        fontWeight: 'bold',
     },
     dropdown: {
         position: 'relative',
-        backgroundColor: 'white',
+        color: 'red',
         height: 30,
-        margin: 2,
-        alignSelf: 'center',
-        width: '60%',
+        margin: 5,
+        alignSelf: 'stretch',
         borderWidth: 1,
+        borderColor: '#C3C9E9',
         padding: 2,
         backgroundColor: 'white',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 1,
+        elevation: 2,
     },
     dropdownOptions: {
         position: 'relative',
         zIndex: 50,
         marginHorizontal: 5,
         height: 30,
-        margin: 1,
-        alignSelf: 'center',
-        width: '60%',
+        margin: 1, 
         padding: 1,
-
     },
     dropdownContainer:{
         borderWidth: 1,
         backgroundColor: 'white',
+        borderColor: '#C3C9E9',
+        alignSelf: 'stretch',
     },  
     saveShiftButtonContainer: {
         marginTop: 20,
@@ -309,7 +347,7 @@ styles = StyleSheet.create({
     },
     saveShiftButtonText: {
         fontSize: 20,
-        color: "#fff",
+        color: "white",
         fontWeight: "bold",
         alignSelf: "center",
         textTransform: "uppercase"
@@ -326,6 +364,7 @@ styles = StyleSheet.create({
         fontSize: 20,
 
     },
+    
 
 
     // My Shifts
@@ -334,12 +373,12 @@ styles = StyleSheet.create({
         marginTop: 0,
     },
     shiftItem: {
-        backgroundColor: '#B5CA8D',
+        backgroundColor: '#C3C9E9',
         marginVertical: 8,
         marginHorizontal: 16,
         borderRadius: 15,
-        alignItems: 'center',
-        padding: 30,
+        alignItems: 'stretch',
+        padding: 20,
         shadowColor: '#000',
         shadowOffset: {
           width: 0,
@@ -362,7 +401,7 @@ styles = StyleSheet.create({
     },
     shiftDeleteText:{  
         fontSize: 15,
-        color: 'white',
+        color: '#EEF0F2',
         fontWeight: 'bold',
     },
     shiftDeleteButton:{
@@ -384,21 +423,38 @@ styles = StyleSheet.create({
     }, 
     shiftSaveText:{  
         fontSize: 25,
-        color: 'white',
+        color: '#EEF0F2',
         fontWeight: 'bold',
     },
     shiftSaveButton:{
-        backgroundColor: '#C3C9E9',
+        backgroundColor: '#858AE3',
         alignSelf: 'center',
         borderRadius: 10,
         padding: 10,
-        marginBottom: 10,
+        marginBottom: 15,
+        marginTop:20,
 
     }, 
+    editShiftInput: {
+        backgroundColor: '#EEF0F2',
+        height: 30,
+        margin: 7,
+        borderWidth: 2,
+        borderColor: '#EEF0F2',
+        padding: 2,
+        alignSelf: 'stretch', 
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 1,
+        elevation: 2,
+    },
     
     // Estimated Pay
     payContainer: {
-        backgroundColor: '#B5CA8D',
+        backgroundColor: '#858AE3',
         marginVertical: 100,
         marginHorizontal: 16,
         alignSelf: 'center',
@@ -416,14 +472,14 @@ styles = StyleSheet.create({
     },
     pay: {
       fontSize: 100,
-      color: 'white',
+      color: '#EEF0F2',
       alignSelf: 'center',
     },
 
     // Job Categories
     myCategoriesButton:{
         alignSelf: 'flex-end',
-        backgroundColor: "#B5CA8D",
+        backgroundColor: "#858AE3",
         borderRadius: 10,
         paddingVertical: 2,
         paddingHorizontal: 2,
@@ -432,7 +488,7 @@ styles = StyleSheet.create({
         width: '60%'
       },
       myCategoriesButtonText:{
-        color: 'white',
+        color: '#EEF0F2',
         fontSize: 18,
         fontWeight: 'bold',
         alignSelf: 'center'
@@ -449,7 +505,7 @@ styles = StyleSheet.create({
       },
       categoryTitle: {
         fontSize: 25,
-        color: 'white',
+        color: '#1C2541',
         alignSelf: 'center',
         fontWeight: 'bold',
       },
@@ -458,6 +514,7 @@ styles = StyleSheet.create({
         margin: 20,
         borderWidth: 1,
         padding: 10,
+        borderColor: '#C3C9E9',
       },
       favoriteButton:{
         alignSelf: 'flex-end',

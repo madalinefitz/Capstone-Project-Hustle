@@ -41,11 +41,11 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
         <SafeAreaView>
             {showShiftEdit ? (
                 <View style={styles.shiftItem}>
-                        <TextInput onChangeText={text=>setEditedStartDT(text)} style={styles.input} placeholder={start_date_time}/>
-                        <TextInput onChangeText={text=>setEditedEndDT(text)} style={styles.input} placeholder={end_date_time}/>
-                        <TextInput onChangeText={text=>setEditedJobId(text)} style={styles.input} placeholder={job_category_name} />
-                        <TextInput onChangeText={text=>setEditedLocation(text)} style={styles.input} placeholder={location} />
-                        <TextInput onChangeText={text=>setEditedPay(text)} style={styles.input} placeholder={hourly_pay.toString()} />
+                        <TextInput onChangeText={text=>setEditedStartDT(text)} style={styles.editShiftInput} placeholder={start_date_time}/>
+                        <TextInput onChangeText={text=>setEditedEndDT(text)} style={styles.editShiftInput} placeholder={end_date_time}/>
+                        <TextInput onChangeText={text=>setEditedJobId(text)} style={styles.editShiftInput} placeholder={job_category_name} />
+                        <TextInput onChangeText={text=>setEditedLocation(text)} style={styles.editShiftInput} placeholder={location} />
+                        <TextInput onChangeText={text=>setEditedPay(text)} style={styles.editShiftInput} placeholder={hourly_pay.toString()} />
                     
                     <Pressable style={styles.shiftSaveButton} onPress={()=>{editShift(id), setShowShiftEdit(!showShiftEdit)}}>
                             <Text style={styles.shiftSaveText}> Save Edits </Text>
