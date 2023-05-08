@@ -478,14 +478,13 @@ styles = StyleSheet.create({
 
     // Job Categories
     myCategoriesButton:{
-        alignSelf: 'flex-end',
-        backgroundColor: "#858AE3",
+        alignSelf: 'center',
+        backgroundColor: "#1C2541",
         borderRadius: 10,
-        paddingVertical: 2,
-        paddingHorizontal: 2,
+        padding: 10,
         marginVertical: 30,
         marginHorizontal: 10,
-        width: '60%'
+        width: '70%'
       },
       myCategoriesButtonText:{
         color: '#EEF0F2',
@@ -499,7 +498,7 @@ styles = StyleSheet.create({
       },
       categoryItem: {
         backgroundColor: '#C3C9E9',
-        padding: 20,
+        padding: 15,
         marginVertical: 8,
         marginHorizontal: 16,
       },
@@ -515,12 +514,21 @@ styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         borderColor: '#C3C9E9',
+        backgroundColor: '#EEF0F2',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 1,
+        elevation: 2,
+        borderRadius: 15,
       },
       favoriteButton:{
         alignSelf: 'flex-end',
-        fontSize: 20,
-        margin: 0,
-        position: 'relative',
+        fontSize: 25,
+        position: 'absolute',
+        padding: 20,
       },
 })
 

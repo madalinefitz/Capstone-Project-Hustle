@@ -5,11 +5,12 @@ import { AuthContext } from './AuthContext'
 
 
 function JobCategories(){
-    const {userInfo, myJobCategories, favoriteCategory} = useContext(AuthContext)
+    const {userInfo, myJobCategories, favoriteCategory, removeFavorite} = useContext(AuthContext)
 
     const [jobCategories, setJobCategories] = useState([])
     const [myCategories, setMyCategories] = useState(false)
     const [searchedCategory, setSearchedCategory] = useState('')
+    const [favorited, setFavorited] = useState(false)
     
     useEffect(()=>{
       fetch('http://127.0.0.1:5555/jobcategories')
@@ -21,7 +22,15 @@ function JobCategories(){
       <View style={styles.categoryItem}>
         <Text style={styles.categoryTitle}>{name}</Text>
         <Pressable style={styles.favoriteButton} onPress={()=>handleFavorites(id)}>
-          <Text style={styles.favoriteButton}>🤍</Text>
+          <Text style={styles.favoriteButton}>+</Text>
+        </Pressable>
+      </View>
+    )
+    const MyItem = ({name, id}) => (
+      <View style={styles.categoryItem}>
+        <Text style={styles.categoryTitle}>{name}</Text>
+        <Pressable style={styles.favoriteButton} onPress={()=>handleUnfavorite(id)}>
+          <Text style={styles.favoriteButton}>-</Text>
         </Pressable>
       </View>
     )
@@ -44,6 +53,10 @@ function JobCategories(){
         }
       })
     }
+
+    const handleUnfavorite = (id => {
+      removeFavorite(id)
+    })
     
     return(
         <SafeAreaView style={styles.categoryContainer}>
@@ -53,7 +66,7 @@ function JobCategories(){
                 <Text style={styles.myCategoriesButtonText}>View All Job Categories</Text>
               </Pressable>
               <FlatList data={uniqueCategories}
-              renderItem={({item}) => <Item  name={item.category_name} />}
+              renderItem={({item}) => <MyItem  name={item.category_name} id={item.id}/>}
               keyExtractor={item => item.id}/>
             </>
             ):(

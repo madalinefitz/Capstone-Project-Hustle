@@ -170,6 +170,22 @@ export const AuthProvider = ({children}) => {
                 AsyncStorage.setItem( 'userInfo', JSON.stringify( {...data, job_categories:[...myJobCategories, favoritedCategory]} ))
                 })
     }
+
+    const removeFavorite = (unfavoritedId) => {
+
+        const newFavorites = myJobCategories.filter(c => {
+            if (c.id !== unfavoritedId){
+                return c
+            }})
+        setMyJobCategories(newFavorites)
+       
+        AsyncStorage.getItem( 'userInfo' )
+            .then( data => {
+            data = JSON.parse( data )
+
+            AsyncStorage.setItem( 'userInfo', JSON.stringify( {...data, job_categories:newFavorites} ))
+        })
+    }   
     
     
     useEffect(()=>{
@@ -178,7 +194,7 @@ export const AuthProvider = ({children}) => {
 
     
     return (
-        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, addNewShift, myShifts, myJobCategories, deleteShift, updateShift, favoriteCategory}}>
+        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, addNewShift, myShifts, myJobCategories, deleteShift, updateShift, favoriteCategory, removeFavorite}}>
             {children}
         </AuthContext.Provider>
     )
