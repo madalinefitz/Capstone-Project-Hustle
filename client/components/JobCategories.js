@@ -19,10 +19,10 @@ function JobCategories(){
 
     const Item = ({name, id}) => (
       <View style={styles.categoryItem}>
+        <Text style={styles.categoryTitle}>{name}</Text>
         <Pressable style={styles.favoriteButton} onPress={()=>handleFavorites(id)}>
           <Text style={styles.favoriteButton}>🤍</Text>
         </Pressable>
-        <Text style={styles.categoryTitle}>{name}</Text>
       </View>
     )
 

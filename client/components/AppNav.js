@@ -107,7 +107,7 @@ styles = StyleSheet.create({
 
     // Home
     welcomeUser: {
-        fontSize: 20,
+        fontSize: 30,
         alignSelf: 'flex-start',
         padding: 0,
         fontWeight: 'bold',
@@ -121,7 +121,7 @@ styles = StyleSheet.create({
 
     homeButtons: {
         marginTop: 0,
-        backgroundColor: "#C2E812",
+        backgroundColor: "#B5CA8D",
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 2,
@@ -334,16 +334,30 @@ styles = StyleSheet.create({
         marginTop: 0,
     },
     shiftItem: {
-        backgroundColor: '#C3C9E9',
-        padding: 20,
+        backgroundColor: '#B5CA8D',
         marginVertical: 8,
         marginHorizontal: 16,
+        borderRadius: 15,
+        alignItems: 'center',
+        padding: 30,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    shiftTitle: {
+        fontSize: 30,
+        color: '#1C2541',
+        fontWeight: 'bold',
+        margin: 10,
     },
     shiftText: {
         fontSize: 20,
-        color: 'white',
-        fontWeight: 'bold',
-        alignSelf: 'center',
+        color: '#1C2541',
         margin: 10,
     },
     shiftDeleteText:{  
@@ -361,6 +375,7 @@ styles = StyleSheet.create({
     shiftEditText:{  
         fontSize: 15,
         color: '#1C2541',
+        fontWeight: 'bold',
     },
     shiftEditButton:{
         alignSelf: 'flex-end',
@@ -373,7 +388,7 @@ styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     shiftSaveButton:{
-        backgroundColor: '#C2E812',
+        backgroundColor: '#C3C9E9',
         alignSelf: 'center',
         borderRadius: 10,
         padding: 10,
@@ -383,11 +398,21 @@ styles = StyleSheet.create({
     
     // Estimated Pay
     payContainer: {
-      backgroundColor: '#C2E812',
-      padding: 20,
-      marginVertical: 100,
-      marginHorizontal: 16,
-      alignSelf: 'center',
+        backgroundColor: '#B5CA8D',
+        marginVertical: 100,
+        marginHorizontal: 16,
+        alignSelf: 'center',
+        borderRadius: 10,
+        alignItems: 'center',
+        padding: 30,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
     },
     pay: {
       fontSize: 100,
@@ -398,7 +423,7 @@ styles = StyleSheet.create({
     // Job Categories
     myCategoriesButton:{
         alignSelf: 'flex-end',
-        backgroundColor: "#C2E812",
+        backgroundColor: "#B5CA8D",
         borderRadius: 10,
         paddingVertical: 2,
         paddingHorizontal: 2,

@@ -56,10 +56,9 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
                 </View>
             ) : (
                 <View style={styles.shiftItem}>
-                    
+                    <Text style={styles.shiftTitle}>{job_category_name}</Text>
                     <Text style={styles.shiftText}>Start: {Date(start_date_time)}</Text>
                     <Text style={styles.shiftText}>End: {Date(end_date_time)}</Text>
-                    <Text style={styles.shiftText}>{job_category_name}</Text>
                     <Text style={styles.shiftText}>{location}</Text>
                     <Text style={styles.shiftText}>${hourly_pay}/hr</Text>
                     <Pressable style={styles.shiftEditButton} onPress={()=>setShowShiftEdit(!showShiftEdit)}>
