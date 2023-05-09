@@ -18,9 +18,11 @@ function MyShifts(){
       const lastDate = new Date(lastday).getTime()
 
       if ((shiftDate >= firstDate) && (shiftDate <= lastDate)){
-              return shift
-      }
-      // else return ("no shifts in date range")
+        return shift
+      } 
+      // else {
+      //   return ("no shifts found")
+      // }
     })
     
     return (

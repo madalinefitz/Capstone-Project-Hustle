@@ -79,7 +79,7 @@ function AppNav(){
                     <Stack.Screen name='Calendar Container' component={CalendarContainer}        
                         options={{title: '',}}
                     />
-                    <Stack.Screen name='Estimated Pay' component={EstimatedPay}/>
+                    <Stack.Screen name='Estimated Pay' component={EstimatedPay} options={{title: '',}}/>
                 </Stack.Navigator>
                 
             ):(
@@ -483,6 +483,9 @@ styles = StyleSheet.create({
     },
     
     // Estimated Pay
+    haul:{
+        fontSize:20
+    },
     payContainer: {
         backgroundColor: '#858AE3',
         marginVertical: 100,
