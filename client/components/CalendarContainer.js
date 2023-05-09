@@ -75,6 +75,8 @@ function CalendarContainer(){
       setLocation('')
       setSelected('Select Job Category')
   }
+
+ 
   
 
   return (
@@ -83,8 +85,8 @@ function CalendarContainer(){
         <Calendar onDayPress={day => {console.log(day.dateString)}} isMultiSelection={true} markingType="multi-period" 
         style={styles.calendar}
         theme={{
-          backgroundColor: '#ffffff',
-          calendarBackground: '#ffffff',
+          backgroundColor: '#EEF0F2',
+          calendarBackground: '#EEF0F2',
           textSectionTitleColor: '#b6c1cd',
           selectedDayBackgroundColor: '#00adf5',
           selectedDayTextColor: '#ffffff',

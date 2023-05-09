@@ -28,7 +28,7 @@ function MyShifts(){
           {currentWeek ? (
             <>
             <Pressable onPress={()=>setCurrentWeek(!currentWeek)} style={styles.shiftsButton}>
-              <Text style={styles.shiftsButtonText}>View Current Week</Text>
+              <Text style={styles.shiftsButtonText}>View Current Week's Shifts</Text>
             </Pressable>
             <FlatList data={myShifts}
                 renderItem={({item}) => <MyShiftItems job_category_name={item.job_category.category_name} job_category_id={item.job_category.id} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time} id={item.id}/>}
@@ -38,7 +38,7 @@ function MyShifts(){
           ) : (
             <>
               <Pressable onPress={()=>setCurrentWeek(!currentWeek)} style={styles.shiftsButton}>
-                <Text style={styles.shiftsButtonText}>View All</Text>
+                <Text style={styles.shiftsButtonText}>View All Shifts</Text>
               </Pressable>
               <FlatList data={weeksShifts}
                 renderItem={({item}) => <MyShiftItems job_category_name={item.job_category.category_name} job_category_id={item.job_category.id} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time} id={item.id}/>}

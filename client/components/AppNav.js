@@ -75,7 +75,7 @@ function AppNav(){
                 >
                     <Stack.Screen name='Home' component={Home} options={{title: '',}}/> 
                     <Stack.Screen name='Job Categories' component={JobCategories} options={{title: ''}}/>
-                    <Stack.Screen name='My Shifts' component={MyShifts} />
+                    <Stack.Screen name='My Shifts' component={MyShifts} options={{title: ''}}/>
                     <Stack.Screen name='Calendar Container' component={CalendarContainer}        
                         options={{title: '',}}
                     />
@@ -116,7 +116,7 @@ styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#1C2541', 
         marginTop:0,
-        marginBottom: 30,
+        marginBottom: 20,
         marginHorizontal: 20,
         
     },
@@ -124,7 +124,6 @@ styles = StyleSheet.create({
         fontSize:18,
         alignSelf: 'center',
         marginBottom: 30,
-        fontWeight: 'bold',
         color: '#1C2541', 
     },
 
@@ -282,9 +281,9 @@ styles = StyleSheet.create({
         marginTop: 50,
     },
     addShiftButtonContainer: {
-        backgroundColor: "#C3C9E9",
+        backgroundColor: "#858AE3",
         borderRadius: 10,
-        padding: 10,
+        padding: 12,
         alignSelf: 'center',
         marginHorizontal: 20,
         marginTop: 80,
@@ -298,7 +297,7 @@ styles = StyleSheet.create({
         elevation: 5,
     },
     addShiftButtonText: {
-        fontSize: 20,
+        fontSize: 22,
         color: "#EEF0F2",
         fontWeight: "bold",
         alignSelf: "center",
@@ -537,30 +536,30 @@ styles = StyleSheet.create({
         marginVertical: 20,
         marginHorizontal: 10,
         width: '70%'
-      },
-      myCategoriesButtonText:{
+    },
+    myCategoriesButtonText:{
         color: '#EEF0F2',
         fontSize: 18,
         fontWeight: 'bold',
         alignSelf: 'center'
-      },
-      categoryContainer: {
+    },
+    categoryContainer: {
         flex: 1,
         marginTop: 0,
-      },
-      categoryItem: {
+    },
+    categoryItem: {
         backgroundColor: '#C3C9E9',
         padding: 15,
         marginVertical: 8,
         marginHorizontal: 16,
-      },
-      categoryTitle: {
+    },
+    categoryTitle: {
         fontSize: 20,
         color: '#1C2541',
         alignSelf: 'flex-start',
         fontWeight: 'bold',
-      },
-      categorySearch:{
+    },
+    categorySearch:{
         height: 40,
         width: '60%',
         margin: 20,
@@ -577,13 +576,13 @@ styles = StyleSheet.create({
         elevation: 2,
         borderRadius: 10,
         alignSelf: 'center',
-      },
-      favoriteButton:{
+    },
+    favoriteButton:{
         alignSelf: 'flex-end',
         fontSize: 25,
         position: 'absolute',
         padding: 15,
-      },
+    },
 })
 
 export default AppNav
