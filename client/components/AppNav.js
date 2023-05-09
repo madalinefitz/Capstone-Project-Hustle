@@ -402,6 +402,19 @@ styles = StyleSheet.create({
         flex: 1,
         marginTop: 0,
     },
+    shiftsButton:{
+        alignSelf: 'flex-end',
+        backgroundColor: "#1C2541",
+        borderRadius: 10,
+        padding: 10,
+        marginBottom: 0,
+        marginHorizontal: 15,
+    },
+    shiftsButtonText:{
+        fontSize: 18,
+        color: '#EEF0F2',
+        fontWeight: 'bold',
+    },
     shiftItem: {
         backgroundColor: '#C3C9E9',
         marginVertical: 8,
@@ -484,11 +497,17 @@ styles = StyleSheet.create({
     
     // Estimated Pay
     haul:{
-        fontSize:20
+        fontSize: 25, 
+        color: '#1C2541',
+        alignSelf: 'center',
+        marginTop: 95,
+        marginBottom: 15,
+        fontWeight: 'bold',
+
     },
     payContainer: {
         backgroundColor: '#858AE3',
-        marginVertical: 100,
+        marginBottom: 100,
         marginHorizontal: 16,
         alignSelf: 'center',
         borderRadius: 10,

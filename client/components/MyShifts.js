@@ -19,32 +19,32 @@ function MyShifts(){
 
       if ((shiftDate >= firstDate) && (shiftDate <= lastDate)){
         return shift
-      } 
-      // else {
-      //   return ("no shifts found")
-      // }
+      }
+      
     })
     
     return (
       <SafeAreaView style={styles.shiftsContainer}>
           {currentWeek ? (
             <>
-              <Pressable onPress={()=>setCurrentWeek(!currentWeek)}>
-                <Text>View All Shifts</Text>
+            <Pressable onPress={()=>setCurrentWeek(!currentWeek)} style={styles.shiftsButton}>
+              <Text style={styles.shiftsButtonText}>View Current Week</Text>
+            </Pressable>
+            <FlatList data={myShifts}
+                renderItem={({item}) => <MyShiftItems job_category_name={item.job_category.category_name} job_category_id={item.job_category.id} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time} id={item.id}/>}
+                keyExtractor={item => item.id}/>
+          </>
+            
+          ) : (
+            <>
+              <Pressable onPress={()=>setCurrentWeek(!currentWeek)} style={styles.shiftsButton}>
+                <Text style={styles.shiftsButtonText}>View All</Text>
               </Pressable>
               <FlatList data={weeksShifts}
                 renderItem={({item}) => <MyShiftItems job_category_name={item.job_category.category_name} job_category_id={item.job_category.id} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time} id={item.id}/>}
                 keyExtractor={item => item.id}/>
             </>
-          ) : (
-            <>
-              <Pressable onPress={()=>setCurrentWeek(!currentWeek)}>
-                <Text>View Current Week Shifts</Text>
-              </Pressable>
-              <FlatList data={myShifts}
-                  renderItem={({item}) => <MyShiftItems job_category_name={item.job_category.category_name} job_category_id={item.job_category.id} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time} id={item.id}/>}
-                  keyExtractor={item => item.id}/>
-            </>
+            
           )
           }
       </SafeAreaView>
