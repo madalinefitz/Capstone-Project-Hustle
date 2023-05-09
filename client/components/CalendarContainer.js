@@ -66,7 +66,7 @@ function CalendarContainer(){
       }
     )
         .then(r => r.json())
-        .then(newShift => addNewShift({...newShift, end_date_time : Date(), start_date_time : Date()} ))
+        .then(newShift => addNewShift({...newShift} ))
         
       setStartDateTime('')
       setEndDateTime('')
@@ -75,7 +75,6 @@ function CalendarContainer(){
       setLocation('')
       setSelected('Select Job Category')
   }
-
   
 
   return (
@@ -102,14 +101,14 @@ function CalendarContainer(){
               <Pressable onPress={()=>setAddShift(!addShift)} style={styles.addShiftExitButton}>
                 <Text style={styles.addShiftExitButtonText}>x</Text>
               </Pressable>
-              <Text style={styles.shiftInput}>{Date(startDateTime)}</Text>
+              <Text style={styles.shiftInput}>{new Date(startDateTime).toUTCString()}</Text>
                   <Pressable title='+' onPress={() => setStartOpen(true)} style={styles.addDateButton}>
                     <Text style={styles.addDateText}>+</Text>
                   </Pressable>
                   <DatePicker
                     modal
                     open={startOpen}
-                    date={new Date(startDateTime)}
+                    date={startDateTime}
                     onConfirm={(date) => {
                       setStartOpen(false)
                       setStartDateTime(date)
@@ -118,14 +117,14 @@ function CalendarContainer(){
                       setStartOpen(false)
                     }}
                   />
-              <Text style={styles.shiftInput}>{Date(endDateTime)}</Text>
+              <Text style={styles.shiftInput}>{new Date(endDateTime).toUTCString()}</Text>
                   <Pressable title='+' onPress={() => setEndOpen(true)} style={styles.addDateButton}>
                     <Text style={styles.addDateText}>+</Text>
                   </Pressable>
                   <DatePicker
                     modal
                     open={endOpen}
-                    date={new Date(endDateTime)}
+                    date={endDateTime}
                     onConfirm={(date) => {
                       setEndOpen(false)
                       setEndDateTime(date)

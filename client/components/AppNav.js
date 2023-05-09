@@ -21,6 +21,7 @@ import MyAccount from './MyAccount';
 
 
 
+
 const Stack = createNativeStackNavigator();
 
 function AppNav(){
@@ -115,9 +116,16 @@ styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#1C2541', 
         marginTop:0,
-        marginBottom: 40,
+        marginBottom: 30,
         marginHorizontal: 20,
         
+    },
+    date: {
+        fontSize:18,
+        alignSelf: 'center',
+        marginBottom: 30,
+        fontWeight: 'bold',
+        color: '#1C2541', 
     },
 
     homeButtons: {
@@ -351,7 +359,7 @@ styles = StyleSheet.create({
         position: 'relative',
         zIndex: 50,
         padding: 5,
-        height: 20,
+        height: 30,
         alignSelf: 'stretch',
     },
     dropdownContainer:{
@@ -386,10 +394,8 @@ styles = StyleSheet.create({
     addShiftExitButtonText:{
         color: '#C3C9E9',
         fontSize: 20,
-
     },
     
-
 
     // My Shifts
     shiftsContainer: {
