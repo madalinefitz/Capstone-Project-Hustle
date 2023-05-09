@@ -114,7 +114,11 @@ class ShiftById(Resource):
         data = request.get_json()
         shift = Shift.query.filter_by(id=id).first()
         
-        date_time_format = '%Y-%m-%d %H:%M:%S'
+        if not shift:
+            return make_response({"error":'not found'}, 404)
+        
+        date_time_format = '%Y-%m-%dT%H:%M:%S.%fZ'
+        # date_time_format = '%Y-%m-%d %H:%M:%S'
 
         for key in data.keys():
             if (key == 'start_date_time') or (key == 'end_date_time'):  

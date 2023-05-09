@@ -110,20 +110,20 @@ styles = StyleSheet.create({
 
     // Home
     welcomeUser: {
-        fontSize: 30,
-        alignSelf: 'flex-start',
+        fontSize: 24,
+        alignSelf: 'center',
         padding: 0,
         fontWeight: 'bold',
         color: '#1C2541', 
         marginTop:0,
-        marginBottom: 20,
+        marginBottom: 10,
         marginHorizontal: 20,
         
     },
     date: {
         fontSize:18,
         alignSelf: 'center',
-        marginBottom: 30,
+        marginBottom: 35,
         color: '#1C2541', 
     },
 
@@ -431,15 +431,15 @@ styles = StyleSheet.create({
         elevation: 5,
     },
     shiftTitle: {
-        fontSize: 30,
+        fontSize: 25,
         color: '#1C2541',
         fontWeight: 'bold',
         margin: 10,
     },
     shiftText: {
-        fontSize: 20,
+        fontSize: 18,
         color: '#1C2541',
-        margin: 10,
+        margin: 8,
     },
     shiftDeleteText:{  
         fontSize: 15,

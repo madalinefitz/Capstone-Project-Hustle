@@ -38,12 +38,13 @@ function CalendarContainer(){
   // console.log(shiftDates)
 
   const myUniqueCategories = [...new Map(myJobCategories.map((c) => [c.category_name, c])).values()]
+  
   const renderDropdown = myUniqueCategories.map(jc => {
     if (showDropdown) {
         return (
-          <View style={styles.dropdownContainer}>
-            <Pressable onPress={()=> {setSelected(jc.category_name), setShowDropdown(!setShowDropdown), setJobCategory(jc.id)}} style={styles.dropdownOptions}>
-                <Text keyExtractor={jc.id}>{jc.category_name}</Text>
+          <View key={jc.id} style={styles.dropdownContainer}>
+            <Pressable key={jc.id} onPress={()=> {setSelected(jc.category_name), setShowDropdown(!setShowDropdown), setJobCategory(jc.id)}} style={styles.dropdownOptions}>
+                <Text key={jc.id}>{jc.category_name}</Text>
             </Pressable>
           </View>
           )
@@ -53,8 +54,8 @@ function CalendarContainer(){
   const createNewShift = () => {
     const newShift = {
       user_id: userId,
-      start_date_time: startDateTime,
-      end_date_time: endDateTime,
+      start_date_time: new Date(startDateTime),
+      end_date_time: new Date(endDateTime),
       job_id: jobCategory,
       hourly_pay: hourlyPay,
       location: location
@@ -76,7 +77,14 @@ function CalendarContainer(){
       setSelected('Select Job Category')
   }
 
- 
+  const dateOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit", 
+    minute: "2-digit"
+  }
   
 
   return (
@@ -103,7 +111,7 @@ function CalendarContainer(){
               <Pressable onPress={()=>setAddShift(!addShift)} style={styles.addShiftExitButton}>
                 <Text style={styles.addShiftExitButtonText}>x</Text>
               </Pressable>
-              <Text style={styles.shiftInput}>{new Date(startDateTime).toUTCString()}</Text>
+              <Text style={styles.shiftInput}>{new Date(startDateTime).toLocaleString("en-US", dateOptions)}</Text>
                   <Pressable title='+' onPress={() => setStartOpen(true)} style={styles.addDateButton}>
                     <Text style={styles.addDateText}>+</Text>
                   </Pressable>
@@ -119,7 +127,7 @@ function CalendarContainer(){
                       setStartOpen(false)
                     }}
                   />
-              <Text style={styles.shiftInput}>{new Date(endDateTime).toUTCString()}</Text>
+              <Text style={styles.shiftInput}>{new Date(endDateTime).toLocaleString("en-US", dateOptions)}</Text>
                   <Pressable title='+' onPress={() => setEndOpen(true)} style={styles.addDateButton}>
                     <Text style={styles.addDateText}>+</Text>
                   </Pressable>

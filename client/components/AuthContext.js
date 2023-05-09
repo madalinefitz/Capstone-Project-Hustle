@@ -82,9 +82,13 @@ export const AuthProvider = ({children}) => {
         setIsLoading(true)
         setUserToken(null)
         setUserInfo(null)
+        setMyShifts(null)
+        setMyJobCategories(null)
         AsyncStorage.removeItem('userToken')
         AsyncStorage.removeItem('userInfo')
         setIsLoading(false)
+        setMyShifts('')
+        setMyJobCategories('')
     }
 
     const isLoggedIn = async() =>{
