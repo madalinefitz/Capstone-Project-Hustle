@@ -8,16 +8,11 @@ import { AuthContext } from './AuthContext';
 
 function MyAccount({handleModalState}){
     const {logout, userInfo, updateUser} = useContext(AuthContext)
-
-    const firstName = userInfo.first_name
-    const lastName = userInfo.last_name
-    const email = userInfo.email
-
     
     const [showEdit, setShowEdit] = useState(false)
-    const [editedFirst, setEditedFirst] = useState(firstName)
-    const [editedLast, setEditedLast] = useState(lastName)
-    const [editedEmail, setEditedEmail] = useState(email)
+    const [editedFirst, setEditedFirst] = useState(userInfo.first_name)
+    const [editedLast, setEditedLast] = useState(userInfo.last_name)
+    const [editedEmail, setEditedEmail] = useState(userInfo.email)
 
     const editUser = ()=>{
         fetch(`http://127.0.0.1:5555/users/${userInfo.id}`, {
@@ -39,6 +34,7 @@ function MyAccount({handleModalState}){
         fetch(`http://127.0.0.1:5555/users/${userInfo.id}`, {method: 'DELETE',})
             .then(r=>r.json())
         }
+
 
     return (
         <SafeAreaView style={styles.centeredView}>

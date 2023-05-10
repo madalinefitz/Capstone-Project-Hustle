@@ -406,7 +406,7 @@ styles = StyleSheet.create({
         backgroundColor: "#1C2541",
         borderRadius: 10,
         padding: 10,
-        marginBottom: 0,
+        marginBottom: 15,
         marginHorizontal: 15,
     },
     shiftsButtonText:{
@@ -416,7 +416,8 @@ styles = StyleSheet.create({
     },
     shiftItem: {
         backgroundColor: '#C3C9E9',
-        marginVertical: 8,
+        marginTop: 0,
+        marginBottom: 8,
         marginHorizontal: 16,
         borderRadius: 15,
         alignItems: 'stretch',

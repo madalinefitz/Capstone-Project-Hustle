@@ -66,7 +66,7 @@ class UserById(Resource):
             setattr(user, key, data[key])
         db.session.add(user)
         db.session.commit()
-        return make_response(user.to_dict(rules = ('shifts',)), 200)
+        return make_response(user.to_dict(rules = ('shifts', 'job_categories',)), 200)
 
     def delete(self, id):
         user = User.query.filter_by(id=id).first()

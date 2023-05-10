@@ -113,8 +113,11 @@ export const AuthProvider = ({children}) => {
 
     const updateUser = (editedUser) =>{
         setUserInfo(editedUser)
-        AsyncStorage.removeItem('userInfo')
-        AsyncStorage.setItem('userInfo', JSON.stringify(editedUser))
+        AsyncStorage.getItem( 'userInfo' )
+            .then( data => {
+                data = JSON.parse( data )
+                AsyncStorage.setItem('userInfo', JSON.stringify(editedUser))
+            })
     }
 
     const addNewShift = (createdShift) => {
@@ -126,7 +129,6 @@ export const AuthProvider = ({children}) => {
             data.shifts.push(createdShift)
             data.job_categories.push(createdShift.job_category)
 
-    
             AsyncStorage.setItem( 'userInfo', JSON.stringify( data ) )
             setMyShifts([...data.shifts])
             setMyJobCategories([...data.job_categories])
@@ -166,13 +168,13 @@ export const AuthProvider = ({children}) => {
     }
 
     const favoriteCategory = (favoritedCategory) => {
-            setMyJobCategories([...myJobCategories, favoritedCategory])
-            AsyncStorage.getItem( 'userInfo' )
-                .then( data => {
-            
-                data = JSON.parse( data );
-                AsyncStorage.setItem( 'userInfo', JSON.stringify( {...data, job_categories:[...myJobCategories, favoritedCategory]} ))
-                })
+        setMyJobCategories([...myJobCategories, favoritedCategory])
+        AsyncStorage.getItem( 'userInfo' )
+            .then( data => {
+        
+            data = JSON.parse( data );
+            AsyncStorage.setItem( 'userInfo', JSON.stringify( {...data, job_categories:[...myJobCategories, favoritedCategory]} ))
+            })
     }
 
     const removeFavorite = (unfavoritedId) => {
