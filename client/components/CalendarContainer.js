@@ -21,22 +21,6 @@ function CalendarContainer(){
   const [showDropdown, setShowDropdown] = useState(false)
   const [selected, setSelected] = useState('Select Job Category')
 
-  const userId = userInfo.id
-
-  //trying to get my shift dates to populate to calendar
-
-  // const [shiftDates, setShiftDates] = useState(myShiftDates)
-  // const myShifts = [...userInfo.shifts]
-
-  // const myShiftDates = myShifts.map( shift => {
-  //   return(
-  //     Date(shift.start_date_time.split(' ')[0])
-  //     )
-  //   }
-  // )
-  
-  // console.log(shiftDates)
-
   const myUniqueCategories = [...new Map(myJobCategories.map((c) => [c.category_name, c])).values()]
   
   const renderDropdown = myUniqueCategories.map(jc => {
@@ -53,7 +37,7 @@ function CalendarContainer(){
 
   const createNewShift = () => {
     const newShift = {
-      user_id: userId,
+      user_id: userInfo.id,
       start_date_time: new Date(startDateTime),
       end_date_time: new Date(endDateTime),
       job_id: jobCategory,
@@ -85,6 +69,24 @@ function CalendarContainer(){
     hour: "2-digit", 
     minute: "2-digit"
   }
+
+  // const myShiftDates = userInfo.shifts.map( shift => {
+  //   const shiftDate = new Date(shift.start_date_time)
+  //   return{
+  //     setShiftDates(shiftDate)
+  //   }
+  //   }
+    
+  // )
+  // const [shiftDates, setShiftDates] = useState([])
+  
+  // console.log(myShiftDates)
+  // const getDate = (count) => {
+  //   const date = new Date();
+  //   const newDate = date.setDate(date.getDate() + count);
+  //   return CalendarUtils.getCalendarDateString(newDate);
+  // };
+
   
 
   return (
@@ -92,6 +94,22 @@ function CalendarContainer(){
         
         <Calendar onDayPress={day => {console.log(day.dateString)}} isMultiSelection={true} markingType="multi-period" 
         style={styles.calendar}
+        // markedDates={{
+        //   [getDate(2)]: {
+        //     shiftDates: true,
+        //     dots: [
+        //       {key: 'vacation', color: 'blue', selectedDotColor: 'red'},
+        //       {key: 'massage', color: 'red', selectedDotColor: 'white'}
+        //     ]
+        //   },
+        //   [getDate(3)]: {
+        //     disabled: true,
+        //     dots: [
+        //       {key: 'vacation', color: 'green', selectedDotColor: 'red'},
+        //       {key: 'massage', color: 'red', selectedDotColor: 'green'}
+        //     ]
+        //   }
+        // }}
         theme={{
           backgroundColor: '#EEF0F2',
           calendarBackground: '#EEF0F2',
@@ -102,6 +120,7 @@ function CalendarContainer(){
           dayTextColor: '#2d4150',
           textDisabledColor: '#d9e'
         }}
+
         />
         <View>
         {addShift ? (

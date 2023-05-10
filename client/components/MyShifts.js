@@ -17,10 +17,9 @@ function MyShifts(){
       const firstDate = new Date(firstday).getTime()
       const lastDate = new Date(lastday).getTime()
 
-      if ((shiftDate >= firstDate) && (shiftDate <= lastDate)){
+      if ((shiftDate >= firstDate) && (lastDate >= shiftDate)){
         return shift
       }
-      
     })
     
     return (

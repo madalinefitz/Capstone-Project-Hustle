@@ -17,7 +17,6 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
     const [showShiftEdit, setShowShiftEdit] = useState(false)
     
     const editShift=(id)=>{
-        console.log(id)
       fetch (`http://127.0.0.1:5555/shifts/${id}`, {
         method: 'PATCH',
         headers: {'Content-type': 'application/json'},
