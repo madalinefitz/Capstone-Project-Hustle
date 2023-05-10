@@ -1,11 +1,11 @@
-import React, {createContext, useEffect, useState} from 'react'
+import React, {createContext, useState} from 'react'
 
 
 export const DateContext = createContext()
 
 
 export const DateProvider=({children})=> {
-    const [currentDate, setCurrentDate] = useState(new Date().getDate())
+    // const [currentDate, setCurrentDate] = useState(new Date().getDate())
 
     const today = new Date()
     const first = today.getDate() - today.getDay()

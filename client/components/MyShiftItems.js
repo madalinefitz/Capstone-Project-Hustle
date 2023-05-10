@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Text, TextInput, Pressable, View} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from './AuthContext';
@@ -6,7 +6,7 @@ import { AuthContext } from './AuthContext';
 
 function MyShiftItems({job_category_name, job_category_id, start_date_time, hourly_pay, location, end_date_time, id}){
     
-    const {userInfo, deleteShift, updateShift, myJobCategories} = useContext(AuthContext)
+    const {userInfo, deleteShift, updateShift} = useContext(AuthContext)
 
     const [editedStartDT, setEditedStartDT] = useState(start_date_time)
     const [editedEndDT, setEditedEndDT] = useState(end_date_time)
@@ -54,15 +54,14 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
         minute: "2-digit", 
         
       }
-    
-    // const subtractHours = () =>{
-    //     const newTime = new Date(start_date_time).getHours()-4
-    //     return(new Date(start_date_time).setHours(newTime))
-        
-    // }
+    // need to change start_date_time as it comes from backend
     // console.log(`start:${start_date_time}`)
-    // const dateTime= start_date_time + ' UTC'
-    // console.log(new Date(dateTime))
+    // const dateTime = start_date_time + ' UTC'
+    // console.log(dateTime)
+    // const stringDT= dateTime.toString()
+    // console.log (stringDT.toLocaleString("en-US", dateOptions))
+    // console.log(new Date(start_date_time))
+    // console.log(start_date_time.toLocaleString("en-US", dateOptions))
     
 
     

@@ -1,13 +1,13 @@
-import React, {useEffect, useContext, useState, useCallback, useMemo, Fragment, useRef} from 'react'
-import {Text, View, Switch, Alert, Modal, TouchableOpacity, TextInput, Pressable, Button } from 'react-native'
+import React, {useContext, useState} from 'react'
+import {Text, View, Modal, TouchableOpacity, TextInput, Pressable} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { AuthContext } from './AuthContext'
-import {Calendar, CalendarUtils, CalendarList, Agenda, AgendaSchedule, AgendaEntry,} from 'react-native-calendars'
+import {Calendar, CalendarUtils, CalendarList} from 'react-native-calendars'
 import DatePicker from 'react-native-date-picker'
 
 
 function CalendarContainer(){
-  const {userInfo, myJobCategories, addNewShift, myShifts} = useContext(AuthContext)
+  const {userInfo, addNewShift} = useContext(AuthContext)
      
   const [addShift, setAddShift] = useState(false)
   const [startDateTime, setStartDateTime] = useState(new Date())
@@ -71,31 +71,26 @@ function CalendarContainer(){
     minute: "2-digit", 
     timeZone: "EDT"
   }
-  
-  // console.log(startDateTime)
 
-  // const myShiftDates = userInfo.shifts.map( shift => {
-  //   const shiftDate = new Date(shift.start_date_time)
-  //   return{
-  //     setShiftDates(shiftDate)
-  //   }
-  //   }
-    
-  // )
-  // const [shiftDates, setShiftDates] = useState([])
-  
-  // console.log(myShiftDates)
-  // const getDate = (count) => {
-  //   const date = new Date();
-  //   const newDate = date.setDate(date.getDate() + count);
-  //   return CalendarUtils.getCalendarDateString(newDate);
-  // };
-
+  // add shift marks to calendar
   // const shiftDates = userInfo.shifts.map(shift => {
   //   const dateTime = shift.start_date_time
   //   return(CalendarUtils.getCalendarDateString(dateTime))
   // })
   // console.log(shiftDates)
+
+
+  // const markedDates = shiftDates.map((date) => {
+  //     )
+  // })
+
+  // const mark = shiftDates.map(date =>{
+  //   return(
+  //     {[date]: {selected: true, marked: true, selectedColor: "blue"}}
+  //    )
+  // })
+  // console.log(mark)
+  
   
   
 
@@ -104,23 +99,7 @@ function CalendarContainer(){
         
         <Calendar onDayPress={day => {console.log(day.dateString)}} isMultiSelection={true} markingType="multi-period" 
         style={styles.calendar}
-        // markedDates={{[shiftDates]: {marked: true, dotColor: 'red', disableTouchEvent: true}}}
-        // markedDates={{
-        //   [getDate(2)]: {
-        //     shiftDates: true,
-        //     dots: [
-        //       {key: 'vacation', color: 'blue', selectedDotColor: 'red'},
-        //       {key: 'massage', color: 'red', selectedDotColor: 'white'}
-        //     ]
-        //   },
-        //   [getDate(3)]: {
-        //     disabled: true,
-        //     dots: [
-        //       {key: 'vacation', color: 'green', selectedDotColor: 'red'},
-        //       {key: 'massage', color: 'red', selectedDotColor: 'green'}
-        //     ]
-        //   }
-        // }}
+        // markedDates={mark}
         theme={{
           backgroundColor: '#EEF0F2',
           calendarBackground: '#EEF0F2',

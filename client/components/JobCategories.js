@@ -5,7 +5,7 @@ import { AuthContext } from './AuthContext'
 
 
 function JobCategories(){
-    const {userInfo, myJobCategories, favoriteCategory, removeFavorite} = useContext(AuthContext)
+    const {userInfo, favoriteCategory, removeFavorite} = useContext(AuthContext)
 
     const [jobCategories, setJobCategories] = useState([])
     const [myCategories, setMyCategories] = useState(false)

@@ -113,16 +113,13 @@ export const AuthProvider = ({children}) => {
   
         AsyncStorage.getItem( 'userInfo' )
           .then( data => {
-            data = JSON.parse( data );
-            console.log(`In Auth ${createdShift.start_date_time}`)
-            
+            data = JSON.parse( data )
     
             data.shifts.push(createdShift)
             data.job_categories.push(createdShift.job_category)
 
             AsyncStorage.setItem( 'userInfo', JSON.stringify( data ) )
             setUserInfo(data)
-    
           })
       }
 

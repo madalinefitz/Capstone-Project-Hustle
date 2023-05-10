@@ -1,8 +1,8 @@
 import React, {useContext, useState} from "react"
-import {SafeAreaView, View, Text, TextInput, TouchableOpacity, Button, StyleSheet, Pressable} from 'react-native'
+import {View, Text, TextInput, StyleSheet, Pressable} from 'react-native'
 import { AuthContext } from "./AuthContext"
 
-function CreateAccount({navigation}){
+function CreateAccount(){
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [newEmail, setNewEmail] = useState('')

@@ -1,5 +1,5 @@
 import React, {useEffect, useContext, useState} from 'react';
-import {Text, TextInput, Pressable, View, StyleSheet, Button, Modal} from 'react-native';
+import {Text, TextInput, Pressable, View, Modal} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from './AuthContext';
 

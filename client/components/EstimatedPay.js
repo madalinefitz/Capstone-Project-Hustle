@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {Text, Pressable, View} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { AuthContext } from './AuthContext'
@@ -7,7 +7,7 @@ import { DateContext } from './DateContext'
 
 
 function EstimatedPay(){
-    const {userInfo, myShifts} = useContext(AuthContext)
+    const {userInfo} = useContext(AuthContext)
     const {firstday, lastday} = useContext(DateContext)
 
   
