@@ -8,11 +8,11 @@ import MyShiftItems from './MyShiftItems'
 
 function MyShifts(){
 
-    const {userInfo, myShifts} = useContext(AuthContext)
+    const {userInfo} = useContext(AuthContext)
     const {firstday, lastday} = useContext(DateContext)
     const [currentWeek, setCurrentWeek] = useState(false)
 
-    const weeksShifts = myShifts.filter(shift =>{
+    const weeksShifts = userInfo.shifts.filter(shift =>{
       const shiftDate = new Date(shift.start_date_time).getTime()
       const firstDate = new Date(firstday).getTime()
       const lastDate = new Date(lastday).getTime()
@@ -22,6 +22,7 @@ function MyShifts(){
       }
     })
     
+    
     return (
       <SafeAreaView style={styles.shiftsContainer}>
           {currentWeek ? (
@@ -29,7 +30,7 @@ function MyShifts(){
             <Pressable onPress={()=>setCurrentWeek(!currentWeek)} style={styles.shiftsButton}>
               <Text style={styles.shiftsButtonText}>View Current Week's Shifts</Text>
             </Pressable>
-            <FlatList data={myShifts}
+            <FlatList data={userInfo.shifts}
                 renderItem={({item}) => <MyShiftItems job_category_name={item.job_category.category_name} job_category_id={item.job_category.id} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time} id={item.id}/>}
                 keyExtractor={item => item.id}/>
           </>

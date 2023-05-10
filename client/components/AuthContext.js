@@ -7,9 +7,6 @@ export const AuthProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(false)
     const [userToken, setUserToken] = useState(null)
     const [userInfo, setUserInfo] = useState(null)
-    
-    const [myShifts, setMyShifts] = useState('')
-    const [myJobCategories, setMyJobCategories] = useState('')
 
     const login = (email, password, accountValidator) => {
         setIsLoading(true)
@@ -29,8 +26,6 @@ export const AuthProvider = ({children}) => {
 
                     setUserInfo(data.user)
                     setUserToken(data.token)
-                    setMyShifts(data.user.shifts)
-                    setMyJobCategories(data.user.job_categories)
                     
                     AsyncStorage.setItem('userToken', JSON.stringify(data.token))
                     AsyncStorage.setItem('userInfo', JSON.stringify(data.user))
@@ -82,13 +77,9 @@ export const AuthProvider = ({children}) => {
         setIsLoading(true)
         setUserToken(null)
         setUserInfo(null)
-        setMyShifts(null)
-        setMyJobCategories(null)
         AsyncStorage.removeItem('userToken')
         AsyncStorage.removeItem('userInfo')
         setIsLoading(false)
-        setMyShifts('')
-        setMyJobCategories('')
     }
 
     const isLoggedIn = async() =>{
@@ -102,8 +93,6 @@ export const AuthProvider = ({children}) => {
             if(theUserToken) {
                 setUserToken(theUserToken)
                 setUserInfo(theUserInfo)
-                setMyShifts(theUserInfo.shifts)
-                setMyJobCategories(theUserInfo.job_categories)
             }
             setIsLoading(false)
         } catch(e) {
@@ -125,13 +114,14 @@ export const AuthProvider = ({children}) => {
         AsyncStorage.getItem( 'userInfo' )
           .then( data => {
             data = JSON.parse( data );
+            console.log(`In Auth ${createdShift.start_date_time}`)
+            
     
             data.shifts.push(createdShift)
             data.job_categories.push(createdShift.job_category)
 
             AsyncStorage.setItem( 'userInfo', JSON.stringify( data ) )
-            setMyShifts([...data.shifts])
-            setMyJobCategories([...data.job_categories])
+            setUserInfo(data)
     
           })
       }
@@ -150,46 +140,45 @@ export const AuthProvider = ({children}) => {
                 }})
 
             AsyncStorage.setItem( 'userInfo', JSON.stringify( {...data, shifts:currentShifts} ) )
-            setMyShifts(currentShifts)
+            setUserInfo({...data, shifts:currentShifts})
           })
     }
 
     const updateShift = (editedShift) => {
-        const newShiftArray= myShifts.map(shift => {
+        const newShiftArray= userInfo.shifts.map(shift => {
             return(shift.id !== editedShift.id ? shift : editedShift)
         })
-
-        setMyShifts(newShiftArray)
+        
         AsyncStorage.getItem( 'userInfo' )
             .then( data => {
                 data = JSON.parse( data )
                 AsyncStorage.setItem( 'userInfo', JSON.stringify( {...data, shifts:newShiftArray} ) )
+                setUserInfo({...data, shifts:newShiftArray})
             })
     }
 
     const favoriteCategory = (favoritedCategory) => {
-        setMyJobCategories([...myJobCategories, favoritedCategory])
         AsyncStorage.getItem( 'userInfo' )
             .then( data => {
         
             data = JSON.parse( data );
-            AsyncStorage.setItem( 'userInfo', JSON.stringify( {...data, job_categories:[...myJobCategories, favoritedCategory]} ))
+            AsyncStorage.setItem( 'userInfo', JSON.stringify( {...data, job_categories:[...userInfo.job_categories, favoritedCategory]} ))
+            setUserInfo({...data, job_categories:[...userInfo.job_categories, favoritedCategory]})
             })
     }
 
     const removeFavorite = (unfavoritedId) => {
-
-        const newFavorites = myJobCategories.filter(c => {
+        const newFavorites = userInfo.job_categories.filter(c => {
             if (c.id !== unfavoritedId){
                 return c
             }})
-        setMyJobCategories(newFavorites)
        
         AsyncStorage.getItem( 'userInfo' )
             .then( data => {
             data = JSON.parse( data )
 
             AsyncStorage.setItem( 'userInfo', JSON.stringify( {...data, job_categories:newFavorites} ))
+            setUserInfo({...data, job_categories:newFavorites})
         })
     }   
     
@@ -200,7 +189,7 @@ export const AuthProvider = ({children}) => {
 
     
     return (
-        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, addNewShift, myShifts, myJobCategories, deleteShift, updateShift, favoriteCategory, removeFavorite}}>
+        <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo, createAccount, updateUser, addNewShift, deleteShift, updateShift, favoriteCategory, removeFavorite}}>
             {children}
         </AuthContext.Provider>
     )

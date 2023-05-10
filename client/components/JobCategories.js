@@ -10,7 +10,6 @@ function JobCategories(){
     const [jobCategories, setJobCategories] = useState([])
     const [myCategories, setMyCategories] = useState(false)
     const [searchedCategory, setSearchedCategory] = useState('')
-    const [favorited, setFavorited] = useState(false)
     
     useEffect(()=>{
       fetch('http://127.0.0.1:5555/jobcategories')
@@ -39,7 +38,7 @@ function JobCategories(){
         return (job.category_name.toLowerCase().includes(searchedCategory))
     })
     
-    const uniqueCategories = [...new Map(myJobCategories.map((c) => [c.category_name, c])).values()]
+    const uniqueCategories = [...new Map(userInfo.job_categories.map((c) => [c.category_name, c])).values()]
     // const uniqueCategories = userInfo.job_categories.filter((item, index) => {
     //   return index===userInfo.job_categories.findIndex(obj=>{
     //     return JSON.stringify(obj) ===JSON.stringify(item)

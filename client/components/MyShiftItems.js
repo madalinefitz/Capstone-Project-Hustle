@@ -37,7 +37,7 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
     }
 
     const editedCategory = (name) => {
-        myJobCategories.filter(c =>{
+        userInfo.job_categories.filter(c =>{
             if (c.category_name == name){
                 setEditedJobId(c.id)
             }
@@ -45,13 +45,26 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
     }
 
     const dateOptions = {
+        timeZone: "EDT",
         weekday: "long",
         year: "numeric",
         month: "long",
         day: "numeric",
         hour: "2-digit", 
-        minute: "2-digit"
+        minute: "2-digit", 
+        
       }
+    
+    // const subtractHours = () =>{
+    //     const newTime = new Date(start_date_time).getHours()-4
+    //     return(new Date(start_date_time).setHours(newTime))
+        
+    // }
+    // console.log(`start:${start_date_time}`)
+    // const dateTime= start_date_time + ' UTC'
+    // console.log(new Date(dateTime))
+    
+
     
     return(
         <SafeAreaView>

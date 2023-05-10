@@ -11,7 +11,7 @@ function EstimatedPay(){
     const {firstday, lastday} = useContext(DateContext)
 
   
-    const weeksShifts = myShifts.filter(shift=>{
+    const weeksShifts = userInfo.shifts.filter(shift=>{
         const shiftDate = new Date(shift.start_date_time).getTime()
         const firstDate = new Date(firstday).getTime()
         const lastDate = new Date(lastday).getTime()

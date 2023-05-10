@@ -7,7 +7,7 @@ import DatePicker from 'react-native-date-picker'
 
 
 function CalendarContainer(){
-  const {userInfo, myJobCategories, addNewShift} = useContext(AuthContext)
+  const {userInfo, myJobCategories, addNewShift, myShifts} = useContext(AuthContext)
      
   const [addShift, setAddShift] = useState(false)
   const [startDateTime, setStartDateTime] = useState(new Date())
@@ -21,7 +21,7 @@ function CalendarContainer(){
   const [showDropdown, setShowDropdown] = useState(false)
   const [selected, setSelected] = useState('Select Job Category')
 
-  const myUniqueCategories = [...new Map(myJobCategories.map((c) => [c.category_name, c])).values()]
+  const myUniqueCategories = [...new Map(userInfo.job_categories.map((c) => [c.category_name, c])).values()]
   
   const renderDropdown = myUniqueCategories.map(jc => {
     if (showDropdown) {
@@ -38,8 +38,8 @@ function CalendarContainer(){
   const createNewShift = () => {
     const newShift = {
       user_id: userInfo.id,
-      start_date_time: new Date(startDateTime),
-      end_date_time: new Date(endDateTime),
+      start_date_time: startDateTime,
+      end_date_time: endDateTime,
       job_id: jobCategory,
       hourly_pay: hourlyPay,
       location: location
@@ -51,7 +51,8 @@ function CalendarContainer(){
       }
     )
         .then(r => r.json())
-        .then(newShift => addNewShift({...newShift} ))
+        .then(newShift => addNewShift({...newShift, start_date_time:startDateTime, end_date_time:endDateTime}))
+        console.log(newShift)
         
       setStartDateTime('')
       setEndDateTime('')
@@ -67,8 +68,11 @@ function CalendarContainer(){
     month: "long",
     day: "numeric",
     hour: "2-digit", 
-    minute: "2-digit"
+    minute: "2-digit", 
+    timeZone: "EDT"
   }
+  
+  // console.log(startDateTime)
 
   // const myShiftDates = userInfo.shifts.map( shift => {
   //   const shiftDate = new Date(shift.start_date_time)
@@ -87,6 +91,12 @@ function CalendarContainer(){
   //   return CalendarUtils.getCalendarDateString(newDate);
   // };
 
+  // const shiftDates = userInfo.shifts.map(shift => {
+  //   const dateTime = shift.start_date_time
+  //   return(CalendarUtils.getCalendarDateString(dateTime))
+  // })
+  // console.log(shiftDates)
+  
   
 
   return (
@@ -94,6 +104,7 @@ function CalendarContainer(){
         
         <Calendar onDayPress={day => {console.log(day.dateString)}} isMultiSelection={true} markingType="multi-period" 
         style={styles.calendar}
+        // markedDates={{[shiftDates]: {marked: true, dotColor: 'red', disableTouchEvent: true}}}
         // markedDates={{
         //   [getDate(2)]: {
         //     shiftDates: true,
