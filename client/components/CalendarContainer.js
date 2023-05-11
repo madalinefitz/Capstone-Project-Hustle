@@ -51,7 +51,8 @@ function CalendarContainer(){
       }
     )
         .then(r => r.json())
-        .then(newShift => addNewShift({...newShift, start_date_time:startDateTime, end_date_time:endDateTime}))
+        .then(newShift => addNewShift(newShift))
+        
         
       setStartDateTime('')
       setEndDateTime('')
@@ -90,8 +91,6 @@ function CalendarContainer(){
   // })
   // console.log(mark)
   
-  
-  
 
   return (
     <SafeAreaView >
@@ -129,7 +128,7 @@ function CalendarContainer(){
                     date={startDateTime}
                     onConfirm={(date) => {
                       setStartOpen(false)
-                      setStartDateTime(date)
+                      setStartDateTime(new Date(date))
                     }}
                     onCancel={() => {
                       setStartOpen(false)
@@ -145,7 +144,7 @@ function CalendarContainer(){
                     date={endDateTime}
                     onConfirm={(date) => {
                       setEndOpen(false)
-                      setEndDateTime(date)
+                      setEndDateTime(new Date(date))
                     }}
                     onCancel={() => {
                       setEndOpen(false)

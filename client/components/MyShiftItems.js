@@ -45,7 +45,6 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
     }
 
     const dateOptions = {
-        timeZone: "EDT",
         weekday: "long",
         year: "numeric",
         month: "long",
@@ -62,8 +61,9 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
     // console.log (stringDT.toLocaleString("en-US", dateOptions))
     // console.log(new Date(start_date_time))
     // console.log(start_date_time.toLocaleString("en-US", dateOptions))
-    
-
+    //   console.log(new Date(start_date_time).toLocaleString())
+    //   console.log(start_date_time.toLocaleString('en-US', dateOptions))
+    //   console.log(new Date(start_date_time).toISOString())
     
     return(
         <SafeAreaView>
@@ -85,7 +85,7 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
             ) : (
                 <View style={styles.shiftItem}>
                     <Text style={styles.shiftTitle}>{job_category_name}</Text>
-                    <Text style={styles.shiftText}>Start: {new Date(start_date_time).toLocaleString("en-US", dateOptions)}</Text>
+                    <Text style={styles.shiftText}>Start: {new Date(start_date_time).toLocaleString('en-US', dateOptions)}</Text>
                     <Text style={styles.shiftText}>End: {new Date(end_date_time).toLocaleString("en-US", dateOptions)}</Text>
                     <Text style={styles.shiftText}>{location}</Text>
                     <Text style={styles.shiftText}>${hourly_pay}/hr</Text>
