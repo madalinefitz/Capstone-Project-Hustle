@@ -1,7 +1,7 @@
-import React, {useContext, useState} from 'react';
-import {Text, TextInput, Pressable, View} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { AuthContext } from './AuthContext';
+import React, {useContext, useState} from 'react'
+import {Text, TextInput, Pressable, View} from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { AuthContext } from './AuthContext'
 
 
 function MyShiftItems({job_category_name, job_category_id, start_date_time, hourly_pay, location, end_date_time, id}){

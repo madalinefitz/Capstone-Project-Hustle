@@ -34,9 +34,6 @@ function EstimatedPay(){
     const weeklyPaySum = weeklyPayList.reduce((accumulator, currentValue) => 
       accumulator + currentValue, initialValue
     )
-
-    //need to change weekly pay state when shifts are updated
-    // const [weeklyPay, setWeeklyPay] = useState(0)
     
   
 

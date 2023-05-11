@@ -52,7 +52,6 @@ function CalendarContainer(){
     )
         .then(r => r.json())
         .then(newShift => addNewShift({...newShift, start_date_time:startDateTime, end_date_time:endDateTime}))
-        console.log(newShift)
         
       setStartDateTime('')
       setEndDateTime('')
