@@ -19,28 +19,35 @@ function EstimatedPay(){
         if ((shiftDate >= firstDate) && (shiftDate <= lastDate)){
           return shift
         }
-      })
+    })
+
+    
     
     const weeklyPayList = weeksShifts.map(shift=>{
       if (shift){
         const numHours = Math.abs(new Date(shift.start_date_time) - new Date(shift.end_date_time)) / 36e5
-        return(numHours * shift.hourly_pay)
+        const pay = numHours * shift.hourly_pay
+        return(pay)
       } else {
         return 0
       }
+    })
+
+    const formatter = new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 2,      
+      maximumFractionDigits: 2,
     })
 
     const initialValue = 0
     const weeklyPaySum = weeklyPayList.reduce((accumulator, currentValue) => 
       accumulator + currentValue, initialValue
     )
-    
 
     return (
       <SafeAreaView>
         <Text style={styles.haul}>This Week's Haul:</Text>
           <View style={styles.payContainer}>
-            <Text style={styles.pay}>${weeklyPaySum}</Text>
+            <Text style={styles.pay}>${formatter.format(weeklyPaySum)}</Text>
           </View>
       </SafeAreaView>
     );

@@ -507,12 +507,12 @@ styles = StyleSheet.create({
     },
     payContainer: {
         backgroundColor: '#858AE3',
-        marginBottom: 100,
+        // marginBottom: 100,
         marginHorizontal: 16,
         alignSelf: 'center',
         borderRadius: 10,
         alignItems: 'center',
-        padding: 30,
+        padding: 15,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -523,9 +523,12 @@ styles = StyleSheet.create({
         elevation: 5,
     },
     pay: {
-      fontSize: 100,
+      width: '80%',
+      fontSize: 80,
       color: '#EEF0F2',
       alignSelf: 'center',
+      paddingTop: 60,
+      paddingBottom: 0,
     },
 
     // Job Categories
