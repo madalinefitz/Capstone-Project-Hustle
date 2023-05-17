@@ -12,9 +12,9 @@ function App() {
 
   return(
     <DateProvider>
-    <AuthProvider >
-        <AppNav/>
-    </AuthProvider>
+      <AuthProvider >
+          <AppNav/>
+      </AuthProvider>
     </DateProvider>
   )
 }

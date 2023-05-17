@@ -20,8 +20,6 @@ function EstimatedPay(){
           return shift
         }
       })
-
-    
     
     const weeklyPayList = weeksShifts.map(shift=>{
       if (shift){
@@ -37,7 +35,6 @@ function EstimatedPay(){
       accumulator + currentValue, initialValue
     )
     
-  
 
     return (
       <SafeAreaView>

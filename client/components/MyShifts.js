@@ -13,15 +13,18 @@ function MyShifts(){
     const [currentWeek, setCurrentWeek] = useState(false)
 
     const weeksShifts = userInfo.shifts.filter(shift =>{
-      const shiftDate = new Date(shift.start_date_time).getTime()
-      const firstDate = new Date(firstday).getTime()
-      const lastDate = new Date(lastday).getTime()
+        const shiftDate = new Date(shift.start_date_time).getTime()
+        const firstDate = new Date(firstday).getTime()
+        const lastDate = new Date(lastday).getTime()
 
-      if ((shiftDate >= firstDate) && (lastDate >= shiftDate)){
-        return shift
-      }
+        if ((shiftDate >= firstDate) && (lastDate >= shiftDate)){
+          return shift
+        }
     })
-    
+
+    const sortedWeekShifts = weeksShifts.sort((firstShift, secondShift) => new Date(firstShift.start_date_time) - new Date(secondShift.start_date_time))
+    const sortedAllShifts = userInfo.shifts.sort((firstShift, secondShift) => new Date(firstShift.start_date_time) - new Date(secondShift.start_date_time))
+
     
     return (
       <SafeAreaView style={styles.shiftsContainer}>
@@ -30,7 +33,7 @@ function MyShifts(){
             <Pressable onPress={()=>setCurrentWeek(!currentWeek)} style={styles.shiftsButton}>
               <Text style={styles.shiftsButtonText}>View Current Week's Shifts</Text>
             </Pressable>
-            <FlatList data={userInfo.shifts}
+            <FlatList data={sortedAllShifts}
                 renderItem={({item}) => <MyShiftItems job_category_name={item.job_category.category_name} job_category_id={item.job_category.id} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time} id={item.id}/>}
                 keyExtractor={item => item.id}/>
           </>
@@ -40,7 +43,7 @@ function MyShifts(){
               <Pressable onPress={()=>setCurrentWeek(!currentWeek)} style={styles.shiftsButton}>
                 <Text style={styles.shiftsButtonText}>View All Shifts</Text>
               </Pressable>
-              <FlatList data={weeksShifts}
+              <FlatList data={sortedWeekShifts}
                 renderItem={({item}) => <MyShiftItems job_category_name={item.job_category.category_name} job_category_id={item.job_category.id} start_date_time={item.start_date_time} hourly_pay={item.hourly_pay} location={item.location} end_date_time={item.end_date_time} id={item.id}/>}
                 keyExtractor={item => item.id}/>
             </>
