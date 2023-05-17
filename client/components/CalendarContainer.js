@@ -90,7 +90,7 @@ function CalendarContainer(){
   //    )
   // })
   // console.log(mark)
-  
+  console.log(startDateTime)
 
   return (
     <SafeAreaView >
@@ -128,7 +128,7 @@ function CalendarContainer(){
                     date={startDateTime}
                     onConfirm={(date) => {
                       setStartOpen(false)
-                      setStartDateTime(new Date(date))
+                      setStartDateTime(date)
                     }}
                     onCancel={() => {
                       setStartOpen(false)
@@ -144,7 +144,7 @@ function CalendarContainer(){
                     date={endDateTime}
                     onConfirm={(date) => {
                       setEndOpen(false)
-                      setEndDateTime(new Date(date))
+                      setEndDateTime(date)
                     }}
                     onCancel={() => {
                       setEndOpen(false)
