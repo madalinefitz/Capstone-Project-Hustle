@@ -53,17 +53,14 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
         minute: "2-digit", 
         
       }
-    // need to change start_date_time as it comes from backend
-    // console.log(`start:${start_date_time}`)
-    // const dateTime = start_date_time + ' UTC'
-    // console.log(dateTime)
-    // const stringDT= dateTime.toString()
-    // console.log (stringDT.toLocaleString("en-US", dateOptions))
-    // console.log(new Date(start_date_time))
-    // console.log(start_date_time.toLocaleString("en-US", dateOptions))
-    //   console.log(new Date(start_date_time).toLocaleString())
-    //   console.log(start_date_time.toLocaleString('en-US', dateOptions))
-    //   console.log(new Date(start_date_time).toISOString())
+
+    const startSplit = start_date_time.split(' ')
+    const startFormat = startSplit[0]+'T'+startSplit[1]+'Z'
+    const startDT = new Date(startFormat).toLocaleString('en-US', dateOptions)
+
+    const endSplit = end_date_time.split(' ')
+    const endFormat = endSplit[0]+'T'+endSplit[1]+'Z'
+    const endDT = new Date(endFormat).toLocaleString('en-US', dateOptions)
     
     return(
         <SafeAreaView>
@@ -85,8 +82,8 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
             ) : (
                 <View style={styles.shiftItem}>
                     <Text style={styles.shiftTitle}>{job_category_name}</Text>
-                    <Text style={styles.shiftText}>Start: {new Date(start_date_time).toLocaleString('en-US', dateOptions)}</Text>
-                    <Text style={styles.shiftText}>End: {new Date(end_date_time).toLocaleString("en-US", dateOptions)}</Text>
+                    <Text style={styles.shiftText}>Start: {startDT}</Text>
+                    <Text style={styles.shiftText}>End: {endDT}</Text>
                     <Text style={styles.shiftText}>{location}</Text>
                     <Text style={styles.shiftText}>${hourly_pay}/hr</Text>
                     <Pressable style={styles.shiftEditButton} onPress={()=>setShowShiftEdit(!showShiftEdit)}>
