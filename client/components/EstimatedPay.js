@@ -20,11 +20,13 @@ function EstimatedPay(){
           return shift
         }
       })
+
     
     
     const weeklyPayList = weeksShifts.map(shift=>{
       if (shift){
-        return(shift.hourly_pay)
+        const numHours = Math.abs(new Date(shift.start_date_time) - new Date(shift.end_date_time)) / 36e5
+        return(numHours * shift.hourly_pay)
       } else {
         return 0
       }
