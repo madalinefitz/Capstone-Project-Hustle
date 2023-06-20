@@ -8,8 +8,8 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
     
     const {userInfo, deleteShift, updateShift} = useContext(AuthContext)
 
-    const [editedStartDT, setEditedStartDT] = useState(start_date_time)
-    const [editedEndDT, setEditedEndDT] = useState(end_date_time)
+    const [editedStartDT, setEditedStartDT] = useState(startFormat)
+    const [editedEndDT, setEditedEndDT] = useState(endFormat)
     const [editedJobId, setEditedJobId] = useState(job_category_id)
     const [editedLocation, setEditedLocation] = useState(location)
     const [editedPay, setEditedPay] = useState(hourly_pay)
@@ -22,8 +22,8 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
         headers: {'Content-type': 'application/json'},
         body: JSON.stringify({
             user_id: userInfo.id,
-            start_date_time: new Date(editedStartDT),
-            end_date_time: new Date(editedEndDT),
+            start_date_time: editedStartDT,
+            end_date_time: editedEndDT,
             job_id: editedJobId,
             location: editedLocation,
             hourly_pay: editedPay,
@@ -66,8 +66,8 @@ function MyShiftItems({job_category_name, job_category_id, start_date_time, hour
         <SafeAreaView>
             {showShiftEdit ? (
                 <View style={styles.shiftItem}>
-                        <TextInput onChangeText={text=>setEditedStartDT(text)} style={styles.editShiftInput} placeholder={start_date_time}/>
-                        <TextInput onChangeText={text=>setEditedEndDT(text)} style={styles.editShiftInput} placeholder={end_date_time}/>
+                        <TextInput onChangeText={text=>setEditedStartDT(text)} style={styles.editShiftInput} placeholder={startDT}/>
+                        <TextInput onChangeText={text=>setEditedEndDT(text)} style={styles.editShiftInput} placeholder={endDT}/>
                         <TextInput onChangeText={text=>editedCategory(text)} style={styles.editShiftInput} placeholder={job_category_name} />
                         <TextInput onChangeText={text=>setEditedLocation(text)} style={styles.editShiftInput} placeholder={location} />
                         <TextInput onChangeText={text=>setEditedPay(text)} style={styles.editShiftInput} placeholder={hourly_pay.toString()} />
